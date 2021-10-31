@@ -1,0 +1,93 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: innks  #웹 사이트의 제목
+subtitle: Sixth Challenge #웹 사이트의 부제목
+description: theK의 여섯번째 도전 블로그 #description는 검색에 쓰이고 또는 `설명`란입니다.
+author: innks #저자
+language:  en #언어 (기본은 en) - 기본언어로 `메뉴와 도움말` 정도 입니다.
+timezone:  Asia/Seoul #타임존 (기본은 현재 PC의 시간값)
+
+# URL
+## 웹 사이트가 http://yoursite.com/child'와 같이 서브디렉토리에 있다면
+## url은 http://yoursite.com/child'고 설정하고 root는 /child/로 설정하세요.
+url: http://won0935.github.io # 기본 주소입니다.
+root: / #웹 사이트의 루트 디렉토리
+permalink: :year/:month/:day/:title/  #특정 페이지에 영구적으로 할당된 URL 주소.
+permalink_defaults:  # 기본 값인데 안적어도 된다.
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # 새 포스트의 파일명 형식 (기본 title.md)
+default_layout: post # 기본 레이아웃 (저장 폴더 기본 _post)
+titlecase: false # 제목을 제목에 맞는 대/소문자로 변경할 것인지 선택 (기본 false)
+external_link: true # 외부 링크를 새 탭에서 열 것인지 선택 (기본 true)
+filename_case: 0 # 파일명을 소문자(1) 또는 대문자(2)로 변경 (기본 0)
+render_drafts: false # Draft(초안) 문서를 표시할 것인지 선택 (기본 false)
+post_asset_folder: false # `true`면 포스트 만들때 마다 같은 이름의 폴더가 생성되며 링크나 이미지링크를 바로 할수있고 관리도 쉽게 하true면 기위한 부분 (![](image.jpg)
+relative_link: false # 루트 폴더에 대한 상대 경로로 링크를 만들 것인지 선택
+future: true # 미래의 포스트를 표시할 것인지 선택 (?)
+highlight: # highlight설정(?)
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace:
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized # 카테고리가 없을시 들어가는 부분 (기본 분류)
+category_map: # 분류 목록
+tag_map: # 태그 목록
+
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10 # 하나의 페이지에 표시할 포스트의 개수. 0이면 pagination을 표시하지 않습니다.
+pagination_dir: page
+
+# Include / Exclude file(s)
+## include:/exclude: options only apply to the 'source/' folder
+include:
+exclude:
+ignore:
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: icarus
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: https://github.com/won0935/won0935.github.io.git
+  branch: gh-pages
