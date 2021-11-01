@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: innks  #웹 사이트의 제목
-subtitle: Sixth Challenge #웹 사이트의 부제목
-description: theK의 여섯번째 도전 블로그 #description는 검색에 쓰이고 또는 `설명`란입니다.
-author: innks #저자
+title: Jay's Develop Note  #웹 사이트의 제목
+subtitle:  #웹 사이트의 부제목
+description: 기억보단 기록으로  #description는 검색에 쓰이고 또는 `설명`란입니다.
+author: Song Jae-won, Jay #저자
 language:  en #언어 (기본은 en) - 기본언어로 `메뉴와 도움말` 정도 입니다.
 timezone:  Asia/Seoul #타임존 (기본은 현재 PC의 시간값)
 
