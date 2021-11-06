@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Song Jae-won, Jay">
+
+
+
+    <meta name="description" content="기억보단 기록으로">
+
+
+
+<title>커맨드 패턴 | Jay&#39;s Note</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">기억보단 기록으로</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">기억보단 기록으로</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">커맨드 패턴</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Song Jae-won, Jay</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 6, 2021&nbsp;&nbsp;18:58:47</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="👋-커맨드패턴이란"><a href="#👋-커맨드패턴이란" class="headerlink" title="👋 커맨드패턴이란"></a>👋 커맨드패턴이란</h2><blockquote>
+<p>요구사항을 객체로 캡슐화 할 수 있으며, 매개변수를 써서 여러 가지 다른 요구 사항을 집어넣을수 있다.</p>
+<p>또한 요청 내역을 큐에 저장하거나 로그로 기록할 수 있으며 작업취소 기능도 지원가능 하다.</p>
+</blockquote>
+<hr>
+<h2 id="🎩-커맨드패턴이-필요한-이유"><a href="#🎩-커맨드패턴이-필요한-이유" class="headerlink" title="🎩 커맨드패턴이 필요한 이유"></a>🎩 커맨드패턴이 필요한 이유</h2><p>커맨드 객체는 일련의 행동을 특정 리시버하고 연결시킴으로써 요구사항을 캡슐화한다.</p>
+<p>이렇게 하기 위해 행동과 <strong>리시버</strong>를 한 객체에 집어넣고 메소드 하나만 외부에 공개하는 방법을 사용한다.</p>
+<hr>
+<h2 id="🔧-커맨드패턴-클래스-다이어그램"><a href="#🔧-커맨드패턴-클래스-다이어그램" class="headerlink" title="🔧 커맨드패턴 클래스 다이어그램"></a>🔧 커맨드패턴 클래스 다이어그램</h2><p><img src="https://user-images.githubusercontent.com/55419159/140605872-990096e0-f4bc-4d27-9e0a-40c5ee684c1d.png" alt="image"></p>
+<h3 id="🍔-식당을-예로들어보자"><a href="#🍔-식당을-예로들어보자" class="headerlink" title="🍔 식당을 예로들어보자"></a>🍔 식당을 예로들어보자</h3><ol>
+<li><p>손님이 웨이터에게 <strong>주문</strong>을 한다.</p>
+</li>
+<li><p>웨이터가 고객의 주문을 <strong>주문서</strong>에 적는다.</p>
+</li>
+<li><p><strong>웨이터</strong>는 주문서를 주방에 전달하여 주문을 요청한다.</p>
+</li>
+<li><p><strong>주방장</strong>은 주문서에 적힌 주문대로 음식을 자신의 노하우로 만든다.</p>
+</li>
+</ol>
+<blockquote>
+<ul>
+<li>손님 == <code>클라이언트</code></li>
+<li>웨이터 == <code>인보커 객체</code></li>
+<li>주문서 == <code>커맨드 객체</code></li>
+<li>주방장 == <code>리시버 객체</code></li>
+<li>주문을 하는것 == <code>setCommand()</code></li>
+<li>주문을 요청하는것 == <code>execute()</code></li>
+</ul>
+</blockquote>
+<p>으로 볼수있다.</p>
+<hr>
+<h2 id="🎞-구현방법"><a href="#🎞-구현방법" class="headerlink" title="🎞 구현방법"></a>🎞 구현방법</h2><h3 id="1-커맨드-인터페이스-구현"><a href="#1-커맨드-인터페이스-구현" class="headerlink" title="1. 커맨드 인터페이스 구현"></a>1. 커맨드 인터페이스 구현</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-커맨드-구현-객체"><a href="#2-커맨드-구현-객체" class="headerlink" title="2. 커맨드 구현 객체"></a>2. 커맨드 구현 객체</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LightOnCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Light light;   <span class="comment">//이 Light 객체는 실제 불키는 방법을 알고있는 리시버 객체</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LightOnCommand</span><span class="params">(Light light)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.light = light;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        light.on();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-인보커"><a href="#3-인보커" class="headerlink" title="3. 인보커"></a>3. 인보커</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleRemoteControl</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Command slot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SimpleRemotecontrol</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCommand</span><span class="params">(Command command)</span> </span>&#123;</span><br><span class="line">        slot = command;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buttonWasPressed</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        slot.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-클라이언트"><a href="#4-클라이언트" class="headerlink" title="4. 클라이언트"></a>4. 클라이언트</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RemoteControlTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        SimpleRemoteControl remote = <span class="keyword">new</span> SimpleRemoteControl();</span><br><span class="line">        Light light = <span class="keyword">new</span> Light();</span><br><span class="line">        LightOnCommand lightOn = <span class="keyword">new</span> LightOnCommand(light);</span><br><span class="line"></span><br><span class="line">        remote.setCommand(lightOn);</span><br><span class="line">        remote.buttonWasPressed();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="매크로-커맨드"><a href="#매크로-커맨드" class="headerlink" title="+ 매크로 커맨드"></a>+ 매크로 커맨드</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MacroCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Command[] commands;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MacroCommand</span><span class="params">(Command[] commands)</span> </span>&#123;  <span class="comment">//커맨드의 묶음으로 메소드 한번으로 실행할 수 있다.</span></span><br><span class="line">        <span class="keyword">this</span>.commands = commands;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> o = <span class="number">0</span>; i &lt; commands.length; i++) &#123;</span><br><span class="line">            commands[i].execute();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="🥊-커맨드-패턴의-활용방식"><a href="#🥊-커맨드-패턴의-활용방식" class="headerlink" title="🥊 커맨드 패턴의 활용방식"></a>🥊 커맨드 패턴의 활용방식</h2><h3 id="1-메시지-큐"><a href="#1-메시지-큐" class="headerlink" title="1. 메시지 큐"></a>1. 메시지 큐</h3><blockquote>
+<p>큐 한 쪽 끝은 커멘드를 추가하고 다른 쪽 끝에는 커맨드를 처리하기 위한 스레드들이 대기.</p>
+<p>각 스레드에서는 execute() 메소드를 호출하고 그 호출이 완료되고 나면 커맨드 객체를 보내고 새로운 커맨드</p>
+<p>객체를 가져온다.</p>
+</blockquote>
+<h3 id="2-리퀘스트-로깅"><a href="#2-리퀘스트-로깅" class="headerlink" title="2. 리퀘스트 로깅"></a>2. 리퀘스트 로깅</h3><blockquote>
+<p>자바에서는 이런 메소드를 객체 직렬화를 통해 구현할 수도 있지만, 직렬화와 관련된 제약 조건때문에 쉽지않을수 있다.</p>
+<p>커맨더 패턴을 이용한다면, Command 인터페이스에 store(), load() 라는 메소드를 추가하여 기능을 지원 가능하다.</p>
+<p>인보커 클래스가 Command1, Command2, Command3.. 각각 커멘드를 execute() 할때마다. 각 Command 들은 store()를</p>
+<p>실행시켜 디스크에 각각의 객체를을 저장한다. 컴퓨터가 다운되어 모든작업이 멈추고 이후 컴퓨터가 복구되었을때,</p>
+<p>디스크로 부터 각각의 Command1, Command2 .. 작업완료 하지 못한 객체들을 로딩하고 다시 순서대로 작업을 처리한다.</p>
+</blockquote>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Song Jae-won, Jay</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://won0935.github.io/2021/11/06/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/">http://won0935.github.io/2021/11/06/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/"># 디자인패턴</a>
+                    
+                        <a href="/tags/%EC%BB%A4%EB%A7%A8%EB%93%9C/"># 커맨드</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/10/30/%EA%B2%8C%EC%9E%84/2021-10-30-m1-league-of-legend/">m1 맥에서 144hz 롤하기</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Song Jae-won, Jay | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
