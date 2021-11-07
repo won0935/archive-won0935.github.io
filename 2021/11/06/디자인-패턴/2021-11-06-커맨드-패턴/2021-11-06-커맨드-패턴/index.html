@@ -221,23 +221,29 @@
 
         <div class="post-content">
             <h2 id="👋-커맨드패턴이란"><a href="#👋-커맨드패턴이란" class="headerlink" title="👋 커맨드패턴이란"></a>👋 커맨드패턴이란</h2><blockquote>
-<p>요구사항을 객체로 캡슐화 할 수 있으며, 매개변수를 써서 여러 가지 다른 요구 사항을 집어넣을수 있다.</p>
-<p>또한 요청 내역을 큐에 저장하거나 로그로 기록할 수 있으며 작업취소 기능도 지원가능 하다.</p>
+<p><em>레스토랑에서 주문을 했다고 가정하자</em><br><em><strong>손님</strong>은 항상 요리의 <strong>요리 방법</strong>을 알아야 하는가?</em><br><em>손님은 그저 <strong>웨이터</strong>에게 주문만 하면 된다. 요리 방법법을 알아야만 하는 건 <strong>요리사</strong> 뿐이다.</em></p>
 </blockquote>
+<p>커맨드 패턴(Command pattern)이란 <strong>요청을 객체의 형태로 캡슐화</strong>하여 사용자가 보낸 요청을 나중에 이용할 수 있도록<br>매서드 이름, 매개변수 등 요청에 필요한 정보를 저장 또는 로깅, 취소할 수 있게 하는 패턴이다.</p>
+<br>
+
+<ul>
+<li>커맨드 패턴에는 <strong>명령</strong>(<code>command</code>), <strong>수신자</strong>(<code>receiver</code>), <strong>발동자</strong>(<code>invoker</code>), <strong>클라이언트</strong>(<code>client</code>)의 네개의 용어가 항상 따른다. </li>
+<li><strong>커맨드 객체</strong>는 수신자 객체를 가지고 있으며, 수신자의 메서드를 호출하고, 이에 수신자는 자신에게 정의된 메서드를 수행한다. </li>
+<li>커맨드 객체는 별도로 <strong>발동자 객체</strong>에 전달되어 명령을 발동하게 한다. </li>
+<li><strong>발동자 객체</strong>는 필요에 따라 명령 발동에 대한 기록을 남길 수 있다. 한 발동자 객체에 <strong>다수</strong>의 커맨드 객체가 전달될 수 있다. </li>
+<li><strong>클라이언트 객체</strong>는 발동자 객체와 하나 이상의 커맨드 객체를 보유한다. 클라이언트 객체는 어느 시점에서 어떤 명령을 수행할지를 결정한다. </li>
+<li>명령을 수행하려면, <strong>클라이언트 객체</strong>는 발동자 객체로 커맨드 객체를 전달한다.</li>
+</ul>
 <hr>
-<h2 id="🎩-커맨드패턴이-필요한-이유"><a href="#🎩-커맨드패턴이-필요한-이유" class="headerlink" title="🎩 커맨드패턴이 필요한 이유"></a>🎩 커맨드패턴이 필요한 이유</h2><p>커맨드 객체는 일련의 행동을 특정 리시버하고 연결시킴으로써 요구사항을 캡슐화한다.</p>
+<h2 id="🎩-커맨드패턴이-필요한-이유"><a href="#🎩-커맨드패턴이-필요한-이유" class="headerlink" title="🎩 커맨드패턴이 필요한 이유"></a>🎩 커맨드패턴이 필요한 이유</h2><p>커맨드 객체는 일련의 행동을 특정 리시버하고 연결시킴으로써 <strong>요구사항을 캡슐화</strong>한다.</p>
 <p>이렇게 하기 위해 행동과 <strong>리시버</strong>를 한 객체에 집어넣고 메소드 하나만 외부에 공개하는 방법을 사용한다.</p>
 <hr>
 <h2 id="🔧-커맨드패턴-클래스-다이어그램"><a href="#🔧-커맨드패턴-클래스-다이어그램" class="headerlink" title="🔧 커맨드패턴 클래스 다이어그램"></a>🔧 커맨드패턴 클래스 다이어그램</h2><p><img src="https://user-images.githubusercontent.com/55419159/140605872-990096e0-f4bc-4d27-9e0a-40c5ee684c1d.png" alt="image"></p>
 <h3 id="🍔-식당을-예로들어보자"><a href="#🍔-식당을-예로들어보자" class="headerlink" title="🍔 식당을 예로들어보자"></a>🍔 식당을 예로들어보자</h3><ol>
-<li><p>손님이 웨이터에게 <strong>주문</strong>을 한다.</p>
-</li>
-<li><p>웨이터가 고객의 주문을 <strong>주문서</strong>에 적는다.</p>
-</li>
-<li><p><strong>웨이터</strong>는 주문서를 주방에 전달하여 주문을 요청한다.</p>
-</li>
-<li><p><strong>주방장</strong>은 주문서에 적힌 주문대로 음식을 자신의 노하우로 만든다.</p>
-</li>
+<li>손님이 웨이터에게 <strong>주문</strong>을 한다.</li>
+<li>웨이터가 고객의 주문을 <strong>주문서</strong>에 적는다.</li>
+<li><strong>웨이터</strong>는 주문서를 주방에 전달하여 주문을 요청한다.</li>
+<li><strong>주방장</strong>은 주문서에 적힌 주문대로 음식을 자신의 노하우로 만든다.</li>
 </ol>
 <blockquote>
 <ul>
@@ -251,7 +257,7 @@
 </blockquote>
 <p>으로 볼수있다.</p>
 <hr>
-<h2 id="🎞-구현방법"><a href="#🎞-구현방법" class="headerlink" title="🎞 구현방법"></a>🎞 구현방법</h2><h3 id="1-커맨드-인터페이스-구현"><a href="#1-커맨드-인터페이스-구현" class="headerlink" title="1. 커맨드 인터페이스 구현"></a>1. 커맨드 인터페이스 구현</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="🎞-구현방법"><a href="#🎞-구현방법" class="headerlink" title="🎞 구현방법"></a>🎞 구현방법</h2><h3 id="1-커맨드-인터페이스-구현"><a href="#1-커맨드-인터페이스-구현" class="headerlink" title="1. 커맨드 인터페이스 구현"></a>1. 커맨드 인터페이스 구현</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-커맨드-구현-객체"><a href="#2-커맨드-구현-객체" class="headerlink" title="2. 커맨드 구현 객체"></a>2. 커맨드 구현 객체</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LightOnCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Light light;   <span class="comment">//이 Light 객체는 실제 불키는 방법을 알고있는 리시버 객체</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LightOnCommand</span><span class="params">(Light light)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.light = light;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        light.on();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -263,18 +269,18 @@
 
 
 <hr>
-<h2 id="🥊-커맨드-패턴의-활용방식"><a href="#🥊-커맨드-패턴의-활용방식" class="headerlink" title="🥊 커맨드 패턴의 활용방식"></a>🥊 커맨드 패턴의 활용방식</h2><h3 id="1-메시지-큐"><a href="#1-메시지-큐" class="headerlink" title="1. 메시지 큐"></a>1. 메시지 큐</h3><blockquote>
-<p>큐 한 쪽 끝은 커멘드를 추가하고 다른 쪽 끝에는 커맨드를 처리하기 위한 스레드들이 대기.</p>
-<p>각 스레드에서는 execute() 메소드를 호출하고 그 호출이 완료되고 나면 커맨드 객체를 보내고 새로운 커맨드</p>
-<p>객체를 가져온다.</p>
-</blockquote>
-<h3 id="2-리퀘스트-로깅"><a href="#2-리퀘스트-로깅" class="headerlink" title="2. 리퀘스트 로깅"></a>2. 리퀘스트 로깅</h3><blockquote>
-<p>자바에서는 이런 메소드를 객체 직렬화를 통해 구현할 수도 있지만, 직렬화와 관련된 제약 조건때문에 쉽지않을수 있다.</p>
-<p>커맨더 패턴을 이용한다면, Command 인터페이스에 store(), load() 라는 메소드를 추가하여 기능을 지원 가능하다.</p>
-<p>인보커 클래스가 Command1, Command2, Command3.. 각각 커멘드를 execute() 할때마다. 각 Command 들은 store()를</p>
-<p>실행시켜 디스크에 각각의 객체를을 저장한다. 컴퓨터가 다운되어 모든작업이 멈추고 이후 컴퓨터가 복구되었을때,</p>
-<p>디스크로 부터 각각의 Command1, Command2 .. 작업완료 하지 못한 객체들을 로딩하고 다시 순서대로 작업을 처리한다.</p>
-</blockquote>
+<h2 id="🥊-커맨드-패턴의-활용방식"><a href="#🥊-커맨드-패턴의-활용방식" class="headerlink" title="🥊 커맨드 패턴의 활용방식"></a>🥊 커맨드 패턴의 활용방식</h2><h3 id="메시지-큐"><a href="#메시지-큐" class="headerlink" title="메시지 큐"></a>메시지 큐</h3><ul>
+<li>큐 한 쪽 끝은 커멘드를 추가하고 다른 쪽 끝에는 커맨드를 처리하기 위한 스레드들이 대기.</li>
+<li>각 스레드에서는 execute() 메소드를 호출하고 그 호출이 완료되고 나면 커맨드 객체를 보내고 새로운 커맨드</li>
+<li>객체를 가져온다.</li>
+</ul>
+<h3 id="리퀘스트-로깅"><a href="#리퀘스트-로깅" class="headerlink" title="리퀘스트 로깅"></a>리퀘스트 로깅</h3><ul>
+<li>자바에서는 이런 메소드를 객체 직렬화를 통해 구현할 수도 있지만, 직렬화와 관련된 제약 조건때문에 쉽지않을수 있다.</li>
+<li>커맨더 패턴을 이용한다면, Command 인터페이스에 store(), load() 라는 메소드를 추가하여 기능을 지원 가능하다.</li>
+<li>인보커 클래스가 Command1, Command2, Command3.. 각각 커멘드를 execute() 할때마다. 각 Command 들은 store()를</li>
+<li>실행시켜 디스크에 각각의 객체를을 저장한다. 컴퓨터가 다운되어 모든작업이 멈추고 이후 컴퓨터가 복구되었을때,</li>
+<li>디스크로 부터 각각의 Command1, Command2 .. 작업완료 하지 못한 객체들을 로딩하고 다시 순서대로 작업을 처리한다.</li>
+</ul>
 
         </div>
 
