@@ -105,3 +105,11 @@ deploy:
   type: git
   repo: https://github.com/won0935/won0935.github.io.git
   branch: gh-pages
+
+# Path or URL to RSS atom.xml
+rss: /rss2.xml #feed에서 등록한 rss 주소 입력
+
+robotstxt:
+  User-agent: "*"
+  Allow: /
+  Sitemap: https://won0935.github.io/sitemap.xml
