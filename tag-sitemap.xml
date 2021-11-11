@@ -3,14 +3,21 @@
 
 
     <url>
-        <loc>http://won0935.github.io/tags/%ED%85%9C%ED%94%8C%EB%A6%BF%EB%A9%94%EC%86%8C%EB%93%9C/</loc>
-        <lastmod>2021-11-09T11:33:27.687Z</lastmod>
+        <loc>http://won0935.github.io/tags/%EC%9D%B4%ED%84%B0%EB%A0%88%EC%9D%B4%ED%84%B0/</loc>
+        <lastmod>2021-11-11T07:52:55.365Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://won0935.github.io/tags/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/</loc>
+        <lastmod>2021-11-11T07:52:55.365Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://won0935.github.io/tags/%ED%85%9C%ED%94%8C%EB%A6%BF%EB%A9%94%EC%86%8C%EB%93%9C/</loc>
         <lastmod>2021-11-09T11:33:27.687Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
