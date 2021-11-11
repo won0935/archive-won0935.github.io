@@ -227,7 +227,7 @@
 <p>컬렉션 객체 안에 들어있는 모든 항목에 <strong>접근하는 방식이 통일되어 있으면</strong> 어떤 종류의 집합체에 대해서도 사용할 수 있는 다형적인 코드를 만들수 있다.</p>
 <p><code>이터레이터 패턴</code>을 사용하면 모든 항목에 일일이 접근하는 작업을 컬렉션 객체가 아닌 <strong>반복자 객체</strong>에서 맡게 된다.<br>이렇게 하면 집합체의 인터페이스 및 구현이 간단해질 뿐 아니라, 집합체에서는 반복작업에서 손을 떼고 원래 자신이 할 일(객체 컬렉션 관리)에만 전념할 수 있다</p>
 <hr>
-<h2 id="🔎-템플릿메소드-패턴의-이해"><a href="#🔎-템플릿메소드-패턴의-이해" class="headerlink" title="🔎 템플릿메소드 패턴의 이해"></a>🔎 템플릿메소드 패턴의 이해</h2><p><img src="https://user-images.githubusercontent.com/55419159/141257200-343f3e03-e28d-4be6-bc54-9f613d0aaf71.png" alt="image"></p>
+<h2 id="🔎-이터레이터-패턴의-이해"><a href="#🔎-이터레이터-패턴의-이해" class="headerlink" title="🔎 이터레이터 패턴의 이해"></a>🔎 이터레이터 패턴의 이해</h2><p><img src="https://user-images.githubusercontent.com/55419159/141257200-343f3e03-e28d-4be6-bc54-9f613d0aaf71.png" alt="image"></p>
 <h3 id="🚀-활용-예시"><a href="#🚀-활용-예시" class="headerlink" title="🚀 활용 예시"></a>🚀 활용 예시</h3><p><em>두개의 서로 다른 식당이있고 각각의 식당에서 메뉴를 구현한다고 가정해보자</em></p>
 <p><code>java.util.Iterator</code> 인터페이스를 사용해서 <code>Iterator</code>를 적용시켜보자.</p>
 <h4 id="이터레이트-인터페이스"><a href="#이터레이트-인터페이스" class="headerlink" title="이터레이트 인터페이스"></a>이터레이트 인터페이스</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Menu</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Iterator&lt;MenuItem&gt; <span class="title">createIterator</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -308,6 +308,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/11/11/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-11-%EC%BB%B4%ED%8F%AC%EC%A7%80%ED%8A%B8-%ED%8C%A8%ED%84%B4/">컴포지트 패턴</a>
             
             
             <a class="next" rel="next" href="/2021/11/08/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-09-%ED%85%9C%ED%94%8C%EB%A6%BF-%EB%A9%94%EC%86%8C%EB%93%9C-%ED%8C%A8%ED%84%B4/">템플릿메소드 패턴</a>
