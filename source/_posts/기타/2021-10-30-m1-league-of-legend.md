@@ -1,7 +1,7 @@
 ---
 title: "m1 맥에서 144hz 롤하기"
 categories:
-  - 게임 
+  - 기타 
 tags:
   - m1
   - 롤
