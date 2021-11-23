@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Song Jae-won, Jay">
+
+
+
+    <meta name="description" content="기억보단 기록으로">
+
+
+
+<title>어댑터 &amp; 파사드 패턴 | Jay&#39;s Note</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Jay's Note" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">기억보단 기록으로</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">기억보단 기록으로</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">어댑터 &amp; 파사드 패턴</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Song Jae-won, Jay</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 8, 2021&nbsp;&nbsp;19:23:29</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="🧤-어댑터-amp-파사드-패턴이란"><a href="#🧤-어댑터-amp-파사드-패턴이란" class="headerlink" title="🧤 어댑터 &amp; 파사드 패턴이란"></a>🧤 어댑터 &amp; 파사드 패턴이란</h2><h3 id="어댑터-패턴"><a href="#어댑터-패턴" class="headerlink" title="어댑터 패턴"></a>어댑터 패턴</h3><blockquote>
+<p>한 클래스의 인터페이스를 클라이언트에서 사용하고자하는 다른 인터페이스로 <strong>변환</strong>한다.<br>어댑터를 이용하면 인터페이스 <strong>호환성</strong> 문제 때문에 같이 쓸 수 없는 클래스들을 연결해서 쓸 수 있다.</p>
+</blockquote>
+<h3 id="파사드-패턴"><a href="#파사드-패턴" class="headerlink" title="파사드 패턴"></a>파사드 패턴</h3><blockquote>
+<p>어떤 서브시스템의 일련의 인터페이스에 대한 <strong>통합된 인터페이스</strong>를 제공한다.<br>퍼사드에서 고수준 인터페이스를 정의하기 때문에 서브시스템을 더 쉽게 사용할수 있다.</p>
+</blockquote>
+<hr>
+<h2 id="🔧-어댑터-패턴의-이해"><a href="#🔧-어댑터-패턴의-이해" class="headerlink" title="🔧 어댑터 패턴의 이해"></a>🔧 어댑터 패턴의 이해</h2><p><img src="https://user-images.githubusercontent.com/55419159/140725965-84c06d1c-050a-4c09-bbe1-73d91d037601.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/55419159/140726207-74aafe97-0197-473f-84ad-e3ed5bea9407.png" alt="image"></p>
+<h3 id="🚀-활용-예시"><a href="#🚀-활용-예시" class="headerlink" title="🚀 활용 예시"></a>🚀 활용 예시</h3><p><em>칠면조를 오리로 변환하기 위해서는… (둘다 새이긴 하니까)</em></p>
+<blockquote>
+<p>Duck 객체가 모자라서 Turkey 객체를 대신 사용해야 하는 상황이라고 해보자.<br>인터페이스가 다르기 때문에 Turkey객체를 바로 사용할 수는 없다.<br>어댑터를 만들어 보자.</p>
+</blockquote>
+<h4 id="오리-인터페이스"><a href="#오리-인터페이스" class="headerlink" title="오리 인터페이스"></a>오리 인터페이스</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Duck</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span></span>; <span class="comment">//오리는 꽥꽥</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="오리-구현체"><a href="#오리-구현체" class="headerlink" title="오리 구현체"></a>오리 구현체</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MallardDuck</span> <span class="keyword">implements</span> <span class="title">Duck</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Quack&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I&#x27;m flying&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="칠면조-인터페이스"><a href="#칠면조-인터페이스" class="headerlink" title="칠면조 인터페이스"></a>칠면조 인터페이스</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Turkey</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">gobble</span><span class="params">()</span></span>; <span class="comment">//칠면조는 이렇게 운다..</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="칠면조-구현체"><a href="#칠면조-구현체" class="headerlink" title="칠면조 구현체"></a>칠면조 구현체</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WildTurkey</span> <span class="keyword">implements</span> <span class="title">Turkey</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">gobble</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Gobble gobble&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I&#x27;m flying a short distance&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="어댑터-구현"><a href="#어댑터-구현" class="headerlink" title="어댑터 구현"></a><strong>어댑터 구현</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TurkeyAdapter</span> <span class="keyword">implements</span> <span class="title">Duck</span> </span>&#123; <span class="comment">//오리인터페이스를 구현한다.</span></span><br><span class="line">    Turkey turkey;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TurkeyAdapter</span><span class="params">(Turkey turkey)</span> </span>&#123; <span class="comment">//생성자에서 칠면조를 받는다.</span></span><br><span class="line">        <span class="keyword">this</span>.turkey = turkey;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        turkey.gobble(); <span class="comment">//변환 작업</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        turkey.fly();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DuckTestDrive</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        MallardDuck duck = <span class="keyword">new</span> MallardDuck();</span><br><span class="line">        WildTurkey turkey = <span class="keyword">new</span> WildTurkey();</span><br><span class="line"></span><br><span class="line">        Duck turkeyAdapter = <span class="keyword">new</span> TurkeyAdapter(turkey);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;The turkey says...&quot;</span>);</span><br><span class="line"></span><br><span class="line">        turkey.gobble();</span><br><span class="line">        turkey.fly();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;The Duck says...&quot;</span>);</span><br><span class="line">        testDuck(duck);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;The TurkeyAdapter says...&quot;</span>);</span><br><span class="line">        testDuck(turkeyAdapter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testDuck</span><span class="params">(Duck duck)</span> </span>&#123;</span><br><span class="line">        duck.quack();</span><br><span class="line">        duck.fly();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="🚌-정리"><a href="#🚌-정리" class="headerlink" title="🚌 정리"></a>🚌 정리</h3><ul>
+<li>클라이언트 -&gt; <code>request()</code> -&gt; 어댑터 - <code>translatedRequest()</code> -&gt; 어댑티.</li>
+<li>클라이언트는 타겟 인터페이스에 맞게 구현, 어댑터는 타겟 인터페이스를 구현하며, 어댑티 인스턴스가 들어있음.</li>
+</ul>
+<hr>
+<h2 id="🗿-파사드-패턴의-이해"><a href="#🗿-파사드-패턴의-이해" class="headerlink" title="🗿 파사드 패턴의 이해"></a>🗿 파사드 패턴의 이해</h2><blockquote>
+<p>패턴을 사용할때는 항상 패턴이 어떤 용도로 쓰이는지를 잘 알아둬야 한다.<br>퍼사드 패턴은 단순화된 인터페이스를 통해서 서브시스템을 더 쉽게 사용할 수 있도록 하기위한 용도로 쓰인다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/55419159/140728533-8bf247c6-484d-4375-9746-d49960e445c3.png" alt="image"></p>
+<h3 id="💿-DVD영화를-보려고하면"><a href="#💿-DVD영화를-보려고하면" class="headerlink" title="💿 DVD영화를 보려고하면.."></a>💿 DVD영화를 보려고하면..</h3><blockquote>
+<p>홈씨어터로 퍼사드 패턴을 구현해보자.<br>전선과 프로젝터를 설치하고, 각 장치들을 케이블로 연결하고 등등 여러 인터페이스들이 나열되어 있다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/55419159/140728598-7bcbeb79-d888-413f-bca6-368863c1e56d.png" alt="image"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>팝콘 기계를켠다.</span><br><span class="line"><span class="number">2.</span>팝콘 튀기기 시작.</span><br><span class="line"><span class="number">3.</span>전등을 어둡게 조절</span><br><span class="line"><span class="number">4.</span>스크린을 내린다.</span><br><span class="line">..</span><br><span class="line">..</span><br><span class="line"><span class="number">12.</span>DVD 플레이어를 켠다</span><br><span class="line"><span class="number">13.</span>DVD를 재생한다.</span><br><span class="line"></span><br><span class="line">poper.on();</span><br><span class="line">poper.pop();</span><br><span class="line">light.dim(<span class="number">10</span>)</span><br><span class="line">screen.down();</span><br><span class="line">.....</span><br><span class="line">dvd.on();</span><br><span class="line">dvd.play(movie);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>너무 복잡하다… 버튼하나로 모든 세팅이 끝나게 할 수는 없을까?</em></p>
+</blockquote>
+<ul>
+<li>이런 경우에 퍼사드를 사용하면 된다.</li>
+<li>퍼사드 패턴은 <strong>인터페이스를 단순화시키기 위해서</strong> 인터페이스를 변경한다.</li>
+<li><strong>통합 인터페이스</strong>를 제공하는 <strong>퍼사드 클래스</strong>를 구현함으로써 복잡한 시스템을 훨씬 쉽게 사용할 수 있다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeTheaterFacade</span> </span>&#123; <span class="comment">//영화 세팅의 모든것이 담겨있는 파사드 객체</span></span><br><span class="line">    Amplifier amp;</span><br><span class="line">    Tuner tuner;</span><br><span class="line">    Dvdplayer dvd;</span><br><span class="line">    CdPlayer cd;</span><br><span class="line">    Projector projector;</span><br><span class="line">    TheaterLights lights;</span><br><span class="line">    Screen screen;</span><br><span class="line">    PopcornPopper popper;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HomeTheaterFacade</span><span class="params">(Amplifier amp,</span></span></span><br><span class="line"><span class="params"><span class="function">                             Tuner tuner,</span></span></span><br><span class="line"><span class="params"><span class="function">                             DvdPlayer dvd,</span></span></span><br><span class="line"><span class="params"><span class="function">                             CdPlayer cd,</span></span></span><br><span class="line"><span class="params"><span class="function">                             Projector projector,</span></span></span><br><span class="line"><span class="params"><span class="function">                             Screen screen,</span></span></span><br><span class="line"><span class="params"><span class="function">                             TheaterLights lights,</span></span></span><br><span class="line"><span class="params"><span class="function">                             PopcornPopper popper)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.amp = amp;</span><br><span class="line">        <span class="keyword">this</span>.tunner = tuner;</span><br><span class="line">        <span class="keyword">this</span>.dvd = dvd;</span><br><span class="line">        <span class="keyword">this</span>.cd = cd;</span><br><span class="line">        <span class="keyword">this</span>.projector = projector;</span><br><span class="line">        <span class="keyword">this</span>.screen = screen;</span><br><span class="line">        <span class="keyword">this</span>.lights = lights;</span><br><span class="line">        <span class="keyword">this</span>.popper = popper;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">watchMovie</span><span class="params">(String movie)</span> </span>&#123;  <span class="comment">//영화를 보고싶으면 그냥 이 메소드만 호출하면 된다!</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Get ready to watch a movie...&quot;</span>);</span><br><span class="line">        popper.on();</span><br><span class="line">        popper.pop();</span><br><span class="line">        lights.dim(<span class="number">10</span>);</span><br><span class="line">        screen.down();</span><br><span class="line">        projector.on();</span><br><span class="line">        projector.wideScreenMode();</span><br><span class="line">        amp.on();</span><br><span class="line">        amp.setDvd(dvd);</span><br><span class="line">        amp.setsurroundSound();</span><br><span class="line">        amp.setVolume(<span class="number">5</span>);</span><br><span class="line">        dvd.on();</span><br><span class="line">        dvd.play(movie);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endMovie</span><span class="params">()</span> </span>&#123; <span class="comment">//끌 때도 마찬가지!</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Shutting movie theater down...&quot;</span>);</span><br><span class="line">        popper.off();</span><br><span class="line">        lights.on();</span><br><span class="line">        screen.up();</span><br><span class="line">        projector.off();</span><br><span class="line">        amp.off();</span><br><span class="line">        dvd.stop();</span><br><span class="line">        dvd.eject();</span><br><span class="line">        dvd.off();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeTheaterTestDrive</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// instantiate components here</span></span><br><span class="line">        HomeTheaterFacade homeTheater =</span><br><span class="line">                <span class="keyword">new</span> HomeTheaterFacade(amp, tuner, dvd, cd, projector, screen, lights, popper);</span><br><span class="line">        homeTheater.watchMovie(<span class="string">&quot;타짜&quot;</span>);</span><br><span class="line">        homeTheater.endMovie();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="💰-최소지식원칙"><a href="#💰-최소지식원칙" class="headerlink" title="💰 최소지식원칙"></a>💰 최소지식원칙</h2><blockquote>
+<p><em>‘정말 친한 친구하고만 얘기하라’</em></p>
+</blockquote>
+<p>어떤 객체든 그 객체와 상호작용을 하는 클래스의 개수에 주의해야 하며, 그런 객체들과 어떤 식으로 상호작용을 하는지에도 주의를 기울여야 한다는 뜻이다.</p>
+<h3 id="⚙️-최소지식원칙을-지키는-방법"><a href="#⚙️-최소지식원칙을-지키는-방법" class="headerlink" title="⚙️ 최소지식원칙을 지키는 방법"></a>⚙️ 최소지식원칙을 지키는 방법</h3><p>어떻게 하면 여러 객체하고 인연을 맺는 것을 피할 수 있을까<br>어떤 메소드에서든지 아래와 같은 <strong>네 종류</strong>의 객체의 <code>메소드</code>만을 호출하면 된다.</p>
+<ol>
+<li>객체 <strong>자체</strong></li>
+<li>메소드에 <strong>매개변수</strong>로 전달된 객체</li>
+<li>그 메소드에서 생성하거나 <strong>인스턴스</strong>를 만든 객체</li>
+<li>그 객체에 속하는 <strong>구성요소</strong></li>
+</ol>
+<h3 id="🥊-활용-예시"><a href="#🥊-활용-예시" class="headerlink" title="🥊 활용 예시"></a>🥊 활용 예시</h3><h4 id="원칙을-따르지-않은-경우"><a href="#원칙을-따르지-않은-경우" class="headerlink" title="원칙을 따르지 않은 경우"></a>원칙을 따르지 않은 경우</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getTemp</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Thermometer thermometer=station.getThermometer(); <span class="comment">// station 오로부터 thermometer라는 객체를 받은다음</span></span><br><span class="line">        <span class="keyword">return</span> thermometer.getTemperature(); <span class="comment">//그 갹체의 getTemperature()메소드를 직접 호출.</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="원칙을-따르는-경우"><a href="#원칙을-따르는-경우" class="headerlink" title="원칙을 따르는 경우"></a>원칙을 따르는 경우</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getTemp</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> station.getTemperature(); <span class="comment">// Station 클래스에 thermometer에 요청을 해주는 메소드를 추가</span></span><br><span class="line">        <span class="comment">// 이렇게 하면 의존해야 하는 클래스의 개수를 줄일수 있다.</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="자동차로-예시를-들면"><a href="#자동차로-예시를-들면" class="headerlink" title="자동차로 예시를 들면"></a>자동차로 예시를 들면</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    Engine engine; <span class="comment">//이 클래스의 구성요소. 이 구성요소의 메소드는 호출해도 된다.</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Key key)</span> </span>&#123; <span class="comment">// 매개변수로 전달된 객체의 메소드는 호출해도 된다.</span></span><br><span class="line"></span><br><span class="line">        Doors doors = <span class="keyword">new</span> Doors(); <span class="comment">//새로운 객체 생성. 이 객체의 메소드는 호출해도 된다.</span></span><br><span class="line">        <span class="keyword">boolean</span> authorized = key.turns(); <span class="comment">//매개변수로 전달된 객체의 메소드는 호출해도 된다.</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (authorized) &#123;</span><br><span class="line">            engine.start(); <span class="comment">// 이 객체의 구성요소의 메소드는 호출해도 된다.</span></span><br><span class="line">            updateDashboardDisplay(); <span class="comment">// 객체 내에 있는 메소드는 호출해도 된다.</span></span><br><span class="line">            doors.lock(); <span class="comment">//직접 생성하거나 인스턴스를 만든 객체의 메소드는 호출해도 된다.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateDashboardDisplay</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Song Jae-won, Jay</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://won0935.github.io/2021/11/08/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-08-%EC%96%B4%EB%8C%91%ED%84%B0-%ED%8C%8C%EC%82%AC%EB%93%9C-%ED%8C%A8%ED%84%B4/">http://won0935.github.io/2021/11/08/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-08-%EC%96%B4%EB%8C%91%ED%84%B0-%ED%8C%8C%EC%82%AC%EB%93%9C-%ED%8C%A8%ED%84%B4/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/"># 디자인패턴</a>
+                    
+                        <a href="/tags/%EC%96%B4%EB%8C%91%ED%84%B0/"># 어댑터</a>
+                    
+                        <a href="/tags/%ED%8C%8C%EC%82%AC%EB%93%9C/"># 파사드</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/11/08/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-09-%ED%85%9C%ED%94%8C%EB%A6%BF-%EB%A9%94%EC%86%8C%EB%93%9C-%ED%8C%A8%ED%84%B4/">템플릿메소드 패턴</a>
+            
+            
+            <a class="next" rel="next" href="/2021/11/06/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/">커맨드 패턴</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Song Jae-won, Jay | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
