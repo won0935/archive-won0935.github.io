@@ -226,16 +226,16 @@
 <li>ObjectMapper는 Thread Safe하기 때문에 굳이 매번 생성해서 따로 쓸 필요가 없음</li>
 <li>Spring의 경우 Bean으로 등록해서 DI받아서 쓰는 것이 좋음</li>
 </ul>
-<h2 id="readValue-vs-convertValue"><a href="#readValue-vs-convertValue" class="headerlink" title="readValue vs convertValue"></a>readValue vs convertValue</h2><ul>
+<h2 id="readValue-vs-convertValue"><a href="#readValue-vs-convertValue" class="headerlink" title="readValue vs convertValue"></a><code>readValue</code> vs <code>convertValue</code></h2><ul>
 <li><p><code>readValue</code></p>
 <p>json String → Model</p>
 </li>
 <li><p><code>convertValue</code></p>
 <p>Object → Model</p>
 <p>Jackson 2.7.x+부터 멤버 변수 자체에 주석을 달 수 있는 방법이 있습니다.</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)</span><br><span class="line">private List&lt;String&gt; newsletters;</span><br></pre></td></tr></table></figure></li>
+</li>
 </ul>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)</span></span><br><span class="line"><span class="keyword">private</span> List&lt;String&gt; newsletters;</span><br></pre></td></tr></table></figure>
         </div>
 
         

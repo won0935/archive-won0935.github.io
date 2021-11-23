@@ -6,7 +6,7 @@
   <link href="http://won0935.github.io/atom.xml" rel="self"/>
   
   <link href="http://won0935.github.io/"/>
-  <updated>2021-11-23T11:03:44.326Z</updated>
+  <updated>2021-11-23T11:07:08.363Z</updated>
   <id>http://won0935.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://won0935.github.io/2021/11/23/%EC%9E%90%EB%B0%94/2021-11-23-ObjectMapper/"/>
     <id>http://won0935.github.io/2021/11/23/%EC%9E%90%EB%B0%94/2021-11-23-ObjectMapper/</id>
     <published>2021-11-23T11:01:39.919Z</published>
-    <updated>2021-11-23T11:03:44.326Z</updated>
+    <updated>2021-11-23T11:07:08.363Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Jackson-ObjectMapper"><a href="#Jackson-ObjectMapper" class="headerlink" title="Jackson ObjectMapper"></a>Jackson ObjectMapper</h1><ul><li>ObjectMapper는 생성 비용이 꽤 비싸기 때문에 멤버변수, bean, static으로 처리</li><li>ObjectMapper는 Thread Safe하기 때문에 굳이 매번 생성해서 따로 쓸 필요가 없음</li><li>Spring의 경우 Bean으로 등록해서 DI받아서 쓰는 것이 좋음</li></ul><h2 id="readValue-vs-convertValue"><a href="#readValue-vs-convertValue" class="headerlink" title="readValue vs convertValue"></a>readValue vs convertValue</h2><ul><li><p><code>readValue</code></p><p>json String → Model</p></li><li><p><code>convertValue</code></p><p>Object → Model</p><p>Jackson 2.7.x+부터 멤버 변수 자체에 주석을 달 수 있는 방법이 있습니다.</p>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)</span><br><span class="line">private List&lt;String&gt; newsletters;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="Jackson-ObjectMapper"><a href="#Jackson-ObjectMapper" class="headerlink" title="Jackson ObjectMapper"></a>Jackson ObjectMapper</h1><ul><li>ObjectMapper는 생성 비용이 꽤 비싸기 때문에 멤버변수, bean, static으로 처리</li><li>ObjectMapper는 Thread Safe하기 때문에 굳이 매번 생성해서 따로 쓸 필요가 없음</li><li>Spring의 경우 Bean으로 등록해서 DI받아서 쓰는 것이 좋음</li></ul><h2 id="readValue-vs-convertValue"><a href="#readValue-vs-convertValue" class="headerlink" title="readValue vs convertValue"></a><code>readValue</code> vs <code>convertValue</code></h2><ul><li><p><code>readValue</code></p><p>json String → Model</p></li><li><p><code>convertValue</code></p><p>Object → Model</p><p>Jackson 2.7.x+부터 멤버 변수 자체에 주석을 달 수 있는 방법이 있습니다.</p></li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)</span></span><br><span class="line"><span class="keyword">private</span> List&lt;String&gt; newsletters;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
@@ -49,9 +49,9 @@
     <link href="http://won0935.github.io/2021/11/23/%EC%9E%90%EB%B0%94/2021-11-21-EnumUtils/"/>
     <id>http://won0935.github.io/2021/11/23/%EC%9E%90%EB%B0%94/2021-11-21-EnumUtils/</id>
     <published>2021-11-23T11:01:01.220Z</published>
-    <updated>2021-11-23T11:03:06.383Z</updated>
+    <updated>2021-11-23T11:06:25.501Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="EnumUtils"><a href="#EnumUtils" class="headerlink" title="EnumUtils"></a>EnumUtils</h1><ul><li><code>apache.commons</code>의 <code>EnumUtils</code>를 상속받음</li><li><code>StringUtils</code>의 <code>defaultIfEmpty()</code> 메소드와 비슷하게 만들었음</li><li>wildcard로 동적으로 파라미터를 정함</li><li><code>&lt;T extends 제한타입&gt;</code> =&gt; 제너릭타입의 상한 제한. 제한타입과 그 자손(타입)들만 가능</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumUtils</span> <span class="keyword">extends</span> <span class="title">org</span>.<span class="title">apache</span>.<span class="title">commons</span>.<span class="title">lang</span>.<span class="title">enums</span>.<span class="title">EnumUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E extends Enum&gt; <span class="function">E <span class="title">defaultIfEmpty</span><span class="params">(E value, E defalutValue)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> vlaue == <span class="keyword">null</span> ? defaultValue : value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="EnumUtils"><a href="#EnumUtils" class="headerlink" title="EnumUtils"></a>EnumUtils</h1><ul><li><code>apache.commons</code>의 <code>EnumUtils</code>를 상속받음</li><li><code>StringUtils</code>의 <code>defaultIfEmpty()</code> 메소드와 비슷하게 만들었음</li><li>wildcard로 동적으로 파라미터를 정함</li><li><code>&lt;T extends 제한타입&gt;</code> =&gt; 제너릭타입의 상한 제한. 제한타입과 그 자손(타입)들만 가능</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumUtils</span> <span class="keyword">extends</span> <span class="title">org</span>.<span class="title">apache</span>.<span class="title">commons</span>.<span class="title">lang</span>.<span class="title">enums</span>.<span class="title">EnumUtils</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;E extends Enum&gt; <span class="function">E <span class="title">defaultIfEmpty</span><span class="params">(E value, E defalutValue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> vlaue == <span class="keyword">null</span> ? defaultValue : value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
