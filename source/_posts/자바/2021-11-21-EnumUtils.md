@@ -17,10 +17,8 @@ tags:
 
 ```java
 public class EnumUtils extends org.apache.commons.lang.enums.EnumUtils {
-	
-		public static <E extends Enum> E defaultIfEmpty(E value, E defalutValue) {
-				return vlaue == null ? defaultValue : value;
-		}
-
+    public static <E extends Enum> E defaultIfEmpty(E value, E defalutValue) {
+        return vlaue == null ? defaultValue : value;
+    }
 }
 ```
