@@ -113,3 +113,6 @@ robotstxt:
   User-agent: "*"
   Allow: /
   Sitemap: https://won0935.github.io/sitemap.xml
+
+sitemap:
+  path: sitemap.xml
