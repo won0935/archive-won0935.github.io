@@ -205,7 +205,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">October 26, 2021&nbsp;&nbsp;21:57:04</a>
+                        Date: <a href="#">November 28, 2021&nbsp;&nbsp;17:40:52</a>
                         </span>
                     
                     
@@ -231,20 +231,19 @@
 <li>서버 과부하 방지</li>
 </ol>
 <hr>
-<h1 id="처리율-제한-알고리즘"><a href="#처리율-제한-알고리즘" class="headerlink" title="처리율 제한 알고리즘"></a>처리율 제한 알고리즘</h1><h2 id="토큰-버킷"><a href="#토큰-버킷" class="headerlink" title="토큰 버킷"></a>토큰 버킷</h2><pre><code>&gt; 토큰을 발급하고 토큰의 갯수 만큼만 API 요청을 버킷에 담음
-버킷이 가득 찬 경우 API요청은 버려짐(overflow)
-&gt;
-</code></pre>
+<h1 id="처리율-제한-알고리즘"><a href="#처리율-제한-알고리즘" class="headerlink" title="처리율 제한 알고리즘"></a>처리율 제한 알고리즘</h1><h2 id="토큰-버킷"><a href="#토큰-버킷" class="headerlink" title="토큰 버킷"></a>토큰 버킷</h2><blockquote>
+<p>토큰을 발급하고 토큰의 갯수 만큼만 API 요청을 버킷에 담음<br>버킷이 가득 찬 경우 API요청은 버려짐(overflow)</p>
+</blockquote>
 <p><img src="https://user-images.githubusercontent.com/55419159/138881073-2532be82-cc51-4872-a6be-f7e256b1a74e.png" alt="image"></p>
-<pre><code>- 가장 간단하고 폭넓게 사용됨(아마존 등)
-- 메모리 효율성 높음
-- 버킷크기:토큰공급률 비율 튜닝이 관건
-</code></pre>
+<ul>
+<li>가장 간단하고 폭넓게 사용됨(아마존 등)</li>
+<li>메모리 효율성 높음</li>
+<li>버킷크기:토큰공급률 비율 튜닝이 관건</li>
+</ul>
 <hr>
-<h2 id="누출-버킷"><a href="#누출-버킷" class="headerlink" title="누출 버킷"></a>누출 버킷</h2><pre><code>&gt; 토큰 버킷 알고리즘과 유사하지만 처리율이 고정
-큐(FIFO)로 구현
-&gt; 
-</code></pre>
+<h2 id="누출-버킷"><a href="#누출-버킷" class="headerlink" title="누출 버킷"></a>누출 버킷</h2><blockquote>
+<p>토큰 버킷 알고리즘과 유사하지만 처리율이 고정<br>큐(FIFO)로 구현</p>
+</blockquote>
 <p><img src="https://user-images.githubusercontent.com/55419159/138881283-90475661-ca10-481f-a3fb-2e7e3cae0168.png" alt="image"></p>
 <ul>
 <li>동작방식<ol>
@@ -269,15 +268,14 @@
 </li>
 </ul>
 <p><img src="https://user-images.githubusercontent.com/55419159/138881425-aaf0ecc3-a73c-4007-9d36-3c9693f2062f.png" alt="image"></p>
-<pre><code>- 메모리 효율 좋음
-- 윈도 경계에서 일시적으로 많은 트래픽이 몰려드는 경우, 
-기대했던 시스템의 처리 한도보다 많은 양의 요청을 처리하게 됨
-</code></pre>
+<ul>
+<li>메모리 효율 좋음</li>
+<li>윈도 경계에서 일시적으로 많은 트래픽이 몰려드는 경우, 기대했던 시스템의 처리 한도보다 많은 양의 요청을 처리하게 됨</li>
+</ul>
 <hr>
-<h2 id="이동-윈도-로그"><a href="#이동-윈도-로그" class="headerlink" title="이동 윈도 로그"></a>이동 윈도 로그</h2><pre><code>&gt; 고정 윈도 카운터 알고리즘의 윈도 경계 부분에서 
-트래픽이 몰리는 경우를 보완하기 위한 알고리즘
-&gt; 
-</code></pre>
+<h2 id="이동-윈도-로그"><a href="#이동-윈도-로그" class="headerlink" title="이동 윈도 로그"></a>이동 윈도 로그</h2><blockquote>
+<p>고정 윈도 카운터 알고리즘의 윈도 경계 부분에서<br>트래픽이 몰리는 경우를 보완하기 위한 알고리즘</p>
+</blockquote>
 <ul>
 <li>동작방식<ol>
 <li>요청의 타임스탬프를 추적함<br>타임스탬프는 보통 Redis의 Sorted Set과 같은 정렬 집합 캐시에 보관</li>
@@ -292,14 +290,14 @@
 </li>
 </ul>
 <hr>
-<h2 id="이동-윈도-카운터"><a href="#이동-윈도-카운터" class="headerlink" title="이동 윈도 카운터"></a>이동 윈도 카운터</h2><pre><code>&gt; 고정 윈도 카운터 + 이동 윈도 로그
-&gt; 
-
-- 이전 시간대의 평균 처리율에 따라 현재 윈도의 상태를 계산하므로 
-짧은 시간에 몰리는 트래픽에도 잘 대응
-- 메모리 효율이 좋음
-- 직전 시간의 추정치를 계산하기 때문에 기준이 느슨함, But 심각한 건 아님
-</code></pre>
+<h2 id="이동-윈도-카운터"><a href="#이동-윈도-카운터" class="headerlink" title="이동 윈도 카운터"></a>이동 윈도 카운터</h2><blockquote>
+<p>고정 윈도 카운터 + 이동 윈도 로그 </p>
+</blockquote>
+<ul>
+<li>이전 시간대의 평균 처리율에 따라 현재 윈도의 상태를 계산하므로 짧은 시간에 몰리는 트래픽에도 잘 대응</li>
+<li>메모리 효율이 좋음</li>
+<li>직전 시간의 추정치를 계산하기 때문에 기준이 느슨함, But 심각한 건 아님</li>
+</ul>
 <hr>
 <h1 id="프로세스"><a href="#프로세스" class="headerlink" title="프로세스"></a>프로세스</h1><ol>
 <li>처리율 제한 규칙은 디스크에 보관한다.<br>작업 프로세스는 수시로 규칙을 디스크에서 읽어 캐시에 저장한다.</li>
@@ -362,10 +360,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/10/27/DesignPattern/SingletonPattern/">싱글톤 패턴</a>
             
-            
-            <a class="next" rel="next" href="/2021/10/26/MassiveSystemDesign/Chapter-4/">안정 해시 설계</a>
+            <a class="next" rel="next" href="/2021/11/23/Java/ObjectMapper/">ObjectMapper</a>
             
         </section>
 
