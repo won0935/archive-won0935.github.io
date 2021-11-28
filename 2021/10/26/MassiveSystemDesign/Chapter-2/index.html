@@ -15,7 +15,7 @@
 
 
 
-<title>안정 해시 설계 | Jay&#39;s Note</title>
+<title>사용자 수에 따른 규모 확장성 | Jay&#39;s Note</title>
 
 
 
@@ -196,7 +196,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">안정 해시 설계</h1>
+            <h1 class="post-title">사용자 수에 따른 규모 확장성</h1>
             
                 <div class="post-meta">
                     
@@ -205,7 +205,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">October 26, 2021&nbsp;&nbsp;21:53:30</a>
+                        Date: <a href="#">October 26, 2021&nbsp;&nbsp;21:50:02</a>
                         </span>
                     
                     
@@ -221,38 +221,110 @@
         </header>
 
         <div class="post-content">
-            <blockquote>
-<p>수평적 규모 확장을 위해서는 요청 또는 데이터를 서버로 균등하게 나누는 것이 중요<br>안정 해시는 이 목표를 달성하기 위해 보편적으로 사용하는 기술</p>
-</blockquote>
-<hr>
-<h2 id="안정-해시-설계의-이점"><a href="#안정-해시-설계의-이점" class="headerlink" title="안정 해시 설계의  이점"></a>안정 해시 설계의  이점</h2><ul>
-<li>서버가 추가되거나 삭제될 때 재배치되는 키의 수가 최소화된다.</li>
-<li>데이터가 보다 균등하게 분포하게 되므로 수평적 규모 확장성을 달성하기 쉽다.</li>
-<li>핫스팟(hotspot) 키 문제를 줄인다.</li>
+            <ul>
+<li>요약<ul>
+<li>웹 계층은 무상태 계층으로</li>
+<li>모든 계층에 다중화 도입</li>
+<li>가능한 많은 데이터를 캐시할 것</li>
+<li>여러 데이터 센터를 지원할 것</li>
+<li>정적 콘텐츠는 CDN을 통해 서비스할 것</li>
+<li>데이터 계층은 샤딩을 통에 그 규모를 확장할 것</li>
+<li>각 계층은 독립적 서비스로 분할할 것</li>
+<li>시스템을 지속적으로 모니터링 하고, 자동화 도구들을 활용할 것</li>
+</ul>
+</li>
 </ul>
 <hr>
-<h3 id="만약-잘-분배가-되어있던-서버-하나가-죽었을-경우"><a href="#만약-잘-분배가-되어있던-서버-하나가-죽었을-경우" class="headerlink" title="만약 잘 분배가 되어있던 서버 하나가 죽었을 경우?"></a>만약 잘 분배가 되어있던 서버 하나가 죽었을 경우?</h3><h3 id="기존-해시-테이블"><a href="#기존-해시-테이블" class="headerlink" title="기존 해시 테이블"></a>기존 해시 테이블</h3><ul>
-<li>모든 키를 재배치함</li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/55419159/138881514-e09e12fd-2764-40ee-9eef-2cf3a4a84f3f.png"></p>
-<h3 id="안정-해시"><a href="#안정-해시" class="headerlink" title="안정 해시"></a>안정 해시</h3><ul>
-<li>이상이 있는 부분만 재배치</li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/55419159/138881565-e60403c1-c98e-48ab-bb80-8a8c5f10320b.png"></p>
-<hr>
-<h2 id="기본-구현법"><a href="#기본-구현법" class="headerlink" title="기본 구현법"></a>기본 구현법</h2><ol>
-<li>서버와 키를 균등 분포 해시 함수를 사용해 해시 링에 배치한다.</li>
-<li>키의 위치에서 링을 시계 방향을 탐색하다 만나는 최초의 서버가 키가 저장될 서버다.</li>
+<h1 id="단일서버"><a href="#단일서버" class="headerlink" title="단일서버"></a>단일서버</h1><h2 id="시스템이-단일-서버로-구현되어있다고-가정할-시-프로세스"><a href="#시스템이-단일-서버로-구현되어있다고-가정할-시-프로세스" class="headerlink" title="시스템이 단일 서버로 구현되어있다고 가정할 시 프로세스"></a>시스템이 단일 서버로 구현되어있다고 가정할 시 프로세스</h2><ol>
+<li>사용자가 도메인(api.mysite.com)으로 접속한다.</li>
+<li>DNS에 질의하여 IP주소로 반환된다. (DNS는 제3사업자임)</li>
+<li>IP주소로 HTTP 요청</li>
+<li>HTML or Json으로 응답</li>
 </ol>
-<p><strong>문제점</strong></p>
-<ul>
-<li>서버가 추가되거나 삭제될 때 파티션의 크기를 균등하게 유지하는게 불가능</li>
-<li>키의 균등 분포를 달성하기가 어려움</li>
+<hr>
+<h1 id="데이터베이스"><a href="#데이터베이스" class="headerlink" title="데이터베이스"></a>데이터베이스</h1><h2 id="RDBMS-vs-NoSQL"><a href="#RDBMS-vs-NoSQL" class="headerlink" title="RDBMS vs NoSQL"></a>RDBMS vs NoSQL</h2><ul>
+<li>RDBMS<ul>
+<li>오라클, MySQL, PostegreSQL</li>
+<li>열, 컬럼으로 표현</li>
+<li>Join으로 합침</li>
+</ul>
+</li>
+<li>NoSQL<ul>
+<li>MongoDB …</li>
+<li>Join 지원 안함</li>
+</ul>
+</li>
+</ul>
+<h2 id="NoSQL-쓰는-경우"><a href="#NoSQL-쓰는-경우" class="headerlink" title="NoSQL 쓰는 경우"></a>NoSQL 쓰는 경우</h2><ul>
+<li>속도 중요할 시</li>
+<li>비정형 데이터일 시</li>
+<li>데이터 직렬화, 역직렬화 용</li>
+<li>대량의 데이터</li>
 </ul>
 <hr>
-<h2 id="가상-노드"><a href="#가상-노드" class="headerlink" title="가상 노드"></a>가상 노드</h2><blockquote>
-<p>기본 구현법의 문제를 해결하기 위한 방법<br>실제 노드를 가르키는 가상 노드를 만들어 해시 링에 균등하게 배치하는 방법</p>
-</blockquote>
+<h1 id="수직적-규모-확장-vs-수평적-규모-확장"><a href="#수직적-규모-확장-vs-수평적-규모-확장" class="headerlink" title="수직적 규모 확장 vs 수평적 규모 확장"></a>수직적 규모 확장 vs 수평적 규모 확장</h1><h2 id="Sacale-Up-vs-Sacale-Out"><a href="#Sacale-Up-vs-Sacale-Out" class="headerlink" title="Sacale-Up vs Sacale-Out"></a>Sacale-Up vs Sacale-Out</h2><p>Scale-Up : 단일 서버 사양을 높임</p>
+<p>Scale-Out : 서버 수를 추가</p>
+<h2 id="Sacale-Up-아닌-Sacale-Out이-유리한-이유"><a href="#Sacale-Up-아닌-Sacale-Out이-유리한-이유" class="headerlink" title="Sacale-Up 아닌 Sacale-Out이 유리한 이유"></a>Sacale-Up 아닌 Sacale-Out이 유리한 이유</h2><ul>
+<li>한 대의 서버 메모리를 무한대로 증설할 방법이 없음</li>
+<li>장애에 대한 자동복구 방안이나 다중화 제시 X</li>
+</ul>
+<h2 id="로드밸런서-LB"><a href="#로드밸런서-LB" class="headerlink" title="로드밸런서(LB)"></a>로드밸런서(LB)</h2><ul>
+<li>트래픽 분산의 역할</li>
+</ul>
+<h2 id="DB-다중화"><a href="#DB-다중화" class="headerlink" title="DB 다중화"></a>DB 다중화</h2><ul>
+<li>이중화 시 master-slave로 나눔</li>
+<li>master는 write, slave는 read</li>
+<li>보통 read연산 비중이 훨씬 높고 slave DB가 더 많음 → 성능</li>
+</ul>
+<hr>
+<h1 id="캐시"><a href="#캐시" class="headerlink" title="캐시"></a>캐시</h1><ul>
+<li>값비싼 연산 결과나 자주 참조되는 데이터를 저장하는 메모리</li>
+</ul>
+<h2 id="캐시-사용-시-고려해야-할-것"><a href="#캐시-사용-시-고려해야-할-것" class="headerlink" title="캐시 사용 시 고려해야 할 것"></a>캐시 사용 시 고려해야 할 것</h2><ul>
+<li>영속적인 데이터 X</li>
+<li>만료(expire) 방식<ul>
+<li>LRU → 가장 자주 씀</li>
+<li>LFU</li>
+<li>FIFO</li>
+</ul>
+</li>
+<li>데이터 일관성 유지 방식</li>
+</ul>
+<hr>
+<h1 id="콘텐츠-전송-네크워크-CDN"><a href="#콘텐츠-전송-네크워크-CDN" class="headerlink" title="콘텐츠 전송 네크워크(CDN)"></a>콘텐츠 전송 네크워크(CDN)</h1><ul>
+<li>정적 콘텐츠 캐싱</li>
+<li>CSS, JS, 이미지, 비디오</li>
+</ul>
+<hr>
+<h1 id="무상태-stateless-웹-계층"><a href="#무상태-stateless-웹-계층" class="headerlink" title="무상태(stateless) 웹 계층"></a>무상태(stateless) 웹 계층</h1><ul>
+<li>Scale-Out 시 중요</li>
+<li>상태정보를 웹 계층에서 제거</li>
+</ul>
+<h2 id="상태-정보를-웹-말고-DB에-저장"><a href="#상태-정보를-웹-말고-DB에-저장" class="headerlink" title="상태 정보를 웹 말고 DB에 저장"></a>상태 정보를 웹 말고 DB에 저장</h2><ul>
+<li>MSA시 <strong>공유저장소</strong>를 활용</li>
+<li>Redis, NoSQL 활용</li>
+</ul>
+<hr>
+<h1 id="데이터센터"><a href="#데이터센터" class="headerlink" title="데이터센터"></a>데이터센터</h1><ul>
+<li>통상적으로 지리적으로 가장 가까운 곳으로 라우팅(Geo-routing)</li>
+</ul>
+<h2 id="구축-시-신경써야-할-것"><a href="#구축-시-신경써야-할-것" class="headerlink" title="구축 시 신경써야 할 것"></a>구축 시 신경써야 할 것</h2><ul>
+<li>트래픽 우회</li>
+<li>데이터 동기화</li>
+<li>테스트와 배포</li>
+</ul>
+<p>→ Message Queue는 시스템이 독립적으로 확장할 수 있는 핵심전략</p>
+<hr>
+<h1 id="메시지-큐"><a href="#메시지-큐" class="headerlink" title="메시지 큐"></a>메시지 큐</h1><ul>
+<li>무손실, 비동기</li>
+<li>pub-sub 방식</li>
+</ul>
+<hr>
+<h1 id="데이터베이스의-규모-확장"><a href="#데이터베이스의-규모-확장" class="headerlink" title="데이터베이스의 규모 확장"></a>데이터베이스의 규모 확장</h1><h2 id="샤딩-sharding"><a href="#샤딩-sharding" class="headerlink" title="샤딩(sharding)"></a>샤딩(sharding)</h2><ul>
+<li>DB를 scale-out 하는 것</li>
+<li><strong>모든 샤드는 같은 스키마를 쓰지만 데이터 중복은 없음</strong></li>
+<li>샤딩 키를 정하는 것이 중요</li>
+</ul>
 
         </div>
 
@@ -285,9 +357,11 @@
                     
                         <a href="/tags/%EB%8C%80%EA%B7%9C%EB%AA%A8%EC%84%A4%EA%B3%84/"># 대규모설계</a>
                     
-                        <a href="/tags/%EC%95%88%EC%A0%95%ED%95%B4%EC%8B%9C/"># 안정해시</a>
+                        <a href="/tags/DB%EC%84%A4%EA%B3%84/"># DB설계</a>
                     
-                        <a href="/tags/%EA%B0%80%EC%83%81%EB%85%B8%EB%93%9C/"># 가상노드</a>
+                        <a href="/tags/%EC%84%9C%EB%B2%84%EC%84%A4%EA%B3%84/"># 서버설계</a>
+                    
+                        <a href="/tags/%EB%B6%84%EC%82%B0%EC%84%A4%EA%B3%84/"># 분산설계</a>
                     
                         
                 </span>
@@ -300,10 +374,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%B2%98%EB%A6%AC%EC%9C%A8-%EC%A0%9C%ED%95%9C-%EC%9E%A5%EC%B9%98%EC%9D%98-%EC%84%A4%EA%B3%84/">처리율 제한 장치의 설계</a>
+                <a class="prev" rel="prev" href="/2021/10/26/MassiveSystemDesign/Chapter-1/">개략적인 규모 추정</a>
             
-            
-            <a class="next" rel="next" href="/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84-%EB%A9%B4%EC%A0%91-%EA%B3%B5%EB%9E%B5%EB%B2%95/">시스템 설계 면접 공략법</a>
             
         </section>
 

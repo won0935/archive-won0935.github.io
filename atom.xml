@@ -18,8 +18,8 @@
   
   <entry>
     <title>ObjectMapper</title>
-    <link href="http://won0935.github.io/2021/11/23/Java/2021-11-23-ObjectMapper/"/>
-    <id>http://won0935.github.io/2021/11/23/Java/2021-11-23-ObjectMapper/</id>
+    <link href="http://won0935.github.io/2021/11/23/Java/ObjectMapper/"/>
+    <id>http://won0935.github.io/2021/11/23/Java/ObjectMapper/</id>
     <published>2021-11-23T11:01:39.919Z</published>
     <updated>2021-11-23T11:07:08.363Z</updated>
     
@@ -46,8 +46,8 @@
   
   <entry>
     <title>EnumUtils</title>
-    <link href="http://won0935.github.io/2021/11/23/Java/2021-11-21-EnumUtils/"/>
-    <id>http://won0935.github.io/2021/11/23/Java/2021-11-21-EnumUtils/</id>
+    <link href="http://won0935.github.io/2021/11/23/Java/EnumUtils/"/>
+    <id>http://won0935.github.io/2021/11/23/Java/EnumUtils/</id>
     <published>2021-11-23T11:01:01.220Z</published>
     <updated>2021-11-23T11:06:25.501Z</updated>
     
@@ -292,8 +292,8 @@
   
   <entry>
     <title>m1 맥에서 144hz 롤하기</title>
-    <link href="http://won0935.github.io/2021/10/30/Extra/2021-10-30-m1-league-of-legend/"/>
-    <id>http://won0935.github.io/2021/10/30/Extra/2021-10-30-m1-league-of-legend/</id>
+    <link href="http://won0935.github.io/2021/10/30/Extra/m1-league-of-legend/"/>
+    <id>http://won0935.github.io/2021/10/30/Extra/m1-league-of-legend/</id>
     <published>2021-10-30T07:18:02.729Z</published>
     <updated>2021-11-13T05:31:56.948Z</updated>
     
@@ -380,8 +380,8 @@
   
   <entry>
     <title>처리율 제한 장치의 설계</title>
-    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%B2%98%EB%A6%AC%EC%9C%A8-%EC%A0%9C%ED%95%9C-%EC%9E%A5%EC%B9%98%EC%9D%98-%EC%84%A4%EA%B3%84/"/>
-    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%B2%98%EB%A6%AC%EC%9C%A8-%EC%A0%9C%ED%95%9C-%EC%9E%A5%EC%B9%98%EC%9D%98-%EC%84%A4%EA%B3%84/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-5/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-5/</id>
     <published>2021-10-26T12:57:04.929Z</published>
     <updated>2021-10-26T12:57:04.929Z</updated>
     
@@ -417,8 +417,8 @@
   
   <entry>
     <title>안정 해시 설계</title>
-    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%95%88%EC%A0%95-%ED%95%B4%EC%8B%9C-%EC%84%A4%EA%B3%84/"/>
-    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%95%88%EC%A0%95-%ED%95%B4%EC%8B%9C-%EC%84%A4%EA%B3%84/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-4/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-4/</id>
     <published>2021-10-26T12:53:30.299Z</published>
     <updated>2021-10-26T12:53:30.299Z</updated>
     
@@ -451,8 +451,8 @@
   
   <entry>
     <title>시스템 설계 면접 공략법</title>
-    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84-%EB%A9%B4%EC%A0%91-%EA%B3%B5%EB%9E%B5%EB%B2%95/"/>
-    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84-%EB%A9%B4%EC%A0%91-%EA%B3%B5%EB%9E%B5%EB%B2%95/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-3/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-3/</id>
     <published>2021-10-26T12:52:30.866Z</published>
     <updated>2021-10-26T12:52:30.866Z</updated>
     
@@ -479,8 +479,8 @@
   
   <entry>
     <title>키-값 저장소 설계</title>
-    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%ED%82%A4-%EA%B0%92-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EA%B3%84/"/>
-    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%ED%82%A4-%EA%B0%92-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EA%B3%84/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-6/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-6/</id>
     <published>2021-10-26T12:52:30.860Z</published>
     <updated>2021-11-28T08:19:28.650Z</updated>
     
@@ -514,8 +514,8 @@
   
   <entry>
     <title>분산 시스템을 위한 유일 ID 생성기 설계</title>
-    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-11-16-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9C%A0%EC%9D%BC-ID-%EC%83%9D%EC%84%B1%EA%B8%B0-%EC%84%A4%EA%B3%84/"/>
-    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-11-16-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9C%A0%EC%9D%BC-ID-%EC%83%9D%EC%84%B1%EA%B8%B0-%EC%84%A4%EA%B3%84/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-7/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-7/</id>
     <published>2021-10-26T12:52:30.860Z</published>
     <updated>2021-11-16T13:37:16.889Z</updated>
     
@@ -547,8 +547,8 @@
   
   <entry>
     <title>개략적인 규모 추정</title>
-    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EA%B0%9C%EB%9E%B5%EC%A0%81%EC%9D%B8-%EA%B7%9C%EB%AA%A8-%EC%B6%94%EC%A0%95/"/>
-    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EA%B0%9C%EB%9E%B5%EC%A0%81%EC%9D%B8-%EA%B7%9C%EB%AA%A8-%EC%B6%94%EC%A0%95/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-1/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-1/</id>
     <published>2021-10-26T12:52:30.856Z</published>
     <updated>2021-10-26T12:52:30.856Z</updated>
     
@@ -575,8 +575,8 @@
   
   <entry>
     <title>사용자 수에 따른 규모 확장성</title>
-    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%88%98%EC%97%90-%EB%94%B0%EB%A5%B8-%EA%B7%9C%EB%AA%A8-%ED%99%95%EC%9E%A5%EC%84%B1/"/>
-    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%88%98%EC%97%90-%EB%94%B0%EB%A5%B8-%EA%B7%9C%EB%AA%A8-%ED%99%95%EC%9E%A5%EC%84%B1/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-2/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-2/</id>
     <published>2021-10-26T12:50:02.725Z</published>
     <updated>2021-10-26T12:50:02.725Z</updated>
     
