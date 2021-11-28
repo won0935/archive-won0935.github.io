@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Song Jae-won, Jay">
+
+
+
+    <meta name="description" content="기억보단 기록으로">
+
+
+
+<title>옵저버 패턴 | Jay&#39;s Note</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Jay's Note" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">기억보단 기록으로</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">기억보단 기록으로</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">옵저버 패턴</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Song Jae-won, Jay</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 12, 2021&nbsp;&nbsp;17:05:58</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="🔭-옵저버-패턴이란"><a href="#🔭-옵저버-패턴이란" class="headerlink" title="🔭 옵저버 패턴이란"></a>🔭 옵저버 패턴이란</h2><blockquote>
+<p>옵저버 패턴(observer pattern)은 객체의 상태 변화를 관찰하는 <strong>관찰자</strong>들,<br>즉 옵저버들의 목록을 객체에 등록하여 <strong>상태 변화가 있을 때마다</strong> 메서드 등을 통해 객체가 직접 목록의 각 <strong>옵저버에게 통지하도록</strong> 하는 디자인 패턴이다.</p>
+</blockquote>
+<h3 id="클래스-다이어그램"><a href="#클래스-다이어그램" class="headerlink" title="클래스 다이어그램"></a>클래스 다이어그램</h3><p><img src="https://user-images.githubusercontent.com/55419159/141607954-d5fd0a63-b644-4e8d-8004-5af5dc53da83.png" alt="image"></p>
+<p>옵저버 패턴은 주제와 옵저버가 <strong>느슨하게</strong> 결합되어 있는 객체 디자인을 제공한다. 주제가 옵저버에 대해서 아는 것은 옵저버가 특정 인터페이스(Observer 인터페이스)를 구현 한다는 것 뿐이다.</p>
+<ul>
+<li>옵저버는 언제든지 새로 추가할 수 있음. (주제는 Observer인터페이스 구현하는 객체 목록에만 의존하기때문)</li>
+<li>새로운 형식의 옵저버를 추가하려해도 주제를 전혀 변경할 필요가 없음. (새로운 클래스에서 Observer 인터페이스만 구현해주면됨)</li>
+<li>주제나 옵저버가 바뀌더라도 서로에게 전혀 영향을 주지않음. 그래서 주제와 옵저버는 서로 독립적으로 재 사용할수 있음.</li>
+</ul>
+<p>느슨하게 결합하는 디자인을 사용하면 변경 사항이 생겨도 무난히 처리할 수 있는 유연한 객체지향 시스템을 구축할수 있다. (객체 사이의 상호 의존성을 최소화 할 수 있기 때문)</p>
+<h3 id="디자인-원칙"><a href="#디자인-원칙" class="headerlink" title="디자인 원칙"></a>디자인 원칙</h3><blockquote>
+<p>서로 상호작용을 하는 객체 사이에서는 가능하면 <strong>느슨하게 결합</strong>하는 디자인을 사용해야 한다.</p>
+</blockquote>
+<hr>
+<h2 id="활용예제"><a href="#활용예제" class="headerlink" title="활용예제"></a>활용예제</h2><h3 id="☀️-기상데이터-관찰"><a href="#☀️-기상데이터-관찰" class="headerlink" title="☀️ 기상데이터 관찰"></a>☀️ 기상데이터 관찰</h3><p>날씨 데이터를 가지고 있는 회사와 데이터를 연동하여 여러종류의 각각의 디스플레이에 날씨데이터를 출력해줘야 하는 업무가 생겼다고 가정했을때. 아래의 기능이 필요하다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getTemperature():온도</span><br><span class="line"></span><br><span class="line">        getHumidity():습도</span><br><span class="line"></span><br><span class="line">        getPressure():기압</span><br><span class="line"></span><br><span class="line">        measurementsChanged():새로운 기상 측정 데이터가 나올때마다 자동으로 호출되는 부분.</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-옵저버-패턴-구현해보기"><a href="#1-옵저버-패턴-구현해보기" class="headerlink" title="1. 옵저버 패턴 구현해보기"></a>1. 옵저버 패턴 구현해보기</h3><p><img src="https://user-images.githubusercontent.com/55419159/141608207-0b9249cf-e475-4169-97c1-7c7d3e7a92a0.png" alt="image"></p>
+<h4 id="Subject-인터페이스-구현"><a href="#Subject-인터페이스-구현" class="headerlink" title="Subject 인터페이스 구현"></a><code>Subject</code> 인터페이스 구현</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">registerobserver</span><span class="params">(Observer observer)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Observer-인테페이스-구현"><a href="#Observer-인테페이스-구현" class="headerlink" title="Observer 인테페이스 구현"></a><code>Observer</code> 인테페이스 구현</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temp, <span class="keyword">float</span> humidity, <span class="keyword">float</span> pressure)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DisplayElement</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Subject를-구현하는-WeatherData-생성"><a href="#Subject를-구현하는-WeatherData-생성" class="headerlink" title="Subject를 구현하는 WeatherData 생성"></a><code>Subject</code>를 구현하는 <code>WeatherData</code> 생성</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherData</span> <span class="keyword">implements</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;Observer&gt; observers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pressure;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">measurementsChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.notifyObservers();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMeasurementsChanged</span><span class="params">(<span class="keyword">float</span> t, <span class="keyword">float</span> h, <span class="keyword">float</span> p)</span> </span>&#123;    <span class="comment">//값이 세팅된다고 가정.</span></span><br><span class="line">        <span class="keyword">this</span>.temperature = t;</span><br><span class="line">        <span class="keyword">this</span>.humidity = h;</span><br><span class="line">        <span class="keyword">this</span>.pressure = p;</span><br><span class="line">        <span class="keyword">this</span>.measurementsChanged();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Observer observer : observers) &#123;</span><br><span class="line">            observer.update(<span class="keyword">this</span>.temperature, <span class="keyword">this</span>.humidity, <span class="keyword">this</span>.pressure);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerobserver</span><span class="params">(Observer observer)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.observers.add(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (observers.contains(observer)) observers.remove(observer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Observer를-구현하는-CurrentConditions-생성"><a href="#Observer를-구현하는-CurrentConditions-생성" class="headerlink" title="Observer를 구현하는 CurrentConditions 생성"></a><code>Observer</code>를 구현하는 <code>CurrentConditions</code> 생성</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CurrentConditions</span> <span class="keyword">implements</span> <span class="title">Observer</span>, <span class="title">DisplayElement</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line">    <span class="keyword">private</span> Subject weatherData;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CurrentConditions</span><span class="params">(Subject weatherData)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.weatherData = weatherData;</span><br><span class="line">        <span class="keyword">this</span>.weatherData.registerobserver(<span class="keyword">this</span>);    <span class="comment">//옵저버 등록</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Current conditions : &quot;</span> + temperature + <span class="string">&quot; , &quot;</span> + humidity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temp, <span class="keyword">float</span> humidity, <span class="keyword">float</span> pressure)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.temperature = temp;</span><br><span class="line">        <span class="keyword">this</span>.humidity = humidity;</span><br><span class="line">        <span class="keyword">this</span>.display();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="테스트"><a href="#테스트" class="headerlink" title="테스트"></a>테스트</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherStation</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        WeatherData weatherData = <span class="keyword">new</span> WeatherData();</span><br><span class="line"></span><br><span class="line">        CurrentConditions currentConditions = <span class="keyword">new</span> CurrentConditions(weatherData);</span><br><span class="line">        StatisticsDisplay statisticsDisplay = <span class="keyword">new</span> StatisticsDisplay(weatherData);</span><br><span class="line">        ForecastDisplay forecastDisplay = <span class="keyword">new</span> ForecastDisplay(weatherData);</span><br><span class="line"></span><br><span class="line">        weatherData.setMeasurementsChanged(<span class="number">85</span>, <span class="number">62</span>, <span class="number">36.7f</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-자바-내장-옵저버-패턴-사용"><a href="#2-자바-내장-옵저버-패턴-사용" class="headerlink" title="2. 자바 내장 옵저버 패턴 사용"></a>2. 자바 내장 옵저버 패턴 사용</h3><p><code>java.util.Observer</code> 인터페이스와 <code>java.util.Observable</code> 클래스를 사용할수 있다.</p>
+<p><img src="https://user-images.githubusercontent.com/55419159/141608538-b814feab-5924-497c-bfb4-885ff8473279.png" alt="image"></p>
+<h4 id="java-util-Observable를-구현한-WeatherData-생성"><a href="#java-util-Observable를-구현한-WeatherData-생성" class="headerlink" title="java.util.Observable를 구현한 WeatherData 생성"></a><code>java.util.Observable</code>를 구현한 <code>WeatherData</code> 생성</h4><ul>
+<li><p>이전에 구현 했던것과 마찬가지로 <code>java.util.Observer</code> 인터페이스를 구현하고 <code>java.util.Observable</code> 객체의<br><code>addObserver()</code> 메소드를 호출하면 옵저버 목록에 추가되고, <code>deleteObserver()</code>를 호출하면 옵저버 목록에서 제거된다.</p>
+</li>
+<li><p><strong>연락을 돌리는 방법</strong>은 <code>java.util.Observable</code>를 상속받는 주제 클래스에서 <code>setChanged()</code> 메소드를 호출해서 객체의 상태가 바뀌었다는 것을 알린 후 <code>notifyObservers()</code> 또는 <code>notifyObserver(Object arg)</code> 메소드를 호출하면 된다. (인자값을 넣어주는 메소드는 푸시방식으로 쓰임.)</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherData</span> <span class="keyword">extends</span> <span class="title">Observable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pressure;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">measurementsChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setChanged();    <span class="comment">//상태가 바뀌었다는 플래그값을 바꿔줌.</span></span><br><span class="line">        <span class="keyword">this</span>.notifyObservers(); <span class="comment">//풀 방식을 사용해서 알림</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMeasurementsChanged</span><span class="params">(<span class="keyword">float</span> t, <span class="keyword">float</span> h, <span class="keyword">float</span> p)</span> </span>&#123;    <span class="comment">//값이 세팅된다고 가정.</span></span><br><span class="line">        <span class="keyword">this</span>.temperature = t;</span><br><span class="line">        <span class="keyword">this</span>.humidity = h;</span><br><span class="line">        <span class="keyword">this</span>.pressure = p;</span><br><span class="line">        <span class="keyword">this</span>.measurementsChanged();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getTemperature</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> temperature;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getHumidity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> humidity;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getPressure</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pressure;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="java-util-Observer를-구현한-CurrentConditions-생성"><a href="#java-util-Observer를-구현한-CurrentConditions-생성" class="headerlink" title="java.util.Observer를 구현한 CurrentConditions 생성"></a><code>java.util.Observer</code>를 구현한 <code>CurrentConditions</code> 생성</h4><ul>
+<li>옵저버 객체가 <strong>연락을 받는 방법</strong>은 <code>update(Observable o, Object arg)</code> 메소드를 구현한다.</li>
+<li><code>Observable o</code> 에는 연락을 보내는 주제 객체가 인자로 전달되고, <code>Object arg</code> 에는 <code>notifyObservers(Object arg)</code> 메소드에서 인자로 전달된 데이터 객체가 넘어온다. (데이터 객체가 지정되지 않은경우 <code>null</code>)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CurrentConditions</span> <span class="keyword">implements</span> <span class="title">Observer</span>, <span class="title">DisplayElement</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Observable observable;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CurrentConditions</span><span class="params">(Observable observable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.observable = observable;</span><br><span class="line">        <span class="keyword">this</span>.observable.addObserver(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Current conditions : &quot;</span> + temperature + <span class="string">&quot; , &quot;</span> + humidity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o <span class="keyword">instanceof</span> WeatherData) &#123;</span><br><span class="line">            WeatherData weatherData = (WeatherData) o;</span><br><span class="line">            <span class="keyword">this</span>.temperature = weatherData.getTemperature();</span><br><span class="line">            <span class="keyword">this</span>.humidity = weatherData.getHumidity();</span><br><span class="line">            <span class="keyword">this</span>.display();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="java-util-Observable-의-단점"><a href="#java-util-Observable-의-단점" class="headerlink" title="java.util.Observable 의 단점"></a><code>java.util.Observable</code> 의 단점</h4><ol>
+<li><code>Observable</code> 은 클래스이기 때문에 <strong>서브클래스</strong>를 만들어야 한다. 이미 다른 수퍼클래스를 확장하고 있는 클래스에 <code>Observable</code>의 기능을 추가할수가 없어서 <strong>재사용성에 제약</strong>이 생긴다.</li>
+<li><code>Observable</code> 인터페이스라는 것이 없기 때문에 자바에 내장된 Observer API 하고 잘 맞는 클래스를 직접 구현하는 것이 불가능하다.</li>
+</ol>
+<hr>
+<h2 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h2><p><code>java.util.Observable</code>을 확장한 클래스를 쓸 수 있는 상황이면<br><code>Observable API</code>를 쓰는 것도 괜찮지만 상황에 따라 직접 구현해야 할수도 있다.</p>
+<p>어떤방법을 쓰든 옵저버 패턴만 제대로 알고 있다면 그 패턴을 활용하는 API는 어떤 것이든 잘 활용할 수 있다.</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Song Jae-won, Jay</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/"># 디자인패턴</a>
+                    
+                        <a href="/tags/%EC%98%B5%EC%A0%80%EB%B2%84/"># 옵저버</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/11/13/DesignPattern/DecoratorPattern/">데코레이터 패턴</a>
+            
+            
+            <a class="next" rel="next" href="/2021/11/11/DesignPattern/StrategyPattern/">스트레티지 패턴</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Song Jae-won, Jay | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Song Jae-won, Jay">
+
+
+
+    <meta name="description" content="기억보단 기록으로">
+
+
+
+<title>컴포지트 패턴 | Jay&#39;s Note</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Jay's Note" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">기억보단 기록으로</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">기억보단 기록으로</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">컴포지트 패턴</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Song Jae-won, Jay</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 11, 2021&nbsp;&nbsp;16:52:55</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="🌲-컴포지트-패턴이란"><a href="#🌲-컴포지트-패턴이란" class="headerlink" title="🌲 컴포지트 패턴이란"></a>🌲 컴포지트 패턴이란</h2><blockquote>
+<p>객체들을 트리 구조로 구성하여 부분과 전체를 나타내는 계층구조로 만들수 있다.<br>클라이언트에서 개별 객체와 다른 객체들오 구성된 복합 객체(composite)를 똑같은 방법으로 다룰 수 있다.</p>
+</blockquote>
+<p>식당 메뉴를 예로들어 생각해본다면<br>중첩되어 있는 메뉴 그룹과 메뉴 항목을 똑같은 구조 내에서 처리할수 있게끔 하는 것이다.</p>
+<p>메뉴와 메뉴항목을 같은 구조에 집어넣어서 <strong>부분-전체 계층구조</strong>를 생성할수 있다.</p>
+<p>이런 복합구조를 사용하면 복합 객체와 개별 객체에 대해 구분없이 똑같은 작업을 적용할 수 있다.</p>
+<hr>
+<h2 id="⛵️-컴포지트-패턴의-이해"><a href="#⛵️-컴포지트-패턴의-이해" class="headerlink" title="⛵️ 컴포지트 패턴의 이해"></a>⛵️ 컴포지트 패턴의 이해</h2><p><img src="https://user-images.githubusercontent.com/55419159/141273718-978b7d56-3eb8-496d-99cb-367e5a2380b6.png" alt="image"></p>
+<h3 id="🚀-활용-예시"><a href="#🚀-활용-예시" class="headerlink" title="🚀 활용 예시"></a>🚀 활용 예시</h3><p><em>컴포지트 패턴을 메뉴에 적용시켜본다면…</em></p>
+<p>우선 구성요소 <strong>인터페이스를 만드는 것</strong>부터 시작해보자.</p>
+<p>이 인터페이스는 메뉴와 메뉴 항목 모두에 적용되는 <strong>공통 인터페이스</strong> 역할을 하며, 이 인터페이스가 있어야만 그 들을 <strong>똑같은 방법</strong>으로 처리할 수 있다. </p>
+<p>즉 메뉴와 메뉴 항목에 대해서 같은 메소드를 호출 할 수 있게 된다.</p>
+<p><img src="https://user-images.githubusercontent.com/55419159/141273915-f2bb7cba-e951-4955-92e0-2ab3eb8ed03a.png" alt="image"></p>
+<h4 id="Component-추상클래스-구현"><a href="#Component-추상클래스-구현" class="headerlink" title="Component 추상클래스 구현"></a><code>Component</code> 추상클래스 구현</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">MenuComponent</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(MenuComponent menuComponent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(MenuComponent menuComponent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> MenuComponent <span class="title">getChild</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getPrice</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isVegetarian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Component-를-상속받는-Leaf-객체-구현"><a href="#Component-를-상속받는-Leaf-객체-구현" class="headerlink" title="Component 를 상속받는 Leaf 객체 구현"></a><code>Component</code> 를 상속받는 <code>Leaf</code> 객체 구현</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MenuItem</span> <span class="keyword">extends</span> <span class="title">MenuComponent</span> </span>&#123; <span class="comment">//MenuItem은 Leaf에 해당한다.</span></span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line">    String description;</span><br><span class="line">    <span class="keyword">boolean</span> vegetarian;</span><br><span class="line">    <span class="keyword">double</span> price;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MenuItem</span><span class="params">(String name, String description, <span class="keyword">boolean</span> vegetarian, <span class="keyword">double</span> price)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">        <span class="keyword">this</span>.vegetarian = vegetarian;</span><br><span class="line">        <span class="keyword">this</span>.price = price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getPrice</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isVegetarian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> vegetarian;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123; <span class="comment">//중요 - Composite 객체에서 공유하게 된다.</span></span><br><span class="line">        System.out.println(getName());</span><br><span class="line">        <span class="keyword">if</span> (isVegetarian()) System.out.println(<span class="string">&quot;(v)&quot;</span>);</span><br><span class="line">        System.out.println(getPrice());</span><br><span class="line">        System.out.println(getDescription());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Component-를-상속받는-Composite-객체-구현"><a href="#Component-를-상속받는-Composite-객체-구현" class="headerlink" title="Component 를 상속받는 Composite 객체 구현"></a><code>Component</code> 를 상속받는 <code>Composite</code> 객체 구현</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Menu</span> <span class="keyword">extends</span> <span class="title">Menucomponent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    ArrayList&lt;Menucomponent&gt; menuComponents = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    String name;</span><br><span class="line">    String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Menu</span><span class="params">(String name, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(MenuComponent menuComponent)</span> </span>&#123;</span><br><span class="line">        menuComponents.add(menuComponent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(MenuComponent menuComponent)</span> </span>&#123;</span><br><span class="line">        menuComponents.remove(menuComponent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MenuComponent <span class="title">getChild</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> menuComponents.get(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123; <span class="comment">//중요 - Leaf 객체에서 공유하게 된다.</span></span><br><span class="line">        System.out.println(getName());</span><br><span class="line">        System.out.println(getDescription());</span><br><span class="line">        System.out.println(<span class="string">&quot;----------------------------------------------------&quot;</span>);</span><br><span class="line">        Iterator&lt;MenuComponent&gt; iterator = menuComponents.iterator();    <span class="comment">//Menu 정보 뿐아니라 Menu안의 아이템까지 출력</span></span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            MenuComponent menuComponent = iterator.next();</span><br><span class="line">            menuComponent.print();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Client-객체-구현"><a href="#Client-객체-구현" class="headerlink" title="Client 객체 구현"></a><code>Client</code> 객체 구현</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Waitress</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MenuComponent allMenus;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Waitress</span><span class="params">(menuComponent allMenus)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.allMenus = allMenus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printMenu</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        allMenus.print();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="테스트"><a href="#테스트" class="headerlink" title="테스트"></a>테스트</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MenuTestDrive</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        MenuComponent pancakeHouseMenu = <span class="keyword">new</span> Menu(<span class="string">&quot;펜케이크 하우스 메뉴&quot;</span>, <span class="string">&quot;아침 메뉴&quot;</span>);</span><br><span class="line">        MenuComponent dinerMenu = <span class="keyword">new</span> Menu(<span class="string">&quot;객체마을 식당 메뉴&quot;</span>, <span class="string">&quot;점심 메뉴&quot;</span>);</span><br><span class="line">        MenuComponent cafeMenu = <span class="keyword">new</span> Menu(<span class="string">&quot;카페 메뉴&quot;</span>, <span class="string">&quot;저녁 메뉴&quot;</span>);</span><br><span class="line">        MenuComponent dessertMenu = <span class="keyword">new</span> Menu(<span class="string">&quot;디저트 메뉴&quot;</span>, <span class="string">&quot;디저트를 즐겨 보세요&quot;</span>);</span><br><span class="line">        MenuComponent allMenus = <span class="keyword">new</span> Menu(<span class="string">&quot;전체 메뉴&quot;</span>, <span class="string">&quot;전체 메뉴&quot;</span>);</span><br><span class="line"></span><br><span class="line">        allMenus.add(pancakeHouseMenu);</span><br><span class="line">        allMenus.add(dinerMenu);</span><br><span class="line">        allMenus.add(cafeMenu);</span><br><span class="line"></span><br><span class="line">        dinerMenu.add(<span class="keyword">new</span> menuItem(<span class="string">&quot;파스타&quot;</span>, <span class="string">&quot;마리나라 소스 스파게티.&quot;</span>, <span class="keyword">true</span>, <span class="number">3.89</span>));</span><br><span class="line">        dinerMenu.add(dessertMenu);</span><br><span class="line"></span><br><span class="line">        dessertMenu.add(<span class="keyword">new</span> menuItem(<span class="string">&quot;애플 파이&quot;</span>, <span class="string">&quot;바삭바삭한 크러스트에 바닐라아이스크림이&quot;</span>, <span class="keyword">true</span>, <span class="number">1.59</span>));</span><br><span class="line"></span><br><span class="line">        Waitress waitress = <span class="keyword">new</span> Waitress(allMenus);</span><br><span class="line">        waitress.printMenu();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🧨-컴포지트패턴-vs-단일역할원칙"><a href="#🧨-컴포지트패턴-vs-단일역할원칙" class="headerlink" title="🧨 컴포지트패턴 vs 단일역할원칙"></a>🧨 컴포지트패턴 vs 단일역할원칙</h2><p>한 클래스에서 한 역할만 맡아야 한다고 했는데,<br>여기서는 <strong>계층구조를 관리하는 역할</strong>과 <strong>메뉴관련 작업을 처리하는 역할</strong> 두 가지를 처리하고 있다</p>
+<blockquote>
+<p>컴포지트 패턴은 <strong>단일 역할 원칙</strong>을 깨면서, 대신에 <strong>투명성을 확보</strong>하기 위한 패턴이다.</p>
+</blockquote>
+<hr>
+<h2 id="🛠-컴포지트-이터레이터-패턴-적용"><a href="#🛠-컴포지트-이터레이터-패턴-적용" class="headerlink" title="🛠 컴포지트 + 이터레이터 패턴 적용"></a>🛠 컴포지트 + 이터레이터 패턴 적용</h2><h3 id="컴포지트-패턴-내에서-이터레이터-패턴을-활용해보자"><a href="#컴포지트-패턴-내에서-이터레이터-패턴을-활용해보자" class="headerlink" title="컴포지트 패턴 내에서 이터레이터 패턴을 활용해보자"></a>컴포지트 패턴 내에서 이터레이터 패턴을 활용해보자</h3><h4 id="Composite-Leaf-객체에-이터레이터-적용"><a href="#Composite-Leaf-객체에-이터레이터-적용" class="headerlink" title="Composite, Leaf 객체에 이터레이터 적용"></a><code>Composite</code>, <code>Leaf</code> 객체에 이터레이터 적용</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Menu</span> <span class="keyword">extends</span> <span class="title">MenuComponent</span> </span>&#123;</span><br><span class="line"><span class="comment">//나머지 코드는 그대로</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Iterator&lt;MenuComponent&gt; <span class="title">createIterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CompositeIterator(menucomponents.iterator());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MenuItem</span> <span class="keyword">extends</span> <span class="title">MenuComponent</span> </span>&#123;</span><br><span class="line"><span class="comment">//나머지 코드는 그대로</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Iterator&lt;MenuComponent&gt; <span class="title">createIterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> NullIterator();<span class="comment">//널 반복자.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="NullIterator-란"><a href="#NullIterator-란" class="headerlink" title="NullIterator 란"></a><code>NullIterator</code> 란</h4><p><code>MenuItem</code>에 대해서는 반복작업을 할 대상이없다. 그래서 <code>createIterator()</code>메소드를 구현하기가 애매해진다.</p>
+<ol>
+<li>그냥 null을 리턴한다. 그렇다면 클라이언트에서 리턴값이 널인지 아닌지를 판단하기 위해 조건문을 써야하는 단점이있다. </li>
+<li>hasNext()가 호출되었을 때 무조건 false 를 리턴하는 반복자를 리턴한다.</li>
+</ol>
+<p>두번째 방법은 여전히 반복자를 리턴할수 있기 때문에 클라이언트에서는 리턴된 객체가 <strong>널 객체인지에 대해 신경 쓸 필요가 없다.</strong></p>
+<p>이렇게 아무일도 하지 않는 반복자를 <code>NullIterator</code>라고 부른다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NullIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">Object</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Iterator-구현"><a href="#Iterator-구현" class="headerlink" title="Iterator 구현"></a><code>Iterator</code> 구현</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CompositeIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Stack&lt;Iterator&lt;MenuComponent&gt;&gt; stack = <span class="keyword">new</span> Stack();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CompositeIterator</span><span class="params">(Iterator iterator)</span> </span>&#123;</span><br><span class="line">        stack.push(iterator);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MenuComponent <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Iterator&lt;MenuComponent&gt; iterator = stack.peek();</span><br><span class="line">        MenuComponent component = iterator.next();</span><br><span class="line">        <span class="keyword">if</span> (component <span class="keyword">instanceof</span> Menu) stack.push(((Menu) component).iterator());</span><br><span class="line">        <span class="keyword">return</span> component;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (stack.empty()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        Iterator&lt;MenuComponent&gt; iterator = stack.peek();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!iterator.hasNext()) &#123;</span><br><span class="line">            stack.pop();</span><br><span class="line">            <span class="keyword">return</span> hasNext();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupporttedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Iterator-를-적용한-Client-구현"><a href="#Iterator-를-적용한-Client-구현" class="headerlink" title="Iterator 를 적용한 Client 구현"></a><code>Iterator</code> 를 적용한 <code>Client</code> 구현</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Waitress</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MenuComponent allMenus;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Waitress</span><span class="params">(MenuComponent allMenus)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.allMenus = allMenus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printMenu</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        allMenus.print();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printVegetarianMenu</span><span class="params">()</span> </span>&#123; <span class="comment">//이 메소드는 &#x27;채식메뉴 인 것&#x27;만 추려낸다</span></span><br><span class="line">        Iterator&lt;MenuComponent&gt; iterator = allMenus.createIterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            Menucomponent menuComponent = iterator.next();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (menuComponent.isVegetarian()) menuComponent.print();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (UnsupportedOpoerationException e) &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="try-문을-쓴-이유"><a href="#try-문을-쓴-이유" class="headerlink" title="try 문을 쓴 이유"></a>try 문을 쓴 이유</h3><ul>
+<li><p>위와 같이 <code>try/catch</code> 코드를 쓴이유는 <code>instanceof</code> 를 써서 실행중에 형식을 확인하여 <code>isVegetarian()</code>을 호출할 수도 있다.<br>하지만 그렇게하면 <code>Menu</code>와 <code>MenuItem</code>을 <strong>똑같이 다루지 않게 되는 셈</strong>이되어 <strong>투명성</strong>을 잃어버리게 된다.</p>
+</li>
+<li><p><code>Menu</code> 의 <code>isVegetarian()</code>메소드에서 무조건 <code>false</code>를 리턴하도록 하는 방법도 있다.<br>이렇게하면 코드도 간단해지고 <strong>투명성도 계속 유지</strong>할수 있다. </p>
+</li>
+<li><p>하지만 위 예제에서는 <code>Menu</code>에서는 그 메소드가 <strong>지원되지 않는다는 것</strong>을 분명하게 나타내기 위해서 사용되었다.</p>
+</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Song Jae-won, Jay</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/"># 디자인패턴</a>
+                    
+                        <a href="/tags/%EC%BB%B4%ED%8F%AC%EC%A7%80%ED%8A%B8/"># 컴포지트</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/11/11/DesignPattern/StrategyPattern/">스트레티지 패턴</a>
+            
+            
+            <a class="next" rel="next" href="/2021/11/09/DesignPattern/IteratePattern/">이터레이터 패턴</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Song Jae-won, Jay | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
