@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Song Jae-won, Jay">
+
+
+
+    <meta name="description" content="기억보단 기록으로">
+
+
+
+<title>시스템 설계 면접 공략법 | Jay&#39;s Note</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Jay's Note" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">기억보단 기록으로</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">기억보단 기록으로</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" target="_blank" rel="noopener" href="https://dev-song.notion.site/Clean-Neat-Code-955801f71953414097b2992b1ed9f3b2">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">시스템 설계 면접 공략법</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Song Jae-won, Jay</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 26, 2021&nbsp;&nbsp;21:52:30</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/">가상면접 사례로 배우는 대규모 시스템 설계기초</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="효과적-면접을-위한-4단계-접근법"><a href="#효과적-면접을-위한-4단계-접근법" class="headerlink" title="효과적 면접을 위한 4단계 접근법"></a>효과적 면접을 위한 4단계 접근법</h1><h2 id="1-문제-이해-및-설계-범위-확정"><a href="#1-문제-이해-및-설계-범위-확정" class="headerlink" title="1. 문제 이해 및 설계 범위 확정"></a>1. 문제 이해 및 설계 범위 확정</h2><ul>
+<li>구체적으로 어떤 기능들을 만들어야 하나</li>
+<li>제품 사용자 수는 얼마나 되나</li>
+<li>회사의 규모는 얼마나 빨리 커지리라 예상하나? 석 달, 여섯 달, 일년 뒤의 규모는 얼마가 되리라 예상하는가</li>
+<li>회사가 주로 사용하는 기술 스택은 무엇인가</li>
+<li>설계를 단순화 하기 위한 기존 서비스로는 어떤 것이 있는가</li>
+</ul>
+<p>→ 중요한 것은 모호함을 없에는 것</p>
+<hr>
+<h2 id="2-개략적인-설계안-제시-및-동의-구하기"><a href="#2-개략적인-설계안-제시-및-동의-구하기" class="headerlink" title="2. 개략적인 설계안 제시 및 동의 구하기"></a>2. 개략적인 설계안 제시 및 동의 구하기</h2><ul>
+<li>청사진을 만들고 의견을 구하라ㅋ</li>
+<li>화이트보드에 다이어그램 그리기<ul>
+<li>클라이언트, API, 웹서버, DB, 캐시, CDN, MQ 등</li>
+</ul>
+</li>
+<li>청사진이 제약사항에 부합하는지 확인하라</li>
+</ul>
+<hr>
+<h2 id="3-상세-설계"><a href="#3-상세-설계" class="headerlink" title="3. 상세 설계"></a>3. 상세 설계</h2><ul>
+<li>시스템에서 전반적으로 달성해야 할 목표와 기능 범위 확인</li>
+<li>전체 설계의 개략적 청사진 마련</li>
+<li>해당 청사진에 대한 면접관의 의견 청취</li>
+<li>상세 설계에서 집중해야 할 영역들 확인</li>
+</ul>
+<hr>
+<h2 id="4-마무리"><a href="#4-마무리" class="headerlink" title="4. 마무리"></a>4. 마무리</h2><ul>
+<li>개선점 찾기 ex&gt; 병목구간</li>
+<li>설계 핵심 요약</li>
+<li>운영 관련 이슈<ul>
+<li>메트릭, 모니터링, 로그, 배포 등</li>
+</ul>
+</li>
+<li>시스템 확장 방식</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Song Jae-won, Jay</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%84%A4%EA%B3%84/"># 시스템설계</a>
+                    
+                        <a href="/tags/%EB%8C%80%EA%B7%9C%EB%AA%A8%EC%84%A4%EA%B3%84/"># 대규모설계</a>
+                    
+                        <a href="/tags/%EB%A9%B4%EC%A0%91/"># 면접</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%95%88%EC%A0%95-%ED%95%B4%EC%8B%9C-%EC%84%A4%EA%B3%84/">안정 해시 설계</a>
+            
+            
+            <a class="next" rel="next" href="/2021/10/26/MassiveSystemDesign/2021-10-13-%ED%82%A4-%EA%B0%92-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EA%B3%84/">키-값 저장소 설계</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Song Jae-won, Jay | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

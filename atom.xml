@@ -18,8 +18,8 @@
   
   <entry>
     <title>ObjectMapper</title>
-    <link href="http://won0935.github.io/2021/11/23/%EC%9E%90%EB%B0%94/2021-11-23-ObjectMapper/"/>
-    <id>http://won0935.github.io/2021/11/23/%EC%9E%90%EB%B0%94/2021-11-23-ObjectMapper/</id>
+    <link href="http://won0935.github.io/2021/11/23/Java/2021-11-23-ObjectMapper/"/>
+    <id>http://won0935.github.io/2021/11/23/Java/2021-11-23-ObjectMapper/</id>
     <published>2021-11-23T11:01:39.919Z</published>
     <updated>2021-11-23T11:07:08.363Z</updated>
     
@@ -46,8 +46,8 @@
   
   <entry>
     <title>EnumUtils</title>
-    <link href="http://won0935.github.io/2021/11/23/%EC%9E%90%EB%B0%94/2021-11-21-EnumUtils/"/>
-    <id>http://won0935.github.io/2021/11/23/%EC%9E%90%EB%B0%94/2021-11-21-EnumUtils/</id>
+    <link href="http://won0935.github.io/2021/11/23/Java/2021-11-21-EnumUtils/"/>
+    <id>http://won0935.github.io/2021/11/23/Java/2021-11-21-EnumUtils/</id>
     <published>2021-11-23T11:01:01.220Z</published>
     <updated>2021-11-23T11:06:25.501Z</updated>
     
@@ -75,8 +75,8 @@
   
   <entry>
     <title>데코레이터 패턴</title>
-    <link href="http://won0935.github.io/2021/11/13/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-13-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/11/13/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-13-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/11/13/DesignPattern/DecoratorPattern/"/>
+    <id>http://won0935.github.io/2021/11/13/DesignPattern/DecoratorPattern/</id>
     <published>2021-11-13T06:40:11.478Z</published>
     <updated>2021-11-13T07:30:16.915Z</updated>
     
@@ -102,8 +102,8 @@
   
   <entry>
     <title>옵저버 패턴</title>
-    <link href="http://won0935.github.io/2021/11/12/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-13-%EC%98%B5%EC%A0%80%EB%B2%84-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/11/12/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-13-%EC%98%B5%EC%A0%80%EB%B2%84-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/11/12/DesignPattern/ObserverPattern/"/>
+    <id>http://won0935.github.io/2021/11/12/DesignPattern/ObserverPattern/</id>
     <published>2021-11-12T08:05:58.356Z</published>
     <updated>2021-11-13T06:40:11.478Z</updated>
     
@@ -129,8 +129,8 @@
   
   <entry>
     <title>스트레티지 패턴</title>
-    <link href="http://won0935.github.io/2021/11/11/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-12-%EC%8A%A4%ED%8A%B8%EB%A0%88%ED%8B%B0%EC%A7%80-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/11/11/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-12-%EC%8A%A4%ED%8A%B8%EB%A0%88%ED%8B%B0%EC%A7%80-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/11/11/DesignPattern/StrategyPattern/"/>
+    <id>http://won0935.github.io/2021/11/11/DesignPattern/StrategyPattern/</id>
     <published>2021-11-11T10:05:19.598Z</published>
     <updated>2021-11-12T08:05:58.357Z</updated>
     
@@ -156,8 +156,8 @@
   
   <entry>
     <title>컴포지트 패턴</title>
-    <link href="http://won0935.github.io/2021/11/11/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-11-%EC%BB%B4%ED%8F%AC%EC%A7%80%ED%8A%B8-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/11/11/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-11-%EC%BB%B4%ED%8F%AC%EC%A7%80%ED%8A%B8-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/11/11/DesignPattern/CompositePattern/"/>
+    <id>http://won0935.github.io/2021/11/11/DesignPattern/CompositePattern/</id>
     <published>2021-11-11T07:52:55.365Z</published>
     <updated>2021-11-11T10:05:19.599Z</updated>
     
@@ -183,8 +183,8 @@
   
   <entry>
     <title>이터레이터 패턴</title>
-    <link href="http://won0935.github.io/2021/11/09/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-11-%EC%9D%B4%ED%84%B0%EB%A0%88%EC%9D%B4%ED%84%B0-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/11/09/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-11-%EC%9D%B4%ED%84%B0%EB%A0%88%EC%9D%B4%ED%84%B0-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/11/09/DesignPattern/IteratePattern/"/>
+    <id>http://won0935.github.io/2021/11/09/DesignPattern/IteratePattern/</id>
     <published>2021-11-09T11:33:27.687Z</published>
     <updated>2021-11-11T09:30:49.905Z</updated>
     
@@ -210,8 +210,8 @@
   
   <entry>
     <title>템플릿메소드 패턴</title>
-    <link href="http://won0935.github.io/2021/11/08/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-09-%ED%85%9C%ED%94%8C%EB%A6%BF-%EB%A9%94%EC%86%8C%EB%93%9C-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/11/08/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-09-%ED%85%9C%ED%94%8C%EB%A6%BF-%EB%A9%94%EC%86%8C%EB%93%9C-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/11/08/DesignPattern/TemplateMethodPattern/"/>
+    <id>http://won0935.github.io/2021/11/08/DesignPattern/TemplateMethodPattern/</id>
     <published>2021-11-08T11:12:10.891Z</published>
     <updated>2021-11-09T11:33:27.687Z</updated>
     
@@ -237,8 +237,8 @@
   
   <entry>
     <title>어댑터 &amp; 파사드 패턴</title>
-    <link href="http://won0935.github.io/2021/11/08/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-08-%EC%96%B4%EB%8C%91%ED%84%B0-%ED%8C%8C%EC%82%AC%EB%93%9C-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/11/08/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-08-%EC%96%B4%EB%8C%91%ED%84%B0-%ED%8C%8C%EC%82%AC%EB%93%9C-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/11/08/DesignPattern/AdaptAndFacadePattern/"/>
+    <id>http://won0935.github.io/2021/11/08/DesignPattern/AdaptAndFacadePattern/</id>
     <published>2021-11-08T10:23:29.584Z</published>
     <updated>2021-11-23T11:02:23.084Z</updated>
     
@@ -265,8 +265,8 @@
   
   <entry>
     <title>커맨드 패턴</title>
-    <link href="http://won0935.github.io/2021/11/06/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/11/06/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/2021-11-06-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/11/06/DesignPattern/CommandPattern/"/>
+    <id>http://won0935.github.io/2021/11/06/DesignPattern/CommandPattern/</id>
     <published>2021-11-06T09:58:47.875Z</published>
     <updated>2021-11-07T12:58:38.901Z</updated>
     
@@ -292,8 +292,8 @@
   
   <entry>
     <title>m1 맥에서 144hz 롤하기</title>
-    <link href="http://won0935.github.io/2021/10/30/%EA%B8%B0%ED%83%80/2021-10-30-m1-league-of-legend/"/>
-    <id>http://won0935.github.io/2021/10/30/%EA%B8%B0%ED%83%80/2021-10-30-m1-league-of-legend/</id>
+    <link href="http://won0935.github.io/2021/10/30/Extra/2021-10-30-m1-league-of-legend/"/>
+    <id>http://won0935.github.io/2021/10/30/Extra/2021-10-30-m1-league-of-legend/</id>
     <published>2021-10-30T07:18:02.729Z</published>
     <updated>2021-11-13T05:31:56.948Z</updated>
     
@@ -325,8 +325,8 @@
   
   <entry>
     <title>팩토리 패턴</title>
-    <link href="http://won0935.github.io/2021/10/28/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-10-20-%ED%8C%A9%ED%86%A0%EB%A6%AC-%ED%8C%A8%ED%84%B4/2021-10-20-%ED%8C%A9%ED%86%A0%EB%A6%AC-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/10/28/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-10-20-%ED%8C%A9%ED%86%A0%EB%A6%AC-%ED%8C%A8%ED%84%B4/2021-10-20-%ED%8C%A9%ED%86%A0%EB%A6%AC-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/10/28/DesignPattern/FatoryPattern/"/>
+    <id>http://won0935.github.io/2021/10/28/DesignPattern/FatoryPattern/</id>
     <published>2021-10-28T11:13:20.382Z</published>
     <updated>2021-11-13T05:32:17.631Z</updated>
     
@@ -351,8 +351,8 @@
   
   <entry>
     <title>싱글톤 패턴</title>
-    <link href="http://won0935.github.io/2021/10/27/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-10-19-%EC%8B%B1%EA%B8%80%ED%86%A4-%ED%8C%A8%ED%84%B4/2021-10-19-%EC%8B%B1%EA%B8%80%ED%86%A4-%ED%8C%A8%ED%84%B4/"/>
-    <id>http://won0935.github.io/2021/10/27/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/2021-10-19-%EC%8B%B1%EA%B8%80%ED%86%A4-%ED%8C%A8%ED%84%B4/2021-10-19-%EC%8B%B1%EA%B8%80%ED%86%A4-%ED%8C%A8%ED%84%B4/</id>
+    <link href="http://won0935.github.io/2021/10/27/DesignPattern/SingletonPattern/"/>
+    <id>http://won0935.github.io/2021/10/27/DesignPattern/SingletonPattern/</id>
     <published>2021-10-27T13:48:15.469Z</published>
     <updated>2021-10-27T13:48:15.469Z</updated>
     
@@ -380,8 +380,8 @@
   
   <entry>
     <title>처리율 제한 장치의 설계</title>
-    <link href="http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EC%B2%98%EB%A6%AC%EC%9C%A8-%EC%A0%9C%ED%95%9C-%EC%9E%A5%EC%B9%98%EC%9D%98-%EC%84%A4%EA%B3%84/2021-10-13-%EC%B2%98%EB%A6%AC%EC%9C%A8-%EC%A0%9C%ED%95%9C-%EC%9E%A5%EC%B9%98%EC%9D%98-%EC%84%A4%EA%B3%84/"/>
-    <id>http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EC%B2%98%EB%A6%AC%EC%9C%A8-%EC%A0%9C%ED%95%9C-%EC%9E%A5%EC%B9%98%EC%9D%98-%EC%84%A4%EA%B3%84/2021-10-13-%EC%B2%98%EB%A6%AC%EC%9C%A8-%EC%A0%9C%ED%95%9C-%EC%9E%A5%EC%B9%98%EC%9D%98-%EC%84%A4%EA%B3%84/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%B2%98%EB%A6%AC%EC%9C%A8-%EC%A0%9C%ED%95%9C-%EC%9E%A5%EC%B9%98%EC%9D%98-%EC%84%A4%EA%B3%84/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%B2%98%EB%A6%AC%EC%9C%A8-%EC%A0%9C%ED%95%9C-%EC%9E%A5%EC%B9%98%EC%9D%98-%EC%84%A4%EA%B3%84/</id>
     <published>2021-10-26T12:57:04.929Z</published>
     <updated>2021-10-26T12:57:04.929Z</updated>
     
@@ -417,8 +417,8 @@
   
   <entry>
     <title>안정 해시 설계</title>
-    <link href="http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EC%95%88%EC%A0%95-%ED%95%B4%EC%8B%9C-%EC%84%A4%EA%B3%84/2021-10-13-%EC%95%88%EC%A0%95-%ED%95%B4%EC%8B%9C-%EC%84%A4%EA%B3%84/"/>
-    <id>http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EC%95%88%EC%A0%95-%ED%95%B4%EC%8B%9C-%EC%84%A4%EA%B3%84/2021-10-13-%EC%95%88%EC%A0%95-%ED%95%B4%EC%8B%9C-%EC%84%A4%EA%B3%84/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%95%88%EC%A0%95-%ED%95%B4%EC%8B%9C-%EC%84%A4%EA%B3%84/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%95%88%EC%A0%95-%ED%95%B4%EC%8B%9C-%EC%84%A4%EA%B3%84/</id>
     <published>2021-10-26T12:53:30.299Z</published>
     <updated>2021-10-26T12:53:30.299Z</updated>
     
@@ -451,8 +451,8 @@
   
   <entry>
     <title>시스템 설계 면접 공략법</title>
-    <link href="http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84-%EB%A9%B4%EC%A0%91-%EA%B3%B5%EB%9E%B5%EB%B2%95/2021-10-13-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84-%EB%A9%B4%EC%A0%91-%EA%B3%B5%EB%9E%B5%EB%B2%95/"/>
-    <id>http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84-%EB%A9%B4%EC%A0%91-%EA%B3%B5%EB%9E%B5%EB%B2%95/2021-10-13-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84-%EB%A9%B4%EC%A0%91-%EA%B3%B5%EB%9E%B5%EB%B2%95/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84-%EB%A9%B4%EC%A0%91-%EA%B3%B5%EB%9E%B5%EB%B2%95/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84-%EB%A9%B4%EC%A0%91-%EA%B3%B5%EB%9E%B5%EB%B2%95/</id>
     <published>2021-10-26T12:52:30.866Z</published>
     <updated>2021-10-26T12:52:30.866Z</updated>
     
@@ -478,9 +478,44 @@
   </entry>
   
   <entry>
+    <title>키-값 저장소 설계</title>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%ED%82%A4-%EA%B0%92-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EA%B3%84/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%ED%82%A4-%EA%B0%92-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EA%B3%84/</id>
+    <published>2021-10-26T12:52:30.860Z</published>
+    <updated>2021-11-28T08:19:28.650Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><ul><li>비 관계형 데이터베이스<br>고유식별자(key)를 키로 가짐</li><li>키와 값 사이의 연결 관계를 “키-값” 쌍(pair)라고 표현</li></ul></blockquote><hr><h2 id="분산-키-값-저장소의-CAP-정리"><a href="#분산-키-값-저장소의-CAP-정리" class="headerlink" title="분산 키-값 저장소의 CAP 정리"></a>분산 키-값 저장소의 CAP 정리</h2><p>데이터 일관성(Consistency), 가용성(Availability), 파티션 감내성(Partition Tolerance)라 표현하며,<br>동시에 3가지 요구사항을 만족하는 것은 불가능하다는 정리</p><p><img src="https://user-images.githubusercontent.com/55419159/138880667-4a4e727b-07d8-44e0-99b5-14088750a4b2.png" alt="image"></p><hr><h3 id="용어-정리"><a href="#용어-정리" class="headerlink" title="용어 정리"></a>용어 정리</h3><p>데이터 일관성(Consistency)</p><ul><li>분산 시스템에 접속하는 모든 클라이언트는 어떤 노드에 접속했느냐에 관계 없이 언제나 같은 데이터를 보게 되어야 한다.</li></ul><p>가용성(Availability)</p><ul><li>분산 시스템에 접속하는 클라이언트는 일부 노드에 장애가 발생하더라도 항상 응답을 받을 수 있어야 한다.</li></ul><p>파티션 감내성(Partition Tolerance)</p><ul><li>파티션은 두 노드 사이에 통신 장애가 발생하였음을 의미한다. 파티션 감내는 네트워크에 파티션이 생기더라도 시스템은 계속 동작하여야 한다는 것을 뜻한다.</li></ul><hr><h3 id="분산-키-값-저장소가-가져야하는-기능"><a href="#분산-키-값-저장소가-가져야하는-기능" class="headerlink" title="분산 키-값 저장소가 가져야하는 기능"></a>분산 키-값 저장소가 가져야하는 기능</h3><table><thead><tr><th>목표/문제</th><th>기술</th></tr></thead><tbody><tr><td>대규모 데이터 저장</td><td>안정 해시를 사용해 서버들에 부하 분산</td></tr><tr><td>읽기 연산에 대한 높은 가용성 보장</td><td>여러 데이터센터에 다중화</td></tr><tr><td>쓰기 연산에 대한 높은 가용성 보장</td><td>버저닝 및 벡터 시계를 사용한 충돌 해소</td></tr><tr><td>데이터 파티션</td><td>안정 해시</td></tr><tr><td>점진적 규모 확장성</td><td>안정 해시</td></tr><tr><td>다양성(heterogeneity)</td><td>안정 해시</td></tr><tr><td>조절 가능한 데이터 일관성</td><td>정족수 합의</td></tr><tr><td>일시적 장애 처리</td><td>느슨한 정족수 프로토콜과 단서 후 임시 위탁</td></tr><tr><td>영구적 장애 처리</td><td>머클 트리</td></tr><tr><td>데이터 센터 장애 대응</td><td>여러 데이터 센터에 걸친 데이터 다중화</td></tr></tbody></table>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;비 관계형 데이터베이스&lt;br&gt;고유식별자(key)를 키로 가짐&lt;/li&gt;
+&lt;li&gt;키와 값 사이의 연결 관계를 “키-값” 쌍(pair)라고 표현&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;분산</summary>
+      
+    
+    
+    
+    <category term="가상면접 사례로 배우는 대규모 시스템 설계기초" scheme="http://won0935.github.io/categories/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/"/>
+    
+    
+    <category term="시스템설계" scheme="http://won0935.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%84%A4%EA%B3%84/"/>
+    
+    <category term="대규모설계" scheme="http://won0935.github.io/tags/%EB%8C%80%EA%B7%9C%EB%AA%A8%EC%84%A4%EA%B3%84/"/>
+    
+    <category term="키값저장소" scheme="http://won0935.github.io/tags/%ED%82%A4%EA%B0%92%EC%A0%80%EC%9E%A5%EC%86%8C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>분산 시스템을 위한 유일 ID 생성기 설계</title>
-    <link href="http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-11-16-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9C%A0%EC%9D%BC-ID-%EC%83%9D%EC%84%B1%EA%B8%B0-%EC%84%A4%EA%B3%84/"/>
-    <id>http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-11-16-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9C%A0%EC%9D%BC-ID-%EC%83%9D%EC%84%B1%EA%B8%B0-%EC%84%A4%EA%B3%84/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-11-16-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9C%A0%EC%9D%BC-ID-%EC%83%9D%EC%84%B1%EA%B8%B0-%EC%84%A4%EA%B3%84/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-11-16-%EB%B6%84%EC%82%B0-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9C%A0%EC%9D%BC-ID-%EC%83%9D%EC%84%B1%EA%B8%B0-%EC%84%A4%EA%B3%84/</id>
     <published>2021-10-26T12:52:30.860Z</published>
     <updated>2021-11-16T13:37:16.889Z</updated>
     
@@ -511,44 +546,9 @@
   </entry>
   
   <entry>
-    <title>키-값 저장소 설계</title>
-    <link href="http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%ED%82%A4-%EA%B0%92-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EA%B3%84/2021-10-13-%ED%82%A4-%EA%B0%92-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EA%B3%84/"/>
-    <id>http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%ED%82%A4-%EA%B0%92-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EA%B3%84/2021-10-13-%ED%82%A4-%EA%B0%92-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EA%B3%84/</id>
-    <published>2021-10-26T12:52:30.860Z</published>
-    <updated>2021-10-26T12:52:30.860Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><ul><li>비 관계형 데이터베이스<br>고유식별자(key)를 키로 가짐</li><li>키와 값 사이의 연결 관계를 “키-값” 쌍(pair)라고 표현</li></ul></blockquote><hr><h2 id="분산-키-값-저장소의-CAP-정리"><a href="#분산-키-값-저장소의-CAP-정리" class="headerlink" title="분산 키-값 저장소의 CAP 정리"></a>분산 키-값 저장소의 CAP 정리</h2><p>데이터 일관성(Consistency), 가용성(Availability), 파티션 감내성(Partition Tolerance)라 표현하며,<br>동시에 3가지 요구사항을 만족하는 것은 불가능하다는 정리</p><p><img src="https://user-images.githubusercontent.com/55419159/138880667-4a4e727b-07d8-44e0-99b5-14088750a4b2.png" alt="image">{: .image-center}</p><hr><h3 id="용어-정리"><a href="#용어-정리" class="headerlink" title="용어 정리"></a>용어 정리</h3><p>데이터 일관성(Consistency)</p><ul><li>분산 시스템에 접속하는 모든 클라이언트는 어떤 노드에 접속했느냐에 관계 없이 언제나 같은 데이터를 보게 되어야 한다.</li></ul><p>가용성(Availability)</p><ul><li>분산 시스템에 접속하는 클라이언트는 일부 노드에 장애가 발생하더라도 항상 응답을 받을 수 있어야 한다.</li></ul><p>파티션 감내성(Partition Tolerance)</p><ul><li>파티션은 두 노드 사이에 통신 장애가 발생하였음을 의미한다. 파티션 감내는 네트워크에 파티션이 생기더라도 시스템은 계속 동작하여야 한다는 것을 뜻한다.</li></ul><hr><h3 id="분산-키-값-저장소가-가져야하는-기능"><a href="#분산-키-값-저장소가-가져야하는-기능" class="headerlink" title="분산 키-값 저장소가 가져야하는 기능"></a>분산 키-값 저장소가 가져야하는 기능</h3><table><thead><tr><th>목표/문제</th><th>기술</th></tr></thead><tbody><tr><td>대규모 데이터 저장</td><td>안정 해시를 사용해 서버들에 부하 분산</td></tr><tr><td>읽기 연산에 대한 높은 가용성 보장</td><td>여러 데이터센터에 다중화</td></tr><tr><td>쓰기 연산에 대한 높은 가용성 보장</td><td>버저닝 및 벡터 시계를 사용한 충돌 해소</td></tr><tr><td>데이터 파티션</td><td>안정 해시</td></tr><tr><td>점진적 규모 확장성</td><td>안정 해시</td></tr><tr><td>다양성(heterogeneity)</td><td>안정 해시</td></tr><tr><td>조절 가능한 데이터 일관성</td><td>정족수 합의</td></tr><tr><td>일시적 장애 처리</td><td>느슨한 정족수 프로토콜과 단서 후 임시 위탁</td></tr><tr><td>영구적 장애 처리</td><td>머클 트리</td></tr><tr><td>데이터 센터 장애 대응</td><td>여러 데이터 센터에 걸친 데이터 다중화</td></tr></tbody></table>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;비 관계형 데이터베이스&lt;br&gt;고유식별자(key)를 키로 가짐&lt;/li&gt;
-&lt;li&gt;키와 값 사이의 연결 관계를 “키-값” 쌍(pair)라고 표현&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id=&quot;분산</summary>
-      
-    
-    
-    
-    <category term="가상면접 사례로 배우는 대규모 시스템 설계기초" scheme="http://won0935.github.io/categories/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/"/>
-    
-    
-    <category term="시스템설계" scheme="http://won0935.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%84%A4%EA%B3%84/"/>
-    
-    <category term="대규모설계" scheme="http://won0935.github.io/tags/%EB%8C%80%EA%B7%9C%EB%AA%A8%EC%84%A4%EA%B3%84/"/>
-    
-    <category term="키값저장소" scheme="http://won0935.github.io/tags/%ED%82%A4%EA%B0%92%EC%A0%80%EC%9E%A5%EC%86%8C/"/>
-    
-  </entry>
-  
-  <entry>
     <title>개략적인 규모 추정</title>
-    <link href="http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EA%B0%9C%EB%9E%B5%EC%A0%81%EC%9D%B8-%EA%B7%9C%EB%AA%A8-%EC%B6%94%EC%A0%95/2021-10-13-%EA%B0%9C%EB%9E%B5%EC%A0%81%EC%9D%B8-%EA%B7%9C%EB%AA%A8-%EC%B6%94%EC%A0%95/"/>
-    <id>http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EA%B0%9C%EB%9E%B5%EC%A0%81%EC%9D%B8-%EA%B7%9C%EB%AA%A8-%EC%B6%94%EC%A0%95/2021-10-13-%EA%B0%9C%EB%9E%B5%EC%A0%81%EC%9D%B8-%EA%B7%9C%EB%AA%A8-%EC%B6%94%EC%A0%95/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EA%B0%9C%EB%9E%B5%EC%A0%81%EC%9D%B8-%EA%B7%9C%EB%AA%A8-%EC%B6%94%EC%A0%95/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EA%B0%9C%EB%9E%B5%EC%A0%81%EC%9D%B8-%EA%B7%9C%EB%AA%A8-%EC%B6%94%EC%A0%95/</id>
     <published>2021-10-26T12:52:30.856Z</published>
     <updated>2021-10-26T12:52:30.856Z</updated>
     
@@ -575,8 +575,8 @@
   
   <entry>
     <title>사용자 수에 따른 규모 확장성</title>
-    <link href="http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%88%98%EC%97%90-%EB%94%B0%EB%A5%B8-%EA%B7%9C%EB%AA%A8-%ED%99%95%EC%9E%A5%EC%84%B1/2021-10-13-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%88%98%EC%97%90-%EB%94%B0%EB%A5%B8-%EA%B7%9C%EB%AA%A8-%ED%99%95%EC%9E%A5%EC%84%B1/"/>
-    <id>http://won0935.github.io/2021/10/26/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/2021-10-13-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%88%98%EC%97%90-%EB%94%B0%EB%A5%B8-%EA%B7%9C%EB%AA%A8-%ED%99%95%EC%9E%A5%EC%84%B1/2021-10-13-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%88%98%EC%97%90-%EB%94%B0%EB%A5%B8-%EA%B7%9C%EB%AA%A8-%ED%99%95%EC%9E%A5%EC%84%B1/</id>
+    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%88%98%EC%97%90-%EB%94%B0%EB%A5%B8-%EA%B7%9C%EB%AA%A8-%ED%99%95%EC%9E%A5%EC%84%B1/"/>
+    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/2021-10-13-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%88%98%EC%97%90-%EB%94%B0%EB%A5%B8-%EA%B7%9C%EB%AA%A8-%ED%99%95%EC%9E%A5%EC%84%B1/</id>
     <published>2021-10-26T12:50:02.725Z</published>
     <updated>2021-10-26T12:50:02.725Z</updated>
     
