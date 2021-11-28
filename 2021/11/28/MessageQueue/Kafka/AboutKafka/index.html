@@ -247,33 +247,35 @@
 <p>각 파티션에는 <code>leader</code>, <code>follower</code>, <code>isr</code> 존재합니다.</p>
 <p>각 용어의 의미는 아래와 같다.</p>
 <ul>
-<li>leader는 메시지를 write, read하는 역할을 수행하며, 토픽의 replication 갯수만큼 follower에게 복제를 명령합니다.</li>
-<li>follower는 leader의 요청을 받아 메시지를 복제하는 역할을 합니다.</li>
-<li>isr는 replication group을 의미하며, leader &amp; follwer 선출 시 이 isr 내에서 선출하게 됩니다.</li>
+<li><code>leader</code>는 메시지를 <code>write</code>, <code>read</code>하는 역할을 수행하며, 토픽의 replication 갯수만큼 <code>follower</code>에게 복제를 명령한다.</li>
+<li><code>follower</code>는 <code>leader</code>의 요청을 받아 메시지를 복제하는 역할.</li>
+<li><code>isr</code>는 replication group을 의미하며, leader &amp; follwer 선출 시 이 isr 내에서 선출하게 된다.</li>
 </ul>
-<p>아래는 파티션의 leader, follower, isr에 관련해서 보여드리기 위해 캡처한 사진입니다.</p>
 <p><img src="https://user-images.githubusercontent.com/55419159/143746108-38d945e4-9723-446a-a07c-6a42ea37feba.png" alt="image"></p>
-<p>위 사진을 보시면 0번 파티션의 정보로는,</p>
-<p>leader는 2번 broker, isr(in sync replicas)는 현재 2번, 3번으로 되어 있는것을 보실 수 있습니다.</p>
-<p>3-5. producer (프로듀서)</p>
-<p>프로듀서는 카프카에서 메시지를 발행(pub)하는 주최를 의미합니다.</p>
-<p>프로듀서의 특징은 아래와 같습니다.</p>
-<p>메시지 발행 시 직렬화를 제공합니다.(string, json, avro 등)<br>partition에 특정 데이터만을 발행하기 위해 메시지의 key를 지정할 수 있습니다.<br>메시지 발행 후 broker로 부터 ack를 받을 수 있습니다. (<a target="_blank" rel="noopener" href="https://kafka.apache.org/23/documentation.html#producerapi">https://kafka.apache.org/23/documentation.html#producerapi</a>)</p>
-<p>3-6. consumer (컨슈머)</p>
-<p>컨슈머는 메시지를 subscribe하는 주최입니다.</p>
-<p>컨슈머의 특징은 아래와 같습니다.</p>
-<p>commit이라는 행위로 어느 offset까지 subscribe했는지 주키퍼에게 알림.<br>컨슈머는 살아있다면 zookeeper에게 heart beat를 전송.<br>poll이라는 행위로 메시지를 subscribe하며, 이때 시간과 최대 갯수등 설정 가능(<a target="_blank" rel="noopener" href="https://kafka.apache.org/23/documentation.html#consumerconfigs">https://kafka.apache.org/23/documentation.html#consumerconfigs</a>)</p>
-<p>여기서 offset은 각 파티션에 메시지가 유입된 순서를 의미합니다.</p>
-<p>3-7. consumer group (컨슈머 그룹)</p>
-<p>컨슈머 그룹은 컨슈머들의 논리적인 그룹을 의미합니다.</p>
-<p>컨슈머 그룹은 아래와 같은 특징을 가지고 있습니다.</p>
-<p>토픽별 컨슈머 그룹 단위로 offset과 lag를 관리.<br>컨슈머는 컨슈머그룹을 필수로 가져야 함.<br>토픽의 파티션 갯수만큼 컨슈머들이 동일 컨슈머 그룹에 존재하는것이 Best!!<br>한 파티션은 하나의 컨슈머만 점유 가능하기 때문.<br>파티션을 점유중인 컨슈머가 down 되었을 시 컨슈머 그룹내 리밸런싱 동작.<br>down된 컨슈머가 점유한 파티션을 다른 컨슈머에게 위임하는 작업.</p>
-<p>여기서, lag는 한 토픽의 (총 메시지 갯수 - 컨슈머 그룹이 subscribe한 메시지 갯수) 입니다.</p>
-<p>간단히, 한 토픽에서 한 컨슈머 그룹이 소비해야하는 총 메시지 갯수입니다.</p>
-<ol start="4">
-<li>마무리<br>이번 포스팅에서는 카프카에 대해 알아보았습니다.</li>
-</ol>
-<p>다음 포스팅부터는 카프카 설치 및 cli를 통한 사용예제를 포스팅하도록 하겠습니다.</p>
+<p>위 사진을 보면 0번 파티션의 정보로는,<br><code>leader</code>는 2번 <code>broker</code>, <code>isr(in sync replicas)</code>는 현재 2번, 3번으로 되어 있는것을 볼 수 있다.</p>
+<h3 id="5-producer-프로듀서"><a href="#5-producer-프로듀서" class="headerlink" title="5. producer (프로듀서)"></a>5. <code>producer</code> (프로듀서)</h3><p>프로듀서는 카프카에서 <strong>메시지를 발행(pub)하는 주체</strong>를 의미한다.</p>
+<h4 id="역할-amp-특징-3"><a href="#역할-amp-특징-3" class="headerlink" title="역할 &amp; 특징"></a>역할 &amp; 특징</h4><ul>
+<li>메시지 발행 시 직렬화를 제공한다.(string, json, avro 등)</li>
+<li>partition에 특정 데이터만을 발행하기 위해 메시지의 key를 지정할 수 있다.</li>
+<li>메시지 발행 후 broker로 부터 ack를 받을 수 있다. (<a target="_blank" rel="noopener" href="https://kafka.apache.org/23/documentation.html#producerapi">Kafka 공식문서- Producer</a>)</li>
+</ul>
+<h3 id="6-consumer-컨슈머"><a href="#6-consumer-컨슈머" class="headerlink" title="6. consumer (컨슈머)"></a>6. <code>consumer</code> (컨슈머)</h3><p>컨슈머는 메시지를 <strong>subscribe하는 주체</strong>이다.</p>
+<h4 id="역할-amp-특징-4"><a href="#역할-amp-특징-4" class="headerlink" title="역할 &amp; 특징"></a>역할 &amp; 특징</h4><ul>
+<li><code>commit</code>이라는 행위로 어느 offset까지 subscribe했는지 주키퍼에게 알림.</li>
+<li>컨슈머는 살아있다면 zookeeper에게 heart beat를 전송.</li>
+<li><code>poll</code>이라는 행위로 메시지를 subscribe하며, 이때 시간과 최대 개수 등을 설정 가능 (<a target="_blank" rel="noopener" href="https://kafka.apache.org/23/documentation.html#consumerconfigs">Kafka 공식문서- Consumer</a>) </li>
+</ul>
+<p>여기서 offset은 각 파티션에 메시지가 유입된 순서를 의미한다.</p>
+<h3 id="7-consumer-group-컨슈머-그룹"><a href="#7-consumer-group-컨슈머-그룹" class="headerlink" title="7. consumer group (컨슈머 그룹)"></a>7. <code>consumer group</code> (컨슈머 그룹)</h3><p>컨슈머 그룹은 <strong>컨슈머들의 논리적인 그룹</strong>을 의미한다.</p>
+<h4 id="역할-amp-특징-5"><a href="#역할-amp-특징-5" class="headerlink" title="역할 &amp; 특징"></a>역할 &amp; 특징</h4><ul>
+<li>토픽별 컨슈머 그룹 단위로 <strong>offset</strong>과 <strong>lag</strong>를 관리.</li>
+<li>컨슈머는 컨슈머그룹을 필수로 가져야 함.</li>
+<li>토픽의 파티션 갯수만큼 컨슈머들이 동일 컨슈머 그룹에 존재하는것이 Best!!</li>
+<li>한 파티션은 하나의 컨슈머만 점유 가능하기 때문.</li>
+<li>파티션을 점유중인 컨슈머가 down 되었을 시 컨슈머 그룹내 리밸런싱 동작.</li>
+<li>down된 컨슈머가 점유한 파티션을 다른 컨슈머에게 위임하는 작업.</li>
+</ul>
+<p>여기서, lag는 한 토픽의 (총 메시지 갯수 - 컨슈머 그룹이 subscribe한 메시지 갯수) 이다.<br>간단히, 한 토픽에서 한 컨슈머 그룹이 소비해야하는 총 메시지 개수이다.</p>
 
         </div>
 
