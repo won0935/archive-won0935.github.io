@@ -6,7 +6,7 @@
   <link href="http://won0935.github.io/atom.xml" rel="self"/>
   
   <link href="http://won0935.github.io/"/>
-  <updated>2021-11-28T10:00:41.825Z</updated>
+  <updated>2021-12-17T06:47:21.974Z</updated>
   <id>http://won0935.github.io/</id>
   
   <author>
@@ -17,9 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Fluentd 를 Prometheus 로 모니터링 하기</title>
+    <link href="http://won0935.github.io/2021/12/17/Monitoring/Fluentd/Fluentd-Prometheus/"/>
+    <id>http://won0935.github.io/2021/12/17/Monitoring/Fluentd/Fluentd-Prometheus/</id>
+    <published>2021-12-17T06:37:02.961Z</published>
+    <updated>2021-12-17T06:47:21.974Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="⛳-들어가기-전에"><a href="#⛳-들어가기-전에" class="headerlink" title="⛳ 들어가기 전에.."></a>⛳ 들어가기 전에..</h2><ul><li>fluentd는 td-agent 를 사용 </li></ul><h2 id="📌-Prometheus"><a href="#📌-Prometheus" class="headerlink" title="📌 Prometheus"></a>📌 Prometheus</h2><p>Prometheus 플러그인은 총 6개를 제공</p><p><img src="https://user-images.githubusercontent.com/55419159/146501113-4abb8f72-23bd-4614-a4f0-57c0a45009a7.png" alt="image"></p><h3 id="⚾-샘플"><a href="#⚾-샘플" class="headerlink" title="⚾ 샘플"></a>⚾ 샘플</h3><p>input plugin 은 promethues 사용해서<br>server_ip:24231/metrics 를 리스닝 상태로 두고</p><p>output plugin은 prometheus_output_monitor 사용해서<br>10 초마다 promethues 에서 pull 해가도록 한다.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;source&gt;</span><br><span class="line">  @type prometheus</span><br><span class="line">  bind 0.0.0.0</span><br><span class="line">  port 24231</span><br><span class="line">  metrics_path /metrics</span><br><span class="line">&lt;/source&gt;</span><br><span class="line"></span><br><span class="line">&lt;source&gt;</span><br><span class="line">  @type prometheus_output_monitor</span><br><span class="line">  interval 10</span><br><span class="line">  &lt;labels&gt;</span><br><span class="line">    hostname $&#123;hostname&#125;</span><br><span class="line">  &lt;/labels&gt;</span><br><span class="line">&lt;/source&gt;</span><br></pre></td></tr></table></figure><p><img src="https://user-images.githubusercontent.com/55419159/146501339-561049d2-7f77-4dd0-8c37-8d1dc77be981.png" alt="image"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;⛳-들어가기-전에&quot;&gt;&lt;a href=&quot;#⛳-들어가기-전에&quot; class=&quot;headerlink&quot; title=&quot;⛳ 들어가기 전에..&quot;&gt;&lt;/a&gt;⛳ 들어가기 전에..&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;fluentd는 td-agent 를 사용 &lt;/li&gt;
+&lt;/u</summary>
+      
+    
+    
+    
+    <category term="Fluentd" scheme="http://won0935.github.io/categories/Fluentd/"/>
+    
+    
+    <category term="Fluentd" scheme="http://won0935.github.io/tags/Fluentd/"/>
+    
+    <category term="td-agent" scheme="http://won0935.github.io/tags/td-agent/"/>
+    
+    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kafka 란</title>
-    <link href="http://won0935.github.io/2021/11/28/MessageQueue/Kafka/AboutKafka/"/>
-    <id>http://won0935.github.io/2021/11/28/MessageQueue/Kafka/AboutKafka/</id>
+    <link href="http://won0935.github.io/2021/11/28/Monitoring/Kafka/AboutKafka/"/>
+    <id>http://won0935.github.io/2021/11/28/Monitoring/Kafka/AboutKafka/</id>
     <published>2021-11-28T08:46:13.612Z</published>
     <updated>2021-11-28T10:00:41.825Z</updated>
     
@@ -567,34 +597,6 @@
     <category term="Primary Key" scheme="http://won0935.github.io/tags/Primary-Key/"/>
     
     <category term="DataBase" scheme="http://won0935.github.io/tags/DataBase/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>개략적인 규모 추정</title>
-    <link href="http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-1/"/>
-    <id>http://won0935.github.io/2021/10/26/MassiveSystemDesign/Chapter-1/</id>
-    <published>2021-10-26T12:52:30.856Z</published>
-    <updated>2021-10-26T12:52:30.856Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="2의-제곱-수"><a href="#2의-제곱-수" class="headerlink" title="2의 제곱 수"></a>2의 제곱 수</h1><ul><li>최소단위는 1바이트, 8비트</li><li>아스키 문자 하나 메모리크기가 1바이트</li></ul><h1 id="모든-프로그래머가-알아야-하는-응답-지연-값"><a href="#모든-프로그래머가-알아야-하는-응답-지연-값" class="headerlink" title="모든 프로그래머가 알아야 하는 응답 지연 값"></a>모든 프로그래머가 알아야 하는 응답 지연 값</h1><ul><li>메모리는 빠르지만 디스크는 아직도 느리다</li><li>디스크 탐색은 가능한 한 피하라</li><li>단순한 압축 알고리즘은 빠르다</li><li>데이터를 인터넷으로 전송하기 전에 가능하면 압축하라</li><li>데이터 센터는 보통 여러 지역에 분산되어있고, 센터들 간에 데이터를 주고 받는 데는 시간이 걸린다</li></ul><h1 id="가용성에-관계된-수치들"><a href="#가용성에-관계된-수치들" class="headerlink" title="가용성에 관계된 수치들"></a>가용성에 관계된 수치들</h1><blockquote><p>고가용성</p><p>시스템이 오랜 기간동안 지속적으로 중단 없이 운영될 수 있는 능력</p></blockquote><hr><h1 id="예제-트위터-QPS와-저장소-요구량-추정"><a href="#예제-트위터-QPS와-저장소-요구량-추정" class="headerlink" title="예제: 트위터 QPS와 저장소 요구량 추정"></a>예제: 트위터 QPS와 저장소 요구량 추정</h1><h2 id="가정"><a href="#가정" class="headerlink" title="가정"></a>가정</h2><ul><li>월간 능동 사용자(mau) 3억 명</li><li>50%가 매일 사용</li><li>각 사용자는 매일 2건</li><li>미디어 포함 10%</li><li>데이터는 5년 보관</li></ul><h2 id="추정"><a href="#추정" class="headerlink" title="추정"></a>추정</h2><ul><li>QPS(Query Per Second) 추정치</li><li>일간 능동 사용자(dau) = 3억 x 50% = 1.5억</li><li>QPS = 1.5억 x 2건 / 24시간 / 3600초 = 약 3500</li><li>최대 QPS = 2 x QPS = 약 7000</li></ul><h2 id="미디어-저장을-위한-저장소-요구량"><a href="#미디어-저장을-위한-저장소-요구량" class="headerlink" title="미디어 저장을 위한 저장소 요구량"></a>미디어 저장을 위한 저장소 요구량</h2><ul><li>평균 크기<ul><li>id = 64바이트</li><li>body = 140바이트</li><li>미디어 = 1MB</li></ul></li><li>미디어 저장소 요구량 : 1.5억 x 2 x 10% x 1MB = 30TB/day</li><li>5년간 미디어를 보관하기 위한 저장소 요구량 : 30TB x 365 x 5 = 약 55PB</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;2의-제곱-수&quot;&gt;&lt;a href=&quot;#2의-제곱-수&quot; class=&quot;headerlink&quot; title=&quot;2의 제곱 수&quot;&gt;&lt;/a&gt;2의 제곱 수&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;최소단위는 1바이트, 8비트&lt;/li&gt;
-&lt;li&gt;아스키 문자 하나 메모리크기가 1바</summary>
-      
-    
-    
-    
-    <category term="가상면접 사례로 배우는 대규모 시스템 설계기초" scheme="http://won0935.github.io/categories/%EA%B0%80%EC%83%81%EB%A9%B4%EC%A0%91-%EC%82%AC%EB%A1%80%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88/"/>
-    
-    
-    <category term="시스템설계" scheme="http://won0935.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%84%A4%EA%B3%84/"/>
-    
-    <category term="대규모설계" scheme="http://won0935.github.io/tags/%EB%8C%80%EA%B7%9C%EB%AA%A8%EC%84%A4%EA%B3%84/"/>
     
   </entry>
   
