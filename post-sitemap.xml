@@ -9,6 +9,14 @@
 
 
     <url>
+        <loc>http://won0935.github.io/2021/12/17/Monitoring/Nginx/Nginx-Prometheus/</loc>
+        <lastmod>2021-12-20T13:27:31.141Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://won0935.github.io/2021/12/17/Monitoring/Fluentd/Fluentd-Prometheus/</loc>
         <lastmod>2021-12-17T06:47:21.974Z</lastmod>
         <changefreq>weekly</changefreq>
