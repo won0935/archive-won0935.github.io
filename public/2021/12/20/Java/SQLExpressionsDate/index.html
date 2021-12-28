@@ -16,7 +16,7 @@
 
 
 
-<title>Archives | Jay&#39;s Note</title>
+<title>QueryDSL 에서 mySQL date() 함수 사용 | Jay&#39;s Note</title>
 
 
 
@@ -128,53 +128,98 @@
     }
 </script>
             <div class="main">
-                <div class="post-wrap archive">
+                <div class="container">
     
     
-        
 
-        
-            <h3>2021</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2021/10/26/MassiveSystemDesign/Chapter-6/">키-값 저장소 설계</a>
-            <span class="archive-item-date">October 26, 2021</span>
-        </article>
     
-        
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">QueryDSL 에서 mySQL date() 함수 사용</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Song Jae-won, Jay</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">December 20, 2021&nbsp;&nbsp;22:27:31</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/QueryDSL/">QueryDSL</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ul>
+<li><code>SQLExpressions.date()</code> 을 사용하면 된다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.querydsl.sql.SQLExpressions;</span><br><span class="line">SQLExpressions.date(QTable.table.date)</span><br></pre></td></tr></table></figure>
+
+<p>출처<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/24531957/mysql-date-function-in-querydsl">https://stackoverflow.com/questions/24531957/mysql-date-function-in-querydsl</a></p>
+
+        </div>
 
         
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Song Jae-won, Jay</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
 
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2021/10/26/MassiveSystemDesign/Chapter-7/">분산 시스템을 위한 유일 ID 생성기 설계</a>
-            <span class="archive-item-date">October 26, 2021</span>
-        </article>
-    
+            </section>
         
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/QueryDSL/"># QueryDSL</a>
+                    
+                        <a href="/tags/mySQL/"># mySQL</a>
+                    
+                        <a href="/tags/SQLExpressions/"># SQLExpressions</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/12/17/Monitoring/Nginx/Nginx-Prometheus/">Nginx 를 Prometheus 로 모니터링 하기</a>
+            
+        </section>
 
-        
 
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2021/10/26/MassiveSystemDesign/Chapter-1/">개략적인 규모 추정</a>
-            <span class="archive-item-date">October 26, 2021</span>
-        </article>
-    
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2021/10/26/MassiveSystemDesign/Chapter-2/">사용자 수에 따른 규모 확장성</a>
-            <span class="archive-item-date">October 26, 2021</span>
-        </article>
-    
-    
-    <nav class="pagination">
-        <a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
-
+    </article>
 </div>
+
             </div>
             <footer id="footer" class="footer">
     <div class="copyright">
