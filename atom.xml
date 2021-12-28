@@ -6,7 +6,7 @@
   <link href="http://won0935.github.io/atom.xml" rel="self"/>
   
   <link href="http://won0935.github.io/"/>
-  <updated>2021-12-21T07:06:26.658Z</updated>
+  <updated>2021-12-28T11:27:06.273Z</updated>
   <id>http://won0935.github.io/</id>
   
   <author>
@@ -17,30 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Nginx 를 Prometheus 로 모니터링 하기</title>
-    <link href="http://won0935.github.io/2021/12/20/Java/SQLExpressions/"/>
-    <id>http://won0935.github.io/2021/12/20/Java/SQLExpressions/</id>
+    <title>QueryDSL 에서 mySQL date() 함수 사용</title>
+    <link href="http://won0935.github.io/2021/12/20/Java/SQLExpressionsDate/"/>
+    <id>http://won0935.github.io/2021/12/20/Java/SQLExpressionsDate/</id>
     <published>2021-12-20T13:27:31.140Z</published>
-    <updated>2021-12-21T07:06:26.658Z</updated>
+    <updated>2021-12-28T11:27:06.273Z</updated>
     
-    <content type="html"><![CDATA[<p><a href="https://stackoverflow.com/questions/24531957/mysql-date-function-in-querydsl">https://stackoverflow.com/questions/24531957/mysql-date-function-in-querydsl</a></p>]]></content>
+    <content type="html"><![CDATA[<ul><li><code>SQLExpressions.date()</code> 을 사용하면 된다.</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.querydsl.sql.SQLExpressions;</span><br><span class="line">SQLExpressions.date(QTable.table.date)</span><br></pre></td></tr></table></figure><p>출처<br><a href="https://stackoverflow.com/questions/24531957/mysql-date-function-in-querydsl">https://stackoverflow.com/questions/24531957/mysql-date-function-in-querydsl</a></p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/24531957/mysql-date-function-in-querydsl&quot;&gt;https://stackoverflow.com/questions/24531957/mysql</summary>
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SQLExpressions.date()&lt;/code&gt; 을 사용하면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cl</summary>
       
     
     
     
-    <category term="Nginx" scheme="http://won0935.github.io/categories/Nginx/"/>
+    <category term="QueryDSL" scheme="http://won0935.github.io/categories/QueryDSL/"/>
     
     
-    <category term="Nginx" scheme="http://won0935.github.io/tags/Nginx/"/>
+    <category term="QueryDSL" scheme="http://won0935.github.io/tags/QueryDSL/"/>
     
-    <category term="Nginx-prometheus-exporter" scheme="http://won0935.github.io/tags/Nginx-prometheus-exporter/"/>
+    <category term="mySQL" scheme="http://won0935.github.io/tags/mySQL/"/>
     
-    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
+    <category term="SQLExpressions" scheme="http://won0935.github.io/tags/SQLExpressions/"/>
     
   </entry>
   
@@ -64,11 +67,11 @@
     <category term="Nginx" scheme="http://won0935.github.io/categories/Nginx/"/>
     
     
+    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
+    
     <category term="Nginx" scheme="http://won0935.github.io/tags/Nginx/"/>
     
     <category term="Nginx-prometheus-exporter" scheme="http://won0935.github.io/tags/Nginx-prometheus-exporter/"/>
-    
-    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
     
   </entry>
   
@@ -94,11 +97,11 @@
     <category term="Fluentd" scheme="http://won0935.github.io/categories/Fluentd/"/>
     
     
-    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
-    
     <category term="Fluentd" scheme="http://won0935.github.io/tags/Fluentd/"/>
     
     <category term="td-agent" scheme="http://won0935.github.io/tags/td-agent/"/>
+    
+    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
     
   </entry>
   
