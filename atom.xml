@@ -67,11 +67,11 @@
     <category term="Nginx" scheme="http://won0935.github.io/categories/Nginx/"/>
     
     
+    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
+    
     <category term="Nginx" scheme="http://won0935.github.io/tags/Nginx/"/>
     
     <category term="Nginx-prometheus-exporter" scheme="http://won0935.github.io/tags/Nginx-prometheus-exporter/"/>
-    
-    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
     
   </entry>
   
@@ -97,11 +97,11 @@
     <category term="Fluentd" scheme="http://won0935.github.io/categories/Fluentd/"/>
     
     
-    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
-    
     <category term="Fluentd" scheme="http://won0935.github.io/tags/Fluentd/"/>
     
     <category term="td-agent" scheme="http://won0935.github.io/tags/td-agent/"/>
+    
+    <category term="Prometheus" scheme="http://won0935.github.io/tags/Prometheus/"/>
     
   </entry>
   
