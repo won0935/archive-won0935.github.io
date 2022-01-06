@@ -1,0 +1,552 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.8e6d16c30a318632e6b9.css" id="gatsby-global-css">pre[class*=language-].line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}pre[class*=language-].line-numbers>code{position:relative;white-space:inherit}.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:0;font-size:100%;left:-3.8em;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-ms-user-select:none;user-select:none}.line-numbers-rows>span{display:block;counter-increment:linenumber}.line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}</style><meta name="generator" content="Gatsby 2.32.13"/><link rel="icon" href="/favicon-32x32.png?v=fdc3be8e1936d723139249e23665dd77" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#0c9ee4"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=fdc3be8e1936d723139249e23665dd77"/><style type="text/css">
+    .anchor-header.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor-header.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor-header svg,
+    h2 .anchor-header svg,
+    h3 .anchor-header svg,
+    h4 .anchor-header svg,
+    h5 .anchor-header svg,
+    h6 .anchor-header svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor-header svg,
+    h2:hover .anchor-header svg,
+    h3:hover .anchor-header svg,
+    h4:hover .anchor-header svg,
+    h5:hover .anchor-header svg,
+    h6:hover .anchor-header svg,
+    h1 .anchor-header:focus svg,
+    h2 .anchor-header:focus svg,
+    h3 .anchor-header:focus svg,
+    h4 .anchor-header:focus svg,
+    h5 .anchor-header:focus svg,
+    h6 .anchor-header:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="alternate" type="application/rss+xml" title="Your Site&#x27;s RSS Feed" href="/rss.xml"/><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><title data-react-helmet="true">[토비의 스프링] 6-3. AOP - 트랜잭션 속성 | Jay 기술 블로그</title><link data-react-helmet="true" rel="canonical" href="https://won0935.github.io/category/study/toby-spring/aop/transaction-property/"/><meta data-react-helmet="true" name="description" content="AOP, 트랜잭션, 트랜잭션 속성, 전파"/><meta data-react-helmet="true" property="og:title" content="[토비의 스프링] 6-3. AOP - 트랜잭션 속성"/><meta data-react-helmet="true" property="og:description" content="AOP, 트랜잭션, 트랜잭션 속성, 전파"/><meta data-react-helmet="true" property="og:image" content="https://won0935.github.io/images/ogp.png"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="google-site-verification" content="OxCmDAbFt_oP2EzYabwJiA4KNndMwAcKMQdvpa8vL6w"/><meta data-react-helmet="true" name="naver-site-verification" content="07c520f56835b243f94776be22c4cbcb671bbfe5"/><script data-react-helmet="true" type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","headline":"[토비의 스프링] 6-3. AOP - 트랜잭션 속성","image":"https://won0935.github.io/images/ogp.png","editor":"won0935","datePublished":"2020-07-20","dateCreated":"2020-07-20","dateModified":"2020-07-20","description":"AOP, 트랜잭션, 트랜잭션 속성, 전파","author":{"@type":"Person","name":"won0935","image":"https://won0935.github.io/images/avatar.png"},"publisher":{"@type":"Organization","name":"won0935","logo":{"@type":"ImageObject","url":"https://won0935.github.io/images/avatar.png","width":150,"height":150}}}</script><script data-react-helmet="true" type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://won0935.github.io","name":"HOME"}},{"@type":"ListItem","position":2,"item":{"@id":"https://won0935.github.io/study","name":"스터디"}},{"@type":"ListItem","position":3,"item":{"name":"[토비의 스프링] 6-3. AOP - 트랜잭션 속성"}}]}</script><style data-styled="fEdaQt ebovCZ iarFOA evPsmz kyfGjL gEBZRU fKTVbh boOHpQ gYZPam dYhQMO knVwJm dQJMGd hzEQGR ctKYlG fiFeft iRbQrG ifmpQu ggusaO fDIfyV fHkPwv kqnMjP XIZEq fTcnoY heGWde" data-styled-version="4.4.1">
+/* sc-component-id: sc-global-2864780479 */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;-webkit-tap-highlight-color:rgba(0,0,0,0);} html,body{height:100%;} body{--bg:#f5f5f5;--textNormal:#21242d;--headerBackground:#ffffff;--bioBackground:#f5f5f5;--bioColor:rgba(0,0,0,0.87);--bioHighlight:#000000;--categoryHeader:rgba(0,0,0,0.87);--categoryColor:rgba(0,0,0,0.87);--categotyImgage:linear-gradient(-45deg,#ffa649,#f7645b,#805ed4);--postCardColor:rgba(0,0,0,0.87);--postCardHighlight:rgba(0,0,0,0.08);--postCardEmoji:#ffffff;--postCardDivideLine:#969fa7;--tableOfContentsFocusColor:rgb(33,37,41) background-color:var(--bg);color:var(--textNormal);line-height:1.6;font-size:100%;font-weight:400;font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,sans-serif;-webkit-text-size-adjust:100%;} body.dark{--bg:#21242d;--textNormal:#21242d;--headerBackground:#3B71DA;--bioBackground:#313746;--bioColor:#ffffff;--bioHighlight:#ffffff;--categoryHeader:#ffffff;--categoryColor:#727d86;--categotyImgage:#313746;--postCardColor:#ffffff;--postCardHighlight:#313746;--postCardEmoji:#313746;--postCardDivideLine:#313746;--tableOfContentsFocusColor:#f1f4f7;background-color:var(--bg);color:var(--textNormal);line-height:1.6;font-size:100%;font-weight:400;font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,sans-serif;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;} article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;} a{color:#20a8ea;-webkit-text-decoration:none;text-decoration:none;word-break:break-all;-webkit-transition:.2s;transition:.2s;} a:focus{outline:none;} ol,ul,li{list-style:none;} blockquote,q{quotes:none;} blockquote::before,blockquote::after,q::before,q::after{content:'';content:none;} table{border-collapse:collapse;border-spacing:0;} *{box-sizing:border-box;} img{max-width:100%;} button,input{font-family:inherit;font-size:inherit;background:none;border:none;outline:none;-webkit-appearance:none;-moz-appearance:none;appearance:none;border-radius:0;resize:none;} button:focus,input:focus{outline:none;}
+/* sc-component-id: ContentWrapper__IndexContent-sc-qgwu46-0 */
+.ebovCZ{max-width:1250px;margin:0 auto;padding:0 1.5em;} @media screen and (max-width:950px){.ebovCZ{max-width:760px;}} @media screen and (max-width:500px){.ebovCZ{padding:0 20px;}}
+/* sc-component-id: Footer__FooterContent-sc-5p0nzy-0 */
+.fTcnoY{padding:0.1em 0;}
+/* sc-component-id: Footer__FooterInner-sc-5p0nzy-1 */
+.heGWde{margin-top:3em;text-align:center;padding:1.5em;border-top:solid 1px #313746;color:#727d86;font-size:14px;} .heGWde a{color:#727d86;-webkit-text-decoration:underline;text-decoration:underline;}
+/* sc-component-id: ColorModeToggle__ToggleButton-sc-b3isah-0 */
+.evPsmz{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;cursor:pointer;} .evPsmz .icon-sun{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;text-align:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;height:100%;color:#222;} .evPsmz .icon-moon{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;text-align:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;height:100%;color:#fff;}
+/* sc-component-id: Header__HeaderTag-sc-sxwgs1-0 */
+.fEdaQt{background:var(--headerBackground);width:100%;box-shadow:rgba(0,0,0,0.2) 0px 3px 3px -2px,rgba(0,0,0,0.14) 0px 3px 4px 0px,rgba(0,0,0,0.12) 0px 1px 8px 0px;}
+/* sc-component-id: Header__HeaderInner-sc-sxwgs1-1 */
+.iarFOA{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:5px;} .iarFOA .logo{width:200px;height:55px;} @media screen and (max-width:500px){.iarFOA .logo{margin:0 auto;}} .iarFOA .message-link{position:absolute;right:0;top:7px;display:block;width:34px;} .iarFOA .message-link:hover{top:5px;}
+/* sc-component-id: Layout__Content-sc-152i9mm-0 */
+.kyfGjL{margin-top:2em;min-height:85vh;} @media screen and (max-width:950px){.kyfGjL{display:block;}} @media screen and (max-width:500px){.kyfGjL{margin-top:0;}}
+/* sc-component-id: MainWrapper__IndexWrapper-sc-vkqmvp-0 */
+.gEBZRU{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;margin-top:2em;min-height:85vh;} @media screen and (max-width:950px){.gEBZRU{display:block;}} @media screen and (max-width:500px){.gEBZRU{margin-top:0;}}
+/* sc-component-id: MainWrapper__ContentsWrapper-sc-vkqmvp-1 */
+.fKTVbh{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:calc(100% - 290px - 40px);margin-right:40px;} @media screen and (max-width:950px){.fKTVbh{width:100%;}}
+/* sc-component-id: CategoryLabel__Wrapper-sc-134vpma-0 */
+.hzEQGR .category-text{padding:0.3em 1em;display:inline-block;display:inline;padding:3px 6px;line-height:1.2;font-size:12px;border-radius:2px;font-weight:700;color:#fff;} @media screen and (max-width:950px){.hzEQGR .category-text{font-size:11px;padding:2.5px 6px;}}
+/* sc-component-id: RelatedPosts__Wrapper-sc-15t1gj5-0 */
+.fiFeft{background:#f1f4f7;padding:2em 2.5em;} @media screen and (max-width:500px){.fiFeft{padding:30px 20px;}}
+/* sc-component-id: RelatedPosts__PostCardWrapper-sc-15t1gj5-1 */
+.iRbQrG .post-card-link{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-bottom:1em;padding:15px;background:#fff;border-radius:5px;color:#313746;box-shadow:0 1px 2px rgba(0,0,0,0.1);} .iRbQrG .post-card-link:hover{background:#e0ebf1;} @media screen and (max-width:500px){.iRbQrG .post-card-link{padding:10px;}}
+/* sc-component-id: RelatedPosts__PostCardEmoji-sc-15t1gj5-2 */
+.ifmpQu{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.4);margin:0;width:80px;height:80px;background:#f1f4f7;border-radius:4px;font-size:50px;} .ifmpQu img{width:55px;height:55px;}
+/* sc-component-id: RelatedPosts__PostCardContent-sc-15t1gj5-3 */
+.ggusaO{width:calc(100% - 80px);padding-left:15px;} .ggusaO h5{font-size:1.1em;font-weight:700;line-height:1.45;} .ggusaO time{display:block;margin-bottom:0.1em;-webkit-letter-spacing:0.05em;-moz-letter-spacing:0.05em;-ms-letter-spacing:0.05em;letter-spacing:0.05em;font-size:0.8em;color:#969fa7;} @media screen and (max-width:500px){.ggusaO{padding-left:15px;}.ggusaO h5{font-size:1em;}}
+/* sc-component-id: TableOfContents__TableIndex-sc-10py2gf-0 */
+.fDIfyV{position:-webkit-sticky;position:sticky;top:2em;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:left;-webkit-justify-content:left;-ms-flex-pack:left;justify-content:left;width:320px;padding:1.5em;background:none;border-radius:4px;} @media screen and (max-width:950px){.fDIfyV{position:relative;margin:2em 0;width:100%;}} @media screen and (max-width:500px){.fDIfyV{padding:1.3em 1em;}}
+/* sc-component-id: TableOfContents__TableWrapper-sc-10py2gf-1 */
+.fHkPwv{display:block;width:100%;max-height:calc(100vh - 150px);word-break:break-word;color:black;overflow:auto;border-left:1.5px solid rgb(233,236,239);}
+/* sc-component-id: TableOfContents__TableHeader-sc-10py2gf-2 */
+.kqnMjP{display:block;text-align:left;font-size:17px;color:var(--bioColor);padding-left:15px;margin-bottom:15px;}
+/* sc-component-id: TableOfContents__TableContents-sc-10py2gf-3 */
+.XIZEq{margin:0 10px;font-size:14px;overflow:hidden;-webkit-transition:all 0.125s ease-in 0s;transition:all 0.125s ease-in 0s;} .XIZEq a{display:block;color:rgb(134,142,150);} .XIZEq a:hover{color:var(--tableOfContentsFocusColor);} .XIZEq ul{list-style:none;margin-left:10px;margin-bottom:0px;line-height:1.5rem;} .XIZEq ul > li a[href='']{color:var(--tableOfContentsFocusColor);-webkit-transform:scale(1.05);-ms-transform:scale(1.05);transform:scale(1.05);}
+/* sc-component-id: post__Content-sc-rer3gn-0 */
+.boOHpQ{position:relative;background:#fff;overflow:hidden;font-size:16px;} .boOHpQ:before,.boOHpQ:after{content:'';position:absolute;width:0;height:0;z-index:5;-webkit-transition:all 0.2s ease-out 0s;transition:all 0.2s ease-out 0s;} .boOHpQ:before{top:0;left:0;border-top:20px solid var(--bg);border-right:20px solid transparent;} .boOHpQ:after{bottom:0;right:0;border-bottom:20px solid var(--bg);border-left:20px solid transparent;} @media screen and (max-width:500px){.boOHpQ{margin:0 -20px;}.boOHpQ:before,.boOHpQ:after{content:none;}}
+/* sc-component-id: post__HeroImage-sc-rer3gn-1 */
+.gYZPam{position:relative;background:#313746;text-align:center;background-image:url("/static/pattern-00b88abde489053a0ab3b3e799db37b9.svg");background-repeat:repeat;background-size:400px;min-height:230px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;} .gYZPam .emoji{width:110px;height:110px;} @media screen and (max-width:500px){.gYZPam{min-height:190px;}}
+/* sc-component-id: post__ContentMain-sc-rer3gn-2 */
+.dYhQMO{padding:1.8em 2.5em;} @media screen and (max-width:500px){.dYhQMO{padding:30px 20px;}}
+/* sc-component-id: post__PostTitle-sc-rer3gn-3 */
+.dQJMGd{margin:0.1em 0 0.3em;font-size:1.8em;font-weight:700;line-height:1.5;} @media screen and (max-width:500px){.dQJMGd{font-size:25px;}}
+/* sc-component-id: post__PostDate-sc-rer3gn-4 */
+.knVwJm{display:block;color:#969fa7;font-size:0.9em;-webkit-letter-spacing:0.05em;-moz-letter-spacing:0.05em;-ms-letter-spacing:0.05em;letter-spacing:0.05em;}
+/* sc-component-id: post__PostContent-sc-rer3gn-5 */
+.ctKYlG{margin:1.5em 0 1em;line-height:1.9;} .ctKYlG .gatsby-highlight{margin:1.5em 0;} @media screen and (max-width:500px){.ctKYlG .gatsby-highlight{margin:1.5em -20px;}} .ctKYlG code[class*='language-'],.ctKYlG pre[class*='language-']{-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;font-family:Menlo,Monaco,'Courier New',monospace;color:#ccc;text-shadow:none;word-break:break-all;} .ctKYlG pre[class*='language-'],.ctKYlG:not(pre) > code[class*='language-']{background:#313746;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,0.5);} @media screen and (max-width:500px){.ctKYlG pre[class*='language-'],.ctKYlG:not(pre) > code[class*='language-']{border-radius:0;}} .ctKYlG pre[class*='language-']{padding:1.2em 1.2em;-webkit-overflow-scrolling:touch;position:relative;font-size:14.5px;line-height:1.7;overflow:auto;} .ctKYlG .gatsby-highlight pre[class*='language-'].line-numbers{padding-left:3.4em;} .ctKYlG pre[class*='language-'].line-numbers span.line-numbers-rows{padding:1.2em 0 1.2em 0.7em;background-color:hsla(0,0%,78.4%,0.15);border:none;} .ctKYlG .token.comment,.ctKYlG .token.block-comment,.ctKYlG .token.prolog,.ctKYlG .token.doctype,.ctKYlG .token.cdata{color:#999;} .ctKYlG .token.punctuation{color:#ccc;} .ctKYlG .token.tag,.ctKYlG .token.attr-name,.ctKYlG .token.namespace,.ctKYlG .token.deleted{color:#e2777a;} .ctKYlG .token.function-name{color:#6196cc;} .ctKYlG .token.boolean,.ctKYlG .token.number,.ctKYlG .token.function{color:#f08d49;} .ctKYlG .token.property,.ctKYlG .token.class-name,.ctKYlG .token.constant,.ctKYlG .token.symbol{color:#f8c555;} .ctKYlG .token.selector,.ctKYlG .token.important,.ctKYlG .token.atrule,.ctKYlG .token.keyword,.ctKYlG .token.builtin{color:#cc99cd;} .ctKYlG .token.string,.ctKYlG .token.char,.ctKYlG .token.attr-value,.ctKYlG .token.regex,.ctKYlG .token.variable{color:#7ec699;} .ctKYlG .token.operator,.ctKYlG .token.entity,.ctKYlG .token.url{color:#67cdcc;} .ctKYlG .token.important,.ctKYlG .token.bold{font-weight:bold;} .ctKYlG .token.italic{font-style:italic;} .ctKYlG .token.entity{cursor:help;} .ctKYlG .token.inserted{color:green;} .ctKYlG .gatsby-code-title{position:relative;margin:1.5em 0 -24px auto;background:#616161;color:#fff;font-size:12px;height:24px;padding:0 8px;line-height:24px;font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-weight:500;border-radius:0 5px;display:table;z-index:2;} @media screen and (max-width:500px){.ctKYlG .gatsby-code-title{border-radius:0 0 0 5px;margin-right:-20px;}} .ctKYlG .gatsby-code-title + .gatsby-highlight{margin-top:0;} .ctKYlG p > code,.ctKYlG li > code{color:#ff3860 !important;background:#f9f1f3;padding:0.15em 0.4em;margin:0.2em;border-radius:4px;font-size:0.85em;word-break:break-all;white-space:pre-line;} .ctKYlG strong > code{font-family:inherit !important;} .ctKYlG a:hover{-webkit-text-decoration:underline;text-decoration:underline;} .ctKYlG p{margin:0.5em 0;} .ctKYlG h1,.ctKYlG h2,.ctKYlG h3,.ctKYlG h4,.ctKYlG h5,.ctKYlG h6{margin:40px 0 10px;font-weight:700;line-height:1.5;} .ctKYlG h1{margin:45px 0 12px;padding:5px 0 5px 17px;font-size:1.55em;} .ctKYlG h1:before{position:absolute;top:0;left:0;content:"";display:inline-block;width:5px;height:100%;border-radius:5px;background:linear-gradient(0deg,#ffa649 0%,#ffa649 50%,#f7645b 50%,#f7645b 100%);} .ctKYlG h2{position:relative;margin:45px 0 12px;padding:5px 0 5px 17px;font-size:1.40em;} .ctKYlG h2:before{position:absolute;top:0;left:0;content:"";display:inline-block;width:5px;height:100%;border-radius:5px;background:linear-gradient(0deg,#ffa649 0%,#ffa649 50%,#f7645b 50%,#f7645b 100%);} .ctKYlG h3{margin:40px 0 12px;font-size:1.40em;} .ctKYlG h4{position:relative;padding-left:18px;font-size:1.2em;} .ctKYlG h4:before{position:absolute;top:.2em;left:0;content:"";display:inline-block;width:14px;height:19px;background-image:url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIyLjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IuODrOOCpOODpOODvF8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiCgkgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzAgNDUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMwIDQ1OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Y3NjQ1Qzt9Cgkuc3Qxe2ZpbGw6I0ZGQTc0ODt9Cjwvc3R5bGU+Cjx0aXRsZT5pY29uPC90aXRsZT4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTI4LjEsMzAuMWMwLDcuNS02LjEsMTMuNi0xMy42LDEzLjZTMC45LDM3LjcsMC45LDMwLjFTNywxNi41LDE0LjUsMTYuNVMyOC4xLDIyLjYsMjguMSwzMC4xeiIvPgo8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMjguMSwxNS42YzAsNy41LTYuMSwxMy42LTEzLjYsMTMuNlMwLjksMjMuMSwwLjksMTUuNlM3LDIsMTQuNSwyUzI4LjEsOC4xLDI4LjEsMTUuNnoiLz4KPC9zdmc+Cg==");background-size:contain;background-repeat:no-repeat;} .ctKYlG ul,.ctKYlG ol{margin:1em 0;} .ctKYlG ul p,.ctKYlG ol p{margin:0;} .ctKYlG ul{padding-left:1.2em;} .ctKYlG ul li{margin:.4em 0;list-style:disc;} .ctKYlG ul ul,.ctKYlG ul ol{margin:0;} .ctKYlG ol{counter-reset:number;} .ctKYlG ol > li{list-style:none;list-style-position:inside;position:relative;padding:0 0 0 30px;margin:0.5em 0;} .ctKYlG ol > li:before{display:inline-block;position:absolute;left:0;top:0;width:20px;height:20px;margin:.4em 0;border-radius:25%;background:#5c9ee7;color:#fff;font-weight:700;font-size:14px;text-align:center;line-height:20px;content:counter(number);counter-increment:number;} .ctKYlG ol ul{margin:0;} .ctKYlG strong{font-weight:550;font-size:1.1em;} .ctKYlG em{font-style:italic;} .ctKYlG del{-webkit-text-decoration:line-through;text-decoration:line-through;} .ctKYlG hr{display:block;margin:2em 0;border:none;border-top:dotted 3px #e1eaf3;} .ctKYlG table{display:block;margin:1em 0;border-spacing:2px;border-collapse:separate;overflow:auto;-webkit-overflow-scrolling:touch;width:auto;font-size:.9em;line-height:1.4;} .ctKYlG table th{background-color:#313746;color:#FFF;padding:10px 12px;text-align:center;font-weight:700;} .ctKYlG table th[align="center"]{text-align:center;} .ctKYlG table th[align="right"]{text-align:right;} .ctKYlG table td{background-color:#f1f4f7;color:#313746;padding:10px 12px;} .ctKYlG table td code[class*='language-']{color:#313746;} .ctKYlG table thead tr th:first-child{border-radius:5px 0 0 0;} .ctKYlG table thead tr th:last-child{border-radius:0 5px 0 0;} .ctKYlG table tbody tr:last-child td:first-child{border-radius:0 0 0 5px;} .ctKYlG table tbody tr:last-child td:last-child{border-radius:0 0 5px 0;} .ctKYlG blockquote{margin:1em 0;padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5;} .ctKYlG .gatsby-resp-image-wrapper{margin:2em 0;box-shadow:1px 1px 20px lightgrey;border-radius:4px;overflow:hidden;} .ctKYlG .anchor-header{margin:2px 0 0 0;} .ctKYlG .custom-block{margin:1em 0;background:#f1f4f7;} .ctKYlG .custom-block-heading{font-weight:700;} .ctKYlG .custom-block-heading .emoji{width:1.2em !important;height:1.2em !important;vertical-align:-0.2em !important;} .ctKYlG .custom-block-body{font-size:0.92em;} .ctKYlG .custom-block-body > *:first-child{margin-top:0;} .ctKYlG .custom-block-body > *:last-child{margin-bottom:0;} .ctKYlG .custom-block-body h5{font-size:1.05em;margin:20px 0 5px;} .ctKYlG > *:first-child{margin-top:0;} .ctKYlG .custom-block.simple{padding:1em 1.2em;border-radius:5px;} .ctKYlG .custom-block.simple .custom-block-heading{font-size:1.1em;} .ctKYlG .custom-block.info,.ctKYlG .custom-block.alert,.ctKYlG .custom-block.notice{padding:0.7em 1em;border-left:solid 4px #20a8ea;border-radius:1px 3px 3px 1px;} .ctKYlG .custom-block.alert{border-left-color:#f7615f;background:#ffeff0;} .ctKYlG .custom-block.alert .custom-block-heading{color:#f7615f;} .ctKYlG .custom-block.notice{border-left-color:#ffa22b;background:#fff4df;} .ctKYlG .custom-block.notice .custom-block-heading{color:#ffa22b;} .ctKYlG .custom-block.image-small,.ctKYlG .custom-block.image-medium{background:#c0e2fb;padding:1.5em;text-align:center;border-radius:5px;} .ctKYlG .custom-block.image-small .gatsby-resp-image-wrapper,.ctKYlG .custom-block.image-medium .gatsby-resp-image-wrapper{margin:0;border:none;box-shadow:0 5px 15px rgba(0,0,0,0.15);} .ctKYlG .custom-block.image-small .gatsby-resp-image-wrapper{max-width:350px !important;border:none;} .ctKYlG .custom-block.image-medium .gatsby-resp-image-wrapper{max-width:450px !important;border:none;}</style><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link as="script" rel="preload" href="/webpack-runtime-07b7d84af1cf9993340d.js"/><link as="script" rel="preload" href="/framework-999a01e9e4c894cffffe.js"/><link as="script" rel="preload" href="/styles-e383b929d2d4095ae339.js"/><link as="script" rel="preload" href="/app-0dbf9fa9f0620e9dd3df.js"/><link as="script" rel="preload" href="/de71a805-d9a74fce0a097621e412.js"/><link as="script" rel="preload" href="/53b27b57f60ee3e1ca57a66cde9add975dffb161-c74f54ae49cc6ab741d1.js"/><link as="script" rel="preload" href="/component---src-templates-post-tsx-f983782df893669fd506.js"/><link as="fetch" rel="preload" href="/page-data/category/study/toby-spring/aop/transaction-property/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/196006245.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/1984257895.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/2528810007.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><script>
+void function() {
+  window.__onThemeChange = function() {}
+
+  var preferredTheme
+  try {
+    preferredTheme = localStorage.getItem('theme')
+  } catch (err) { }
+
+  function setTheme(newTheme) {
+    if (preferredTheme && document.body.classList.contains(preferredTheme)) {
+      document.body.classList.replace(preferredTheme, newTheme)
+    } else {
+      document.body.classList.add(newTheme)
+    }
+
+    window.__theme = newTheme
+    preferredTheme = newTheme
+    window.__onThemeChange(newTheme)
+  }
+
+  window.__setPreferredTheme = function(newTheme) {
+    setTheme(newTheme)
+    try {
+      localStorage.setItem('theme', newTheme)
+    } catch (err) {}
+  }
+
+  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  darkQuery.addListener(function(e) {
+    window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+  })
+
+  setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'))
+}()
+    </script><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="App" style="background-color:var(--bg);color:var(--textNormal);transition:color 0.2s ease-out, background 0.2s ease-out"><header class="Header__HeaderTag-sc-sxwgs1-0 fEdaQt"><div class="ContentWrapper__IndexContent-sc-qgwu46-0 ebovCZ"><div class="Header__HeaderInner-sc-sxwgs1-1 iarFOA"><a class="logo-link" href="/"><img class="logo" src="/static/logo-42e9962f0784e14369fff245074e7612.png" alt="Jay 기술 블로그"/></a><div class="ColorModeToggle__ToggleButton-sc-b3isah-0 evPsmz"><div style="position:relative;display:inline-block;text-align:left;opacity:1;direction:ltr;border-radius:13px;-webkit-transition:opacity 0.25s;-moz-transition:opacity 0.25s;transition:opacity 0.25s;touch-action:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none"><div class="react-switch-bg" style="height:26px;width:54px;margin:0;position:relative;background:#d9dfe2;border-radius:13px;cursor:pointer;-webkit-transition:background 0.25s;-moz-transition:background 0.25s;transition:background 0.25s"><div style="height:26px;width:29px;position:relative;opacity:0;pointer-events:none;-webkit-transition:opacity 0.25s;-moz-transition:opacity 0.25s;transition:opacity 0.25s"><div class="icon-moon checkedIcon"><svg width="24" height="24" fill="#EFDC05"><rect width="24" height="24" fill="none" rx="0" ry="0"></rect><path fill-rule="evenodd" clip-rule="evenodd" d="M14.8102 3.2H13.8202C13.4902 3.2 13.2302 2.93 13.2302 2.6C13.2302 2.27 13.5002 2 13.8302 2H16.2602C16.5002 2 16.7202 2.15 16.8102 2.37C16.9002 2.59 16.8502 2.85 16.6802 3.02L15.2702 4.43H16.2602C16.5902 4.43 16.8602 4.7 16.8602 5.03C16.8602 5.36 16.5902 5.63 16.2602 5.63H13.8202C13.5802 5.63 13.3602 5.48 13.2702 5.26C13.1802 5.04 13.2302 4.78 13.4002 4.61L14.8102 3.2ZM20.1401 11.0101H21.1301C21.4601 11.0101 21.7401 11.2801 21.7401 11.6101C21.7401 11.9401 21.4701 12.2101 21.1401 12.2101H18.7001C18.4601 12.2101 18.2401 12.0601 18.1501 11.8401C18.0601 11.6201 18.1101 11.3601 18.2801 11.1901L19.6901 9.78008H18.7001C18.3701 9.78008 18.1001 9.51008 18.1001 9.18008C18.1001 8.85008 18.3701 8.58008 18.7001 8.58008H21.1301C21.3701 8.58008 21.5901 8.73008 21.6801 8.95008C21.7701 9.17008 21.7201 9.43008 21.5501 9.60008L20.1401 11.0101ZM11.0302 9.8499H12.8502L10.7002 11.9999C10.5302 12.1699 10.4802 12.4299 10.5702 12.6499C10.6602 12.8699 10.8802 13.0199 11.1202 13.0199H14.2902C14.6202 13.0199 14.8902 12.7499 14.8902 12.4199C14.8902 12.0899 14.6202 11.8199 14.2902 11.8199H12.5602L14.7102 9.6699C14.8802 9.4999 14.9302 9.2399 14.8402 9.0199C14.7502 8.7999 14.5302 8.6499 14.2902 8.6499H11.0202C10.6902 8.6499 10.4202 8.9199 10.4202 9.2499C10.4202 9.5799 10.7002 9.8499 11.0302 9.8499ZM14.5501 16.89C15.6601 16.89 16.7201 16.66 17.7101 16.19C17.9401 16.08 18.2101 16.13 18.3801 16.3C18.5601 16.48 18.6101 16.75 18.5001 16.98C17.0901 20.05 13.9901 22.03 10.6001 22.03C5.79013 22.03 1.88013 18.12 1.88013 13.31C1.88013 9.94004 3.87013 6.84004 6.93013 5.40004C7.16013 5.29004 7.43012 5.34004 7.61012 5.52004C7.79012 5.70004 7.84013 5.97004 7.73013 6.20004C7.27013 7.19004 7.03012 8.26004 7.03012 9.38004C7.03012 13.52 10.4001 16.89 14.5501 16.89ZM3.09013 13.31C3.09013 17.46 6.46012 20.83 10.6101 20.83C12.9901 20.83 15.2001 19.7 16.6001 17.85C15.9401 18.01 15.2501 18.09 14.5501 18.09C9.74013 18.09 5.83012 14.18 5.83012 9.38004C5.83012 8.68004 5.91013 7.99004 6.07013 7.32004C4.22013 8.73004 3.09013 10.94 3.09013 13.31Z"></path></svg></div></div><div style="height:26px;width:29px;position:absolute;opacity:1;right:0;top:0;pointer-events:none;-webkit-transition:opacity 0.25s;-moz-transition:opacity 0.25s;transition:opacity 0.25s"><div class="icon-sun uncheckedIcon"><svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.2" baseProfile="tiny" viewBox="0 0 24 24" size="24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 6.934l1-2.934c.072-.213.078-.452 0-.682-.188-.553-.789-.848-1.341-.659-.553.189-.847.788-.659 1.341l1 2.934zM4 11c-.213-.072-.452-.078-.682 0-.553.188-.848.789-.659 1.341.189.553.788.847 1.341.659l2.934-1-2.934-1zM12 17.066l-1 2.934c-.072.213-.078.452 0 .682.188.553.789.848 1.341.659.553-.189.847-.788.659-1.341l-1-2.934zM21.341 11.657c-.188-.553-.788-.848-1.341-.659l-2.934 1 2.934 1c.213.072.452.078.682 0 .552-.188.847-.789.659-1.341zM5.636 7.05l2.781 1.367-1.367-2.781c-.1-.202-.265-.375-.482-.482-.524-.258-1.157-.042-1.415.482-.257.523-.041 1.157.483 1.414zM5.153 17.432c-.257.523-.041 1.156.482 1.414.523.257 1.157.041 1.414-.482l1.367-2.781-2.781 1.367c-.201.099-.374.263-.482.482zM18.363 16.949l-2.781-1.367 1.367 2.781c.1.202.264.375.482.482.523.257 1.156.041 1.414-.482s.042-1.157-.482-1.414zM18.844 6.566c.258-.524.042-1.157-.481-1.415-.523-.257-1.157-.041-1.414.482l-1.369 2.783 2.782-1.368c.202-.1.375-.264.482-.482zM12 7.5c-2.481 0-4.5 2.019-4.5 4.5s2.019 4.5 4.5 4.5 4.5-2.019 4.5-4.5-2.019-4.5-4.5-4.5z"></path></svg></div></div></div><div class="react-switch-handle" style="height:26px;width:26px;background:#ffffff;display:inline-block;cursor:pointer;border-radius:50%;position:absolute;transform:translateX(0px);top:0;outline:0;box-shadow:0px 1px 5px rgba(0, 0, 0, 0.6);border:0;-webkit-transition:background-color 0.25s, transform 0.25s, box-shadow 0.15s;-moz-transition:background-color 0.25s, transform 0.25s, box-shadow 0.15s;transition:background-color 0.25s, transform 0.25s, box-shadow 0.15s"></div><input type="checkbox" role="switch" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px" id="normal-switch"/></div></div></div></div></header><div class="ContentWrapper__IndexContent-sc-qgwu46-0 ebovCZ"><div class="Layout__Content-sc-152i9mm-0 kyfGjL"><main><div class="MainWrapper__IndexWrapper-sc-vkqmvp-0 gEBZRU"><div class="MainWrapper__ContentsWrapper-sc-vkqmvp-1 fKTVbh"><section class="post__Content-sc-rer3gn-0 boOHpQ"><p class="post__HeroImage-sc-rer3gn-1 gYZPam"><img class="emoji" draggable="false" alt="🧩" src="https://twemoji.maxcdn.com/v/12.1.6/svg/1f9e9.svg"/></p><div class="post__ContentMain-sc-rer3gn-2 dYhQMO"><time class="post__PostDate-sc-rer3gn-4 knVwJm">2020.07.20</time><h1 class="post__PostTitle-sc-rer3gn-3 dQJMGd">[토비의 스프링] 6-3. AOP - 트랜잭션 속성</h1><div class="CategoryLabel__Wrapper-sc-134vpma-0 hzEQGR"><a class="category-text" style="background:#C0D545" href="/category/study">스터디</a></div><div class="post__PostContent-sc-rer3gn-5 ctKYlG"><h2 id="개요" style="position:relative;"><a href="#%EA%B0%9C%EC%9A%94" aria-label="개요 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>개요</h2>
+<p><code class="language-text">토비의 스프링</code> AOP의 마지막 챕터를 정리한 포스팅입니다.</p>
+<h2 id="트랜잭션-정의" style="position:relative;"><a href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A0%95%EC%9D%98" aria-label="트랜잭션 정의 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>트랜잭션 정의</h2>
+<p><code class="language-text">트랜잭션</code>이라고 모두 같은 방식으로 동작하는 것은 아닙니다.<br>
+물론 트랜잭션의 기본 개념인 ‘더 이상 쪼갤 수 없는 최소 단위의 작업’이라는 개념은 항상 유효합니다.<br>
+트랜잭션 경계 안에서 진행된 작업은 <code class="language-text">commit()</code>을 통해 모두 성공하든지 아니면 <code class="language-text">rollback()</code>을 통해 모두 취소 되어야합니다.<br>
+그런데 이 밖에도 트랜잭션의 동작방식을 제어할 수 있는 4가지 속성이 있습니다.</p>
+<h4 id="트랜잭션-전파" style="position:relative;"><a href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A0%84%ED%8C%8C" aria-label="트랜잭션 전파 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>트랜잭션 전파</h4>
+<p><code class="language-text">트랜잭션 전파</code>(transaction propagation)이란 트랜잭션의 경계에서 이미 진행 중인 트랜잭션이 있을 때 또는 없을 때 어떻게 동작할 것인가를 결정하는 방식입니다.</p>
+<p>대표적으로 다음과 같은 <code class="language-text">전파 속성</code>을 줄 수 있습니다.</p>
+<h5 id="propagation-required" style="position:relative;"><a href="#propagation-required" aria-label="propagation required permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PROPAGATION REQUIRED</h5>
+<p>진행 중인 트랜잭션이 없으면 새로 시작하고, 이미 시작된 트랜잭션이 있으면 이에 참여합니다.<br>
+‘DefaultTransactionDefinition’의 트랜잭션 전파 속성이 <code class="language-text">PROPAGATION_REQUIRED</code> 입니다.</p>
+<h5 id="propagation-requires-new" style="position:relative;"><a href="#propagation-requires-new" aria-label="propagation requires new permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PROPAGATION REQUIRES NEW</h5>
+<p>항상 새로운 트랜잭션을 시작합니다.<br>
+즉, 앞에서 시작된 트랜잭션이 있든 없든 상관없이 새로운 트랜잭션을 만들어서 독자적으로 동작합니다.</p>
+<h5 id="propagation-not-supported" style="position:relative;"><a href="#propagation-not-supported" aria-label="propagation not supported permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PROPAGATION NOT SUPPORTED</h5>
+<p>이 속성을 사용하면 트랜잭션없이 동작하도록 만들 수도 있습니다.<br>
+진행 중인 트랜잭션이 있어도 무시합니다.</p>
+<hr>
+<p>이렇게 트랜잭션 매니저를 통해 트랜잭션을 시작하려고 할 때, <code class="language-text">getTransaction()</code>이라는 메소드를 사용하는 이유는 바로 항상 트랜잭션을 새로 시작하는 것이 아니기 때문입니다.<br>
+새로 시작할 수도 있고, 현재 진행 중인 트랜잭션에 참여해서 동작할 수도 있습니다.</p>
+<h4 id="격리-수준" style="position:relative;"><a href="#%EA%B2%A9%EB%A6%AC-%EC%88%98%EC%A4%80" aria-label="격리 수준 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>격리 수준</h4>
+<p>모든 DB 트랜잭션은 <code class="language-text">격리수준</code>(isolation level)을 가지고 있어야합니다.</p>
+<p>서버 환경에서는 여러 개의 트랜잭션이 동시에 진행될 수 있기 때문입니다.<br>
+순차적으로 진행되어 독립적이면 좋겠지만 <code class="language-text">성능</code>이 크게 떨어질 수 밖에 없습니다.<br>
+따라서, 적절하게 격리수준을 조정해서 가능한 한 많은 트랜잭션을 <code class="language-text">동시에 진행</code>시키면서도 문제가 발생하지 않게 하는 <code class="language-text">제어가 필요</code>합니다.</p>
+<p>격리수준은 기본적으로 DB에 설정되어 있지만 JDBC 드라이버나 DataSource 등에서 재설정할 수 있고, 필요하다면 트랜잭션 단위로 격리수준을 조정할 수 있습니다.</p>
+<h5 id="제한-시간" style="position:relative;"><a href="#%EC%A0%9C%ED%95%9C-%EC%8B%9C%EA%B0%84" aria-label="제한 시간 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>제한 시간</h5>
+<p>트랜잭션을 수해하는 <code class="language-text">제한 시간</code>(timeout)을 설정할 수 있습니다.<br>
+‘DefaultTransactionDefinition’의 기본 설정은 제한시간이 없고 <code class="language-text">제한 시간</code>은 트랜잭션을 직접 시작할 수 있는 <code class="language-text">PROPAGATION_REQUIRED</code>, <code class="language-text">PROPAGATION_REQUIRES_NEW</code>와 함께 사용해야만 의미가 있습니다.</p>
+<h5 id="읽기-전용" style="position:relative;"><a href="#%EC%9D%BD%EA%B8%B0-%EC%A0%84%EC%9A%A9" aria-label="읽기 전용 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>읽기 전용</h5>
+<p><code class="language-text">읽기 전용</code>(read-only)으로 설정해두면 트랜잭션 내에서 데이터를 조작하는 시도를 막아줄 수 있고 데이터 액세스 기술에 따라서 <code class="language-text">성능이 향상</code>될 수도 있다.</p>
+<h2 id="트랜잭션-인터셉터와-트랜잭션-속성" style="position:relative;"><a href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%9D%B8%ED%84%B0%EC%85%89%ED%84%B0%EC%99%80-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%86%8D%EC%84%B1" aria-label="트랜잭션 인터셉터와 트랜잭션 속성 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>트랜잭션 인터셉터와 트랜잭션 속성</h2>
+<p>메소드 별로 다른 트랜잭션 정의를 적용하려면 어드바이스의 기능을 확장해야합니다.<br>
+메소드 이름 패턴에 따라 다른 트랜잭션 정의가 되도록 구현하는 것과 비슷합니다.</p>
+<p>스프링에서 제공하는 클래스로 편리하게 트랜잭션 경계설정 어드바이스로 사용할 수 있도록 ‘TransactionInterceptor’을 제공합니다.</p>
+<p>‘TransactionInterceptor’은 ‘PlatformTransactionManager’와 ‘Properties’ 타입의 두 가지 프로퍼티를 갖고 있습니다.</p>
+<blockquote>
+<p>Properties는 트랜잭션 속성 3가지 + rollbackOn()이라는 속성을 가집니다.</p>
+</blockquote>
+<p>그리고 스프링이 제공하는 ‘TransactionInterceptor’에는 기본적으로 두 가지 종류의 예외 처리 방식이 있다.</p>
+<ul>
+<li>런타임 예외 : 트랜잭션은 롤백됩니다.</li>
+<li>체크 예외 : 예외상황으로 해석하지 않고 일종의 비즈니스 로직에 따른, 의미가 있는 리턴 방식의 한 가지로 인식해서 트랜잭션을 커밋합니다.</li>
+</ul>
+<p>이러한 동작의 <code class="language-text">이유</code>는 스프링의 기본적인 예외처리 원칙에 따라 비즈니스적인 의미가 있는 예외상황만 체크 예외를 사용하고, 그 외의 모든 복구 불가능한 순수한 예외의 경우는 런타임 예외로 포장돼서 전달하는 방식을 따른다고 가정하기 때문입니다.</p>
+<h4 id="포인트컷과-트랜잭션-속성의-적용-전략" style="position:relative;"><a href="#%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%BB%B7%EA%B3%BC-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%86%8D%EC%84%B1%EC%9D%98-%EC%A0%81%EC%9A%A9-%EC%A0%84%EB%9E%B5" aria-label="포인트컷과 트랜잭션 속성의 적용 전략 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>포인트컷과 트랜잭션 속성의 적용 전략</h4>
+<p><strong>1. 트랜잭션 포인트컷 표현식은 타입 패턴이나 빈 이름을 이용합니다.</strong></p>
+<p><strong>2. 공통된 메소드 이름 규칙을 통해 최소한의 트랜잭션 어드바이스와 속성을 정의합니다.</strong></p>
+<p><strong>3. 프록시 방식 AOP는 같은 타킷 오브젝트 내의 메소드를 호출할 때는 적용되지 않습니다.</strong></p>
+<p>프록시 방식의 AOP에서는 프록시를 통한 부가기능의 적용은 클라이언트로부터 호출이 일어날 때만 가능합니다.<br>
+자기 자신의 메소드를 호출할 때는 프록시를 통한 부가기능의 적용이 일어나지 않습니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/e880356e2a184732cfa020bc6bb10662/8d919/aop-1.jpg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 25.531914893617024%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAFABQDASIAAhEBAxEB/8QAFwABAAMAAAAAAAAAAAAAAAAAAAECBf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAdqQuD//xAAXEAADAQAAAAAAAAAAAAAAAAAAARAR/9oACAEBAAEFAtFP/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQAGPwJ//8QAFxABAQEBAAAAAAAAAAAAAAAAAQARQf/aAAgBAQABPyFUNMgzt//aAAwDAQACAAMAAAAQ88//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAYEAADAQEAAAAAAAAAAAAAAAAAAREhMf/aAAgBAQABPxCBqvc6ObTXNRBKP//Z'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="그림 1"
+        title="그림 1"
+        src="/static/e880356e2a184732cfa020bc6bb10662/acb04/aop-1.jpg"
+        srcset="/static/e880356e2a184732cfa020bc6bb10662/bc01b/aop-1.jpg 188w,
+/static/e880356e2a184732cfa020bc6bb10662/bf173/aop-1.jpg 375w,
+/static/e880356e2a184732cfa020bc6bb10662/acb04/aop-1.jpg 750w,
+/static/e880356e2a184732cfa020bc6bb10662/ec605/aop-1.jpg 1125w,
+/static/e880356e2a184732cfa020bc6bb10662/8d919/aop-1.jpg 1182w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<ul>
+<li><code class="language-text">[1], [3]</code>은 클라이언트로부터 메소드가 호출되면 프록시를 통해 타깃에게 전달되므로 트랜잭션 경계설정 기능이 부여됩니다.</li>
+<li><code class="language-text">[2]</code>는 타깃 오브젝트 내로 들어와서 다른 메소드를 호출하는 경우에는 프록시를 거치지 않고 직접 타깃의 메소드가 호출되어 부가기능이 적용되지 않습니다.</li>
+</ul>
+<p>타깃 안에서의 호출에는 프록시가 적용되지 않는 문제를 <code class="language-text">해결할 수 있는 방법</code>은 두 가지가 있습니다.</p>
+<ol>
+<li>스프링 API를 이용해 프록시 오브젝트에 대한 레퍼런스를 가져온 뒤에 같은 오브젝트의 메소드 호출도 <code class="language-text">프록시를 이용하도록 강제</code>하는 방법</li>
+<li><code class="language-text">AspectJ</code>와 같은 타깃의 <code class="language-text">바이트코드를 직접 조작</code>하는 방식의 AOP 기술을 적용</li>
+</ol>
+<h2 id="트랜잭션-속성-적용" style="position:relative;"><a href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%86%8D%EC%84%B1-%EC%A0%81%EC%9A%A9" aria-label="트랜잭션 속성 적용 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>트랜잭션 속성 적용</h2>
+<h4 id="트랜잭션-경계-설정의-일원화" style="position:relative;"><a href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EA%B2%BD%EA%B3%84-%EC%84%A4%EC%A0%95%EC%9D%98-%EC%9D%BC%EC%9B%90%ED%99%94" aria-label="트랜잭션 경계 설정의 일원화 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>트랜잭션 경계 설정의 일원화</h4>
+<ul>
+<li>트랜잭션 경계설정의 부가기능을 여러 계층에서 중구난방으로 적용하는 것은 좋지 않습니다.</li>
+<li>비즈니스 로직을 담고 있는 서비스 계층 오브젝트의 메소드가 트랜잭션 경계를 부여하기에 가장 적절한 대상입니다.</li>
+<li>테스트와 같은 특별한 이유가 아니고는 다른 계층이나 모듈에서 <code class="language-text">DAO</code>를 직접 접근하는 것은 차단해야합니다.</li>
+<li>Service 계층을 통해서 접근하는 것이 좋습니다.</li>
+</ul>
+<h2 id="애노테이션-트랜잭션-속성과-포인트컷" style="position:relative;"><a href="#%EC%95%A0%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%86%8D%EC%84%B1%EA%B3%BC-%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%BB%B7" aria-label="애노테이션 트랜잭션 속성과 포인트컷 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>애노테이션 트랜잭션 속성과 포인트컷</h2>
+<p>포인트컷 표현식과 트랜잭션 속성을 이용해 트랜잭션을 일괄적으로 적용하는 방식은 복잡한 트랜잭션 속성이 요구되지 않는 한 잘 들어맞습니다.<br>
+그런데 가끔은 클래스나 메서드 단위의 세밀하게 튜닝된 트랜잭션 속성을 적용해야 하는 경우에는 매번 포인트컷이나 어드바이스를 추가해야하기 때문에 적합하지 않습니다.</p>
+<p>이런 세밀한 트랜잭션 속성의 제어를 위해 스프링은 ‘직접 타깃에 애노테이션을 지정하는 방법’을 제공합니다.</p>
+<h4 id="트랜잭션-애노테이션" style="position:relative;"><a href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%95%A0%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98" aria-label="트랜잭션 애노테이션 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>트랜잭션 애노테이션</h4>
+<p><strong>@Transaction</strong></p>
+<p>다음 코드는 <code class="language-text">@Transaction</code>를 정의한 코드입니다.</p>
+<div class="gatsby-code-title">Java</div>
+<div class="gatsby-highlight" data-language="java"><pre style="counter-reset: linenumber NaN" class="language-java line-numbers"><code class="language-java"><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> <span class="token class-name">ElementType</span><span class="token punctuation">.</span>TYPE<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// 애노테이션을 사용할 대상을 지정</span>
+<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span> <span class="token comment">// 애노테이션 정보가 언제까지 유지되는지</span>
+<span class="token annotation punctuation">@Inherited</span> <span class="token comment">// 상속을 통해서도 애노테이션 정보를 얻을 수 있도록</span>
+<span class="token annotation punctuation">@Documented</span>
+<span class="token comment">// 트랜잭션 속성의 모든 항목을 엘리먼트로 지정 가능, 디폴트 값이 설정되어 있으므로 모두 생략이 가능</span>
+<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">Transactional</span> <span class="token punctuation">{</span>
+	<span class="token class-name">String</span> <span class="token function">value</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token string">""</span><span class="token punctuation">;</span>
+	<span class="token class-name">Propagation</span> <span class="token function">propagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>REQUIRED<span class="token punctuation">;</span>
+	<span class="token class-name">Isolation</span> <span class="token function">isolation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token class-name">Isolation</span><span class="token punctuation">.</span>DEFAULT<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> <span class="token function">timeout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token class-name">TransactionDefinition</span><span class="token punctuation">.</span>TIMEOUT_DEFAULT<span class="token punctuation">;</span>
+	<span class="token keyword">boolean</span> <span class="token function">readOnly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+	<span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Throwable</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">rollbackFor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+	<span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">rollbackForClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+	<span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Throwable</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">noRollbackFor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+	<span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">noRollbackForClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
+<p><code class="language-text">@Transaction</code>의 타깃은 <code class="language-text">메소드</code>와 <code class="language-text">타입</code>입니다.<br>
+따라서 메소드, 클래스, 인터페이스에 사용할 수 있고 <code class="language-text">@Transaction</code>은 기본적으로 <code class="language-text">트랜잭션 속성을 지정</code>하는 것이지만, 동시에 <code class="language-text">포인트컷의 자동 등록</code>에도 사용됩니다.</p>
+<hr>
+<p>다음 그림은 <code class="language-text">@Transactional</code>을 사용했을 때 어드바이저의 동작 방식입니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/0b63478162367e0be2ad687d650bfc15/d53ff/aop-2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 22.340425531914892%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAwElEQVQY0z1PWQqFQAzz/ndz+dAZd8UVN2QUcUHNe61oIUzbSdNUwz+2bUMURUjTFGVZous6JEmCMAzheR4jCAJ+i6LAOI647xvXdeENqgnaPM8sNgwDfxzHwbllWTBNC1LIT6hpGkzThHVdP4GqqnkxGVmW5RGkRl3X2PedSeSYXCg14TxPXqSU4gGClBK+7/NFNNf3PXPIsUYJkehEQpZlaNsWcfzU5CrPcziOAyEEXNeFruswDAO2bbMoLXsFf+6TK03taunSAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="그림 2"
+        title="그림 2"
+        src="/static/0b63478162367e0be2ad687d650bfc15/1d69c/aop-2.png"
+        srcset="/static/0b63478162367e0be2ad687d650bfc15/4dcb9/aop-2.png 188w,
+/static/0b63478162367e0be2ad687d650bfc15/5ff7e/aop-2.png 375w,
+/static/0b63478162367e0be2ad687d650bfc15/1d69c/aop-2.png 750w,
+/static/0b63478162367e0be2ad687d650bfc15/d53ff/aop-2.png 1068w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p><code class="language-text">@Transactional</code> 방식을 이용하면 포인트컷과 트랜잭션 속성을 <code class="language-text">애노테이션 하나로 지정</code>할 수 있습니다.<br>
+그리고 트랜잭션 속성은 타입 레벨에 일괄적으로 부여할 수도 있지만 메소드 단위로 세분화해서 트랜잭션 속성을 다르게 지정할 수도 있기 때문에 매우 <code class="language-text">세밀한 트랜잭션 속성 제어</code>가 가능해집니다.</p>
+<h4 id="대체-정책" style="position:relative;"><a href="#%EB%8C%80%EC%B2%B4-%EC%A0%95%EC%B1%85" aria-label="대체 정책 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>대체 정책</h4>
+<p>스프링은 <code class="language-text">@Transactional</code>을 적용할 때 4단계의 대체(fallback)정책을 이용하게 해줍니다.</p>
+<p>4단계 대체 정책은 다음과 같습니다.</p>
+<ol>
+<li>타깃 메소드에 @Transactional이 있는지 확인</li>
+<li>@Transactional이 부여되어 있다면 이를 속성으로 사용</li>
+<li>없다면, 다음 대체 후보인 타깃 클래스에 부여된 @Transactional를 찾음</li>
+<li>메소드 레벨에는 없지만, 클래스 레벨에 @Transactional이 존재하면 이를 메소드의 트랜잭션으로 사용</li>
+</ol>
+<p><strong>@Transactional 대체 정책의 예</strong></p>
+<p><code class="language-text">[x]</code>는 검색의 <code class="language-text">우선 순위</code>입니다.</p>
+<blockquote>
+<p>낮을 수록 높은 우선순위</p>
+</blockquote>
+<div class="gatsby-code-title">Java</div>
+<div class="gatsby-highlight" data-language="java"><pre style="counter-reset: linenumber NaN" class="language-java line-numbers"><code class="language-java"><span class="token comment">// [4]</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Service</span> <span class="token punctuation">{</span>
+	<span class="token comment">// [3]</span>
+	<span class="token keyword">void</span> <span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">// [3]</span>
+	<span class="token keyword">void</span> <span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 타깃 클래스 [2]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Servicelmpl</span> <span class="token keyword">implements</span> <span class="token class-name">Service</span> <span class="token punctuation">{</span>
+	<span class="token comment">// [1]</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>
+	<span class="token comment">// [1]</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
+<p><code class="language-text">@Transactional</code>도 타깃 클래스보다는 인터페이스에 두는 게 바람직합니다.<br>
+하지만 인터페이스를 사용하는 프록시 방식의 AOP가 아닌 방식으로 트랜잭션을 적용하면 인터페이스에 정의한 <code class="language-text">@Transactional</code>은 무시되기 때문에 안전하게 타깃 클래스에 <code class="language-text">@Transactional</code>을 두는 방법을 권장합니다.</p>
+<p>단, 인터페이스에 <code class="language-text">@Transactional</code>를 두면 구현 클래스가 바뀌더라도 트랜잭션 속성을 유지할 수 있다는 장점이 있습니다.</p>
+<blockquote>
+<p>확신이 있다면 인터페이스에 ! 아니면 타깃 클래스에 선언 !</p>
+</blockquote>
+<h2 id="트랜잭션-지원-테스트" style="position:relative;"><a href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A7%80%EC%9B%90-%ED%85%8C%EC%8A%A4%ED%8A%B8" aria-label="트랜잭션 지원 테스트 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>트랜잭션 지원 테스트</h2>
+<h4 id="트랜잭션-동기화와-테스트" style="position:relative;"><a href="#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EB%8F%99%EA%B8%B0%ED%99%94%EC%99%80-%ED%85%8C%EC%8A%A4%ED%8A%B8" aria-label="트랜잭션 동기화와 테스트 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>트랜잭션 동기화와 테스트</h4>
+<ul>
+<li>
+<p>트랜잭션 추상화 기술의 핵심은 트랜잭션 매니저와 트랜잭션 동기화입니다.</p>
+<ul>
+<li>트랜잭션 매니저 : PlatformTransactionManager 인터페이스를 구현한 트랜잭션 매니저를 통해 구체적인 트랜잭션 기술의 종류에 상관없이 일관된 트랜잭션 제어가 가능</li>
+<li>트랜잭션 동기화 : 트랜잭션 동기화 기술이 있었기에 시작된 트랜잭션 정보를 저장소에 보관해뒀다가 DAO에서 공유 가능</li>
+</ul>
+</li>
+</ul>
+<p>트랜잭션 동기화 기술은 트랜잭션 전파를 위해서도 다음과 같은 중요한 역할을 합니다.</p>
+<ol>
+<li>진행 중인 트랜잭션이 있는지 확인</li>
+<li>트랜잭션 전파 속성에 따라서 이에 참여할 수 있도록 만들어줌</li>
+</ol>
+<p>이 모든 것은 <code class="language-text">트랜잭션 동기화</code> 기술 덕분 !</p>
+<p>이제 한번 간단한 테스트를 추가해봅시다.</p>
+<div class="gatsby-code-title">Java</div>
+<div class="gatsby-highlight" data-language="java"><pre style="counter-reset: linenumber NaN" class="language-java line-numbers"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">transactionSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    userService<span class="token punctuation">.</span><span class="token function">deleteAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    userService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>users<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    userService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>users<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
+<p><strong>‘transactionSync()’ 테스트 메소드가 실행되는 동안 몇 개의 트랜잭션이 만들어 졌을까?!</strong></p>
+<p>정답은 <code class="language-text">UserService</code>의 모든 메소드에 트랜잭션을 적용했으니 3개가 적용됩니다.</p>
+<hr>
+<p><strong>그렇다면, 이 테스트 메소드에서 만들어지는 세 개의 트랜잭션을 하나로 통합하려면 ?</strong></p>
+<p><code class="language-text">하나의 커넥션을 사용</code>해서 트랜잭션을 유지해야합니다 !</p>
+<p>즉 3개의 동작이 이루어지기 전에 트랜잭션을 <code class="language-text">미리 시작</code>하면 됩니다.</p>
+<div class="gatsby-code-title">Java</div>
+<div class="gatsby-highlight" data-language="java"><pre style="counter-reset: linenumber NaN" class="language-java line-numbers"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">transactionSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">DefaultTransactionDefinition</span> definition <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DefaultTransactionDefinition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">TransactionStatus</span> status <span class="token operator">=</span> transactionManager<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span>definition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    userService<span class="token punctuation">.</span><span class="token function">deleteAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    userService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>users<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    userService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>users<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    transactionManager<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
+<h4 id="롤백-테스트" style="position:relative;"><a href="#%EB%A1%A4%EB%B0%B1-%ED%85%8C%EC%8A%A4%ED%8A%B8" aria-label="롤백 테스트 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>롤백 테스트</h4>
+<p>테스트 코드로 트랜잭션을 제어해서 적용할 수 있는 테스트 기법이 있습니다.<br>
+바로 <code class="language-text">롤백 테스트</code>입니다 !</p>
+<p><code class="language-text">롤백 테스트</code>는 테스트 내의 모든 DB 작업을 하나의 트랜잭션 안에서 동작하게하고 테스트가 끝나면 무조건 롤백해버리는 테스트를 말합니다.</p>
+<p>다음과 같은 코드가 전형적인 롤백 테스트입니다.</p>
+<div class="gatsby-code-title">Java</div>
+<div class="gatsby-highlight" data-language="java"><pre style="counter-reset: linenumber NaN" class="language-java line-numbers"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">transactionSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">DefaultTransactionDefinition</span> txDefinition <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DefaultTransactionDefinition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">TransactionStatus</span> txStatus <span class="token operator">=</span> transactionManager<span class="token punctuation">.</span><span class="token function">getTransaction</span><span class="token punctuation">(</span>txDefinition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        userService<span class="token punctuation">.</span><span class="token function">deleteAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        userService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>users<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        userService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>users<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+        transactionManager<span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span>txStatus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
+<p><code class="language-text">롤백 테스트</code>는 DB 작업이 포함된 테스트가 수행되어도 DB에 영향을 주지 않기 때문에 <code class="language-text">장점</code>이 많습니다.<br>
+복잡한 데이터를 바탕으로 동작하는 기능을 테스트하려면 테스트가 실행될 때의 DB 데이터와 상태가 매우 중요합니다.<br>
+문제는 테스트를 실행할 때마다 데이터가 변한다는 것인데 이런 문제를 <code class="language-text">롤백 테스트</code>로 해결할 수 있습니다.</p>
+<p>롤백 테스트는 심지어 여러 개발자가 하나의 공용 테스트용 DB를 사용할 수 있게 도와줍니다.<br>
+적절한 격리 수준만 보장해주면 동시에 여러 개의 테스트가 진행되어도 상관 없습니다 !</p>
+<p>또한 DB에 따라서 성공적인 작업이라도 트랜잭션을 롤백하면 커밋할 때보다 성능이 향상되기도 합니다</p>
+<blockquote>
+<p>MySQL의 속도는 롤백 > 커밋</p>
+</blockquote>
+<p>하지만, DB의 트랜잭션 처리 방법에 따라 롤백과 커밋의 속도 차이는 있습니다.</p>
+<h2 id="테스트를-위한-트랜잭션-애노테이션" style="position:relative;"><a href="#%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%95%A0%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98" aria-label="테스트를 위한 트랜잭션 애노테이션 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>테스트를 위한 트랜잭션 애노테이션</h2>
+<p>스프링의 컨텍스트 테스트 프레임워크는 애노테이션을 이용해 테스트를 편리하게 만들 수 있는 여러 가지 기능을 추가하게 해줍니다.</p>
+<h4 id="transaction" style="position:relative;"><a href="#transaction" aria-label="transaction permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@Transaction</h4>
+<p>테스트에도 <code class="language-text">@Transaction</code>을 적용할 수 있습니다.<br>
+테스트 클래스, 메소드에 <code class="language-text">@Transaction</code>을 적용하면 마치 타깃 클래스나 인터페이스에 적용한 것처럼 테스트 메소드에 트랜잭션 경계가 <code class="language-text">자동으로 설정</code>됩니다.</p>
+<p>물론 테스트에서 사용하는 <code class="language-text">@Transaction</code>은 AOP를 위한 것은 아닙니다.
+하지만 기본적인 동작방식과 속성은 <code class="language-text">UserService</code> 등에 적용한 <code class="language-text">@Transaction</code>과 동일하므로 이해하기 쉽고 사용하기 편리합니다.</p>
+<p><strong>하나의 트랜잭션으로 동작하는 테스트 @Transaction</strong></p>
+<div class="gatsby-code-title">Java</div>
+<div class="gatsby-highlight" data-language="java"><pre style="counter-reset: linenumber NaN" class="language-java line-numbers"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token annotation punctuation">@Transaction</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">transactionSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    userService<span class="token punctuation">.</span><span class="token function">deleteAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    userService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>users<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    userService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>users<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
+<h4 id="rollback" style="position:relative;"><a href="#rollback" aria-label="rollback permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>@Rollback</h4>
+<p>테스트용 트랜잭션은 테스트가 끝나면 자동으로 롤백됩니다.<br>
+<code class="language-text">@Transaction</code>을 지정해주기만 하면 자동으로 <code class="language-text">롤백 테스트</code>로 설정됩니다 !</p>
+<p>하지만, 강제 롤백을 원하지 않는 경우엔 어떻게 하면 좋을까?</p>
+<p>이때는, <code class="language-text">@Rollback</code>이라는 애노테이션을 사용하면 됩니다.<br>
+<code class="language-text">@Rollback</code>은 롤백 여부를 지정하는 값을 가지고 있습니다.</p>
+<blockquote>
+<p>@Rollback의 기본 값은 true</p>
+</blockquote>
+<p>따라서, 롤백을 원치 않는다면 <code class="language-text">@Rollback(false)</code>라고 해줘야합니다.</p>
+<p><strong>만약, 모든 테스트 클래스의 모든 메소드에 트랜잭션을 적용하면서 롤백되지 않고 커밋되게 하려면 어떻게 해야할 까?</strong></p>
+<p>이런 경우엔 클래스 레벨에 적용시킬 수 있도록 <code class="language-text">@TransactionConfiguration(defaultRollback=false)</code>를 적용하면 됩니다.</p>
+<h4 id="propagationnever" style="position:relative;"><a href="#propagationnever" aria-label="propagationnever permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Propagation.NEVER</h4>
+<p>트랜잭션이 일부 메서드에서 필요없는 경우가 있을 수 있습니다.<br>
+그럴 경우는 다음과 같이 사용하면 됩니다.</p>
+<div class="gatsby-code-title">Java</div>
+<div class="gatsby-highlight" data-language="java"><pre style="counter-reset: linenumber NaN" class="language-java line-numbers"><code class="language-java"><span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>NEVER<span class="token punctuation">)</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span></span></pre></div>
+<p>위의 애노테이션을 테스트 메소드에 지정하면 트랜잭션이 시작되지 않고 동작합니다 !</p>
+<h4 id="효과적인-db-테스트" style="position:relative;"><a href="#%ED%9A%A8%EA%B3%BC%EC%A0%81%EC%9D%B8-db-%ED%85%8C%EC%8A%A4%ED%8A%B8" aria-label="효과적인 db 테스트 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>효과적인 DB 테스트</h4>
+<ul>
+<li>단위 테스트와 DB 같은 외부 리소스가 참여하는 통합 테스트는 아예 클래스를 구분.</li>
+<li>
+<p>DB가 사용되는 통합 테스트는 가능한 한 롤백 테스트로 만드는 게 좋음.</p>
+<ul>
+<li><code class="language-text">@Transaction</code>을 사용해서 롤백 테스트로 !</li>
+<li>테스트가 기본적으로 롤백 테스트로 되어 있다면 테스트 사이에 서로 영향을 주지 않으므로 독립적이고 자동화된 테스트로 만들기가 매우 편함</li>
+</ul>
+</li>
+<li>테스트는 어떤 경우에도 서로 의존하면 안됨</li>
+</ul>
+<h2 id="마무리" style="position:relative;"><a href="#%EB%A7%88%EB%AC%B4%EB%A6%AC" aria-label="마무리 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>마무리</h2>
+<p>지금까지 이번 <code class="language-text">토비의 스프링</code>에서 가장 긴 챕터인 <code class="language-text">AOP</code>에 대해서 알아보았습니다.</p>
+<p>다음 포스팅은 <code class="language-text">스프링의 핵심 기술의 응용</code>에 대해서 알아보겠습니다.</p>
+<p>감사합니다 🙇🏻‍♂️</p></div></div><aside><div class="RelatedPosts__Wrapper-sc-15t1gj5-0 fiFeft"><div class="RelatedPosts__PostCardWrapper-sc-15t1gj5-1 iRbQrG"><a class="post-card-link" href="/category/study/jpa-programming/chapter7-persistence-context-and-jpql/"><p class="RelatedPosts__PostCardEmoji-sc-15t1gj5-2 ifmpQu"><img class="emoji" draggable="false" alt="📦" src="https://twemoji.maxcdn.com/v/12.1.6/svg/1f4e6.svg"/></p><div class="RelatedPosts__PostCardContent-sc-15t1gj5-3 ggusaO"><h5>[JPA 프로그래밍] 7. 영속성 컨텍스트와 JPQL</h5><time>2020.11.11</time></div></a></div><div class="RelatedPosts__PostCardWrapper-sc-15t1gj5-1 iRbQrG"><a class="post-card-link" href="/category/study/jpa-programming/chapter6-object-oriented-query-language/"><p class="RelatedPosts__PostCardEmoji-sc-15t1gj5-2 ifmpQu"><img class="emoji" draggable="false" alt="📝" src="https://twemoji.maxcdn.com/v/12.1.6/svg/1f4dd.svg"/></p><div class="RelatedPosts__PostCardContent-sc-15t1gj5-3 ggusaO"><h5>[JPA 프로그래밍] 6. 객체지향 쿼리 언어</h5><time>2020.11.04</time></div></a></div><div class="RelatedPosts__PostCardWrapper-sc-15t1gj5-1 iRbQrG"><a class="post-card-link" href="/category/study/jpa-programming/chapter5-relationship-mapping/"><p class="RelatedPosts__PostCardEmoji-sc-15t1gj5-2 ifmpQu"><img class="emoji" draggable="false" alt="🤼‍♂️" src="https://twemoji.maxcdn.com/v/12.1.6/svg/1f93c-200d-2642-fe0f.svg"/></p><div class="RelatedPosts__PostCardContent-sc-15t1gj5-3 ggusaO"><h5>[JPA 프로그래밍] 5. 연관 관계 매핑</h5><time>2020.10.27</time></div></a></div><div class="RelatedPosts__PostCardWrapper-sc-15t1gj5-1 iRbQrG"><a class="post-card-link" href="/category/study/jpa-programming/chapter4-entity-mapping/"><p class="RelatedPosts__PostCardEmoji-sc-15t1gj5-2 ifmpQu"><img class="emoji" draggable="false" alt="⛳️" src="https://twemoji.maxcdn.com/v/12.1.6/svg/26f3.svg"/></p><div class="RelatedPosts__PostCardContent-sc-15t1gj5-3 ggusaO"><h5>[JPA 프로그래밍] 4. 엔티티 매핑</h5><time>2020.10.22</time></div></a></div><div class="RelatedPosts__PostCardWrapper-sc-15t1gj5-1 iRbQrG"><a class="post-card-link" href="/category/study/jpa-programming/chapter3-persistence-context/"><p class="RelatedPosts__PostCardEmoji-sc-15t1gj5-2 ifmpQu"><img class="emoji" draggable="false" alt="⏰" src="https://twemoji.maxcdn.com/v/12.1.6/svg/23f0.svg"/></p><div class="RelatedPosts__PostCardContent-sc-15t1gj5-3 ggusaO"><h5>[JPA 프로그래밍] 3. 영속성 관리</h5><time>2020.10.18</time></div></a></div></div><div></div></aside></section></div><div class="TableOfContents__TableIndex-sc-10py2gf-0 fDIfyV"><div class="TableOfContents__TableWrapper-sc-10py2gf-1 fHkPwv table-of-contents"><h1 class="TableOfContents__TableHeader-sc-10py2gf-2 kqnMjP">🔖 Catalog</h1><div class="TableOfContents__TableContents-sc-10py2gf-3 XIZEq"><ul>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%EA%B0%9C%EC%9A%94">개요</a></li>
+<li>
+<p><a href="/category/study/toby-spring/aop/transaction-property/#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A0%95%EC%9D%98">트랜잭션 정의</a></p>
+<ul>
+<li>
+<ul>
+<li>
+<p><a href="/category/study/toby-spring/aop/transaction-property/#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A0%84%ED%8C%8C">트랜잭션 전파</a></p>
+<ul>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#propagation-required">PROPAGATION REQUIRED</a></li>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#propagation-requires-new">PROPAGATION REQUIRES NEW</a></li>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#propagation-not-supported">PROPAGATION NOT SUPPORTED</a></li>
+</ul>
+</li>
+<li>
+<p><a href="/category/study/toby-spring/aop/transaction-property/#%EA%B2%A9%EB%A6%AC-%EC%88%98%EC%A4%80">격리 수준</a></p>
+<ul>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%EC%A0%9C%ED%95%9C-%EC%8B%9C%EA%B0%84">제한 시간</a></li>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%EC%9D%BD%EA%B8%B0-%EC%A0%84%EC%9A%A9">읽기 전용</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="/category/study/toby-spring/aop/transaction-property/#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%9D%B8%ED%84%B0%EC%85%89%ED%84%B0%EC%99%80-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%86%8D%EC%84%B1">트랜잭션 인터셉터와 트랜잭션 속성</a></p>
+<ul>
+<li>
+<ul>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%BB%B7%EA%B3%BC-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%86%8D%EC%84%B1%EC%9D%98-%EC%A0%81%EC%9A%A9-%EC%A0%84%EB%9E%B5">포인트컷과 트랜잭션 속성의 적용 전략</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="/category/study/toby-spring/aop/transaction-property/#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%86%8D%EC%84%B1-%EC%A0%81%EC%9A%A9">트랜잭션 속성 적용</a></p>
+<ul>
+<li>
+<ul>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EA%B2%BD%EA%B3%84-%EC%84%A4%EC%A0%95%EC%9D%98-%EC%9D%BC%EC%9B%90%ED%99%94">트랜잭션 경계 설정의 일원화</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="/category/study/toby-spring/aop/transaction-property/#%EC%95%A0%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%86%8D%EC%84%B1%EA%B3%BC-%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%BB%B7">애노테이션 트랜잭션 속성과 포인트컷</a></p>
+<ul>
+<li>
+<ul>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%95%A0%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98">트랜잭션 애노테이션</a></li>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%EB%8C%80%EC%B2%B4-%EC%A0%95%EC%B1%85">대체 정책</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="/category/study/toby-spring/aop/transaction-property/#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A7%80%EC%9B%90-%ED%85%8C%EC%8A%A4%ED%8A%B8">트랜잭션 지원 테스트</a></p>
+<ul>
+<li>
+<ul>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EB%8F%99%EA%B8%B0%ED%99%94%EC%99%80-%ED%85%8C%EC%8A%A4%ED%8A%B8">트랜잭션 동기화와 테스트</a></li>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%EB%A1%A4%EB%B0%B1-%ED%85%8C%EC%8A%A4%ED%8A%B8">롤백 테스트</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="/category/study/toby-spring/aop/transaction-property/#%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%95%A0%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98">테스트를 위한 트랜잭션 애노테이션</a></p>
+<ul>
+<li>
+<ul>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#transaction">@Transaction</a></li>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#rollback">@Rollback</a></li>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#propagationnever">Propagation.NEVER</a></li>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%ED%9A%A8%EA%B3%BC%EC%A0%81%EC%9D%B8-db-%ED%85%8C%EC%8A%A4%ED%8A%B8">효과적인 DB 테스트</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/category/study/toby-spring/aop/transaction-property/#%EB%A7%88%EB%AC%B4%EB%A6%AC">마무리</a></li>
+</ul></div></div></div></div></main></div></div><footer class="Footer__FooterContent-sc-5p0nzy-0 fTcnoY"><div class="ContentWrapper__IndexContent-sc-qgwu46-0 ebovCZ"><div class="Footer__FooterInner-sc-5p0nzy-1 heGWde"><div>© <!-- -->2022<!-- -->, Blausee. All rights reserved.</div></div></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'none', 'auto', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/category/study/toby-spring/aop/transaction-property/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-6ed0469530c21b23fd71.js"],"app":["/app-0dbf9fa9f0620e9dd3df.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-2296adb1de2fc003fbd5.js"],"component---src-pages-404-tsx":["/component---src-pages-404-tsx-50bdfd543664202d8b16.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-7396849cd1398b08eae4.js"],"component---src-templates-categories-tsx":["/component---src-templates-categories-tsx-655be2bbb60a827e3b84.js"],"component---src-templates-post-tsx":["/component---src-templates-post-tsx-f983782df893669fd506.js"]};/*]]>*/</script><script src="/polyfill-6ed0469530c21b23fd71.js" nomodule=""></script><script src="/component---src-templates-post-tsx-f983782df893669fd506.js" async=""></script><script src="/53b27b57f60ee3e1ca57a66cde9add975dffb161-c74f54ae49cc6ab741d1.js" async=""></script><script src="/de71a805-d9a74fce0a097621e412.js" async=""></script><script src="/app-0dbf9fa9f0620e9dd3df.js" async=""></script><script src="/styles-e383b929d2d4095ae339.js" async=""></script><script src="/framework-999a01e9e4c894cffffe.js" async=""></script><script src="/webpack-runtime-07b7d84af1cf9993340d.js" async=""></script></body></html>

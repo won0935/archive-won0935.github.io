@@ -1,0 +1,916 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.8e6d16c30a318632e6b9.css" id="gatsby-global-css">pre[class*=language-].line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}pre[class*=language-].line-numbers>code{position:relative;white-space:inherit}.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:0;font-size:100%;left:-3.8em;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-ms-user-select:none;user-select:none}.line-numbers-rows>span{display:block;counter-increment:linenumber}.line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}</style><meta name="generator" content="Gatsby 2.32.13"/><link rel="icon" href="/favicon-32x32.png?v=fdc3be8e1936d723139249e23665dd77" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#0c9ee4"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=fdc3be8e1936d723139249e23665dd77"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=fdc3be8e1936d723139249e23665dd77"/><style type="text/css">
+    .anchor-header.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor-header.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor-header svg,
+    h2 .anchor-header svg,
+    h3 .anchor-header svg,
+    h4 .anchor-header svg,
+    h5 .anchor-header svg,
+    h6 .anchor-header svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor-header svg,
+    h2:hover .anchor-header svg,
+    h3:hover .anchor-header svg,
+    h4:hover .anchor-header svg,
+    h5:hover .anchor-header svg,
+    h6:hover .anchor-header svg,
+    h1 .anchor-header:focus svg,
+    h2 .anchor-header:focus svg,
+    h3 .anchor-header:focus svg,
+    h4 .anchor-header:focus svg,
+    h5 .anchor-header:focus svg,
+    h6 .anchor-header:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="alternate" type="application/rss+xml" title="Your Site&#x27;s RSS Feed" href="/rss.xml"/><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><title data-react-helmet="true">[AWS EB] AWS Elastic Beanstalk로 서버 배포 하기 | Jay 기술 블로그</title><link data-react-helmet="true" rel="canonical" href="https://won0935.github.io/category/blog/aws-eb-deploy/"/><meta data-react-helmet="true" name="description" content="개요 저번 포스팅에서는 AWS Elastic Beanstalk에서 HTTPS를 적용하는 방법에 대해서 알아보았는데요. AWS EB로 서버를 배포하는 방법도 공유하면 좋을 것 같아서 준비했습니다 😆 AWS EB로 서버를 배포하는 방법은 2가지가 있습니다. 첫번째 방법은 직접 AWS…"/><meta data-react-helmet="true" property="og:title" content="[AWS EB] AWS Elastic Beanstalk로 서버 배포 하기"/><meta data-react-helmet="true" property="og:description" content="개요 저번 포스팅에서는 AWS Elastic Beanstalk에서 HTTPS를 적용하는 방법에 대해서 알아보았는데요. AWS EB로 서버를 배포하는 방법도 공유하면 좋을 것 같아서 준비했습니다 😆 AWS EB로 서버를 배포하는 방법은 2가지가 있습니다. 첫번째 방법은 직접 AWS…"/><meta data-react-helmet="true" property="og:image" content="https://won0935.github.io/images/ogp.png"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="google-site-verification" content="OxCmDAbFt_oP2EzYabwJiA4KNndMwAcKMQdvpa8vL6w"/><meta data-react-helmet="true" name="naver-site-verification" content="07c520f56835b243f94776be22c4cbcb671bbfe5"/><script data-react-helmet="true" type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","headline":"[AWS EB] AWS Elastic Beanstalk로 서버 배포 하기","image":"https://won0935.github.io/images/ogp.png","editor":"won0935","datePublished":"2020-09-02","dateCreated":"2020-09-02","dateModified":"2020-09-02","description":"개요 저번 포스팅에서는 AWS Elastic Beanstalk에서 HTTPS를 적용하는 방법에 대해서 알아보았는데요. AWS EB로 서버를 배포하는 방법도 공유하면 좋을 것 같아서 준비했습니다 😆 AWS EB로 서버를 배포하는 방법은 2가지가 있습니다. 첫번째 방법은 직접 AWS…","author":{"@type":"Person","name":"won0935","image":"https://won0935.github.io/images/avatar.png"},"publisher":{"@type":"Organization","name":"won0935","logo":{"@type":"ImageObject","url":"https://won0935.github.io/images/avatar.png","width":150,"height":150}}}</script><script data-react-helmet="true" type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://won0935.github.io","name":"HOME"}},{"@type":"ListItem","position":2,"item":{"@id":"https://won0935.github.io/blog","name":"블로그"}},{"@type":"ListItem","position":3,"item":{"name":"[AWS EB] AWS Elastic Beanstalk로 서버 배포 하기"}}]}</script><style data-styled="fEdaQt ebovCZ iarFOA evPsmz kyfGjL gEBZRU fKTVbh boOHpQ gYZPam dYhQMO knVwJm dQJMGd hzEQGR ctKYlG fiFeft iRbQrG ifmpQu ggusaO fDIfyV fHkPwv kqnMjP XIZEq fTcnoY heGWde" data-styled-version="4.4.1">
+/* sc-component-id: sc-global-2864780479 */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;-webkit-tap-highlight-color:rgba(0,0,0,0);} html,body{height:100%;} body{--bg:#f5f5f5;--textNormal:#21242d;--headerBackground:#ffffff;--bioBackground:#f5f5f5;--bioColor:rgba(0,0,0,0.87);--bioHighlight:#000000;--categoryHeader:rgba(0,0,0,0.87);--categoryColor:rgba(0,0,0,0.87);--categotyImgage:linear-gradient(-45deg,#ffa649,#f7645b,#805ed4);--postCardColor:rgba(0,0,0,0.87);--postCardHighlight:rgba(0,0,0,0.08);--postCardEmoji:#ffffff;--postCardDivideLine:#969fa7;--tableOfContentsFocusColor:rgb(33,37,41) background-color:var(--bg);color:var(--textNormal);line-height:1.6;font-size:100%;font-weight:400;font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,sans-serif;-webkit-text-size-adjust:100%;} body.dark{--bg:#21242d;--textNormal:#21242d;--headerBackground:#3B71DA;--bioBackground:#313746;--bioColor:#ffffff;--bioHighlight:#ffffff;--categoryHeader:#ffffff;--categoryColor:#727d86;--categotyImgage:#313746;--postCardColor:#ffffff;--postCardHighlight:#313746;--postCardEmoji:#313746;--postCardDivideLine:#313746;--tableOfContentsFocusColor:#f1f4f7;background-color:var(--bg);color:var(--textNormal);line-height:1.6;font-size:100%;font-weight:400;font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,sans-serif;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;} article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;} a{color:#20a8ea;-webkit-text-decoration:none;text-decoration:none;word-break:break-all;-webkit-transition:.2s;transition:.2s;} a:focus{outline:none;} ol,ul,li{list-style:none;} blockquote,q{quotes:none;} blockquote::before,blockquote::after,q::before,q::after{content:'';content:none;} table{border-collapse:collapse;border-spacing:0;} *{box-sizing:border-box;} img{max-width:100%;} button,input{font-family:inherit;font-size:inherit;background:none;border:none;outline:none;-webkit-appearance:none;-moz-appearance:none;appearance:none;border-radius:0;resize:none;} button:focus,input:focus{outline:none;}
+/* sc-component-id: ContentWrapper__IndexContent-sc-qgwu46-0 */
+.ebovCZ{max-width:1250px;margin:0 auto;padding:0 1.5em;} @media screen and (max-width:950px){.ebovCZ{max-width:760px;}} @media screen and (max-width:500px){.ebovCZ{padding:0 20px;}}
+/* sc-component-id: Footer__FooterContent-sc-5p0nzy-0 */
+.fTcnoY{padding:0.1em 0;}
+/* sc-component-id: Footer__FooterInner-sc-5p0nzy-1 */
+.heGWde{margin-top:3em;text-align:center;padding:1.5em;border-top:solid 1px #313746;color:#727d86;font-size:14px;} .heGWde a{color:#727d86;-webkit-text-decoration:underline;text-decoration:underline;}
+/* sc-component-id: ColorModeToggle__ToggleButton-sc-b3isah-0 */
+.evPsmz{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;cursor:pointer;} .evPsmz .icon-sun{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;text-align:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;height:100%;color:#222;} .evPsmz .icon-moon{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;text-align:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;height:100%;color:#fff;}
+/* sc-component-id: Header__HeaderTag-sc-sxwgs1-0 */
+.fEdaQt{background:var(--headerBackground);width:100%;box-shadow:rgba(0,0,0,0.2) 0px 3px 3px -2px,rgba(0,0,0,0.14) 0px 3px 4px 0px,rgba(0,0,0,0.12) 0px 1px 8px 0px;}
+/* sc-component-id: Header__HeaderInner-sc-sxwgs1-1 */
+.iarFOA{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:5px;} .iarFOA .logo{width:200px;height:55px;} @media screen and (max-width:500px){.iarFOA .logo{margin:0 auto;}} .iarFOA .message-link{position:absolute;right:0;top:7px;display:block;width:34px;} .iarFOA .message-link:hover{top:5px;}
+/* sc-component-id: Layout__Content-sc-152i9mm-0 */
+.kyfGjL{margin-top:2em;min-height:85vh;} @media screen and (max-width:950px){.kyfGjL{display:block;}} @media screen and (max-width:500px){.kyfGjL{margin-top:0;}}
+/* sc-component-id: MainWrapper__IndexWrapper-sc-vkqmvp-0 */
+.gEBZRU{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;margin-top:2em;min-height:85vh;} @media screen and (max-width:950px){.gEBZRU{display:block;}} @media screen and (max-width:500px){.gEBZRU{margin-top:0;}}
+/* sc-component-id: MainWrapper__ContentsWrapper-sc-vkqmvp-1 */
+.fKTVbh{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:calc(100% - 290px - 40px);margin-right:40px;} @media screen and (max-width:950px){.fKTVbh{width:100%;}}
+/* sc-component-id: CategoryLabel__Wrapper-sc-134vpma-0 */
+.hzEQGR .category-text{padding:0.3em 1em;display:inline-block;display:inline;padding:3px 6px;line-height:1.2;font-size:12px;border-radius:2px;font-weight:700;color:#fff;} @media screen and (max-width:950px){.hzEQGR .category-text{font-size:11px;padding:2.5px 6px;}}
+/* sc-component-id: RelatedPosts__Wrapper-sc-15t1gj5-0 */
+.fiFeft{background:#f1f4f7;padding:2em 2.5em;} @media screen and (max-width:500px){.fiFeft{padding:30px 20px;}}
+/* sc-component-id: RelatedPosts__PostCardWrapper-sc-15t1gj5-1 */
+.iRbQrG .post-card-link{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-bottom:1em;padding:15px;background:#fff;border-radius:5px;color:#313746;box-shadow:0 1px 2px rgba(0,0,0,0.1);} .iRbQrG .post-card-link:hover{background:#e0ebf1;} @media screen and (max-width:500px){.iRbQrG .post-card-link{padding:10px;}}
+/* sc-component-id: RelatedPosts__PostCardEmoji-sc-15t1gj5-2 */
+.ifmpQu{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.4);margin:0;width:80px;height:80px;background:#f1f4f7;border-radius:4px;font-size:50px;} .ifmpQu img{width:55px;height:55px;}
+/* sc-component-id: RelatedPosts__PostCardContent-sc-15t1gj5-3 */
+.ggusaO{width:calc(100% - 80px);padding-left:15px;} .ggusaO h5{font-size:1.1em;font-weight:700;line-height:1.45;} .ggusaO time{display:block;margin-bottom:0.1em;-webkit-letter-spacing:0.05em;-moz-letter-spacing:0.05em;-ms-letter-spacing:0.05em;letter-spacing:0.05em;font-size:0.8em;color:#969fa7;} @media screen and (max-width:500px){.ggusaO{padding-left:15px;}.ggusaO h5{font-size:1em;}}
+/* sc-component-id: TableOfContents__TableIndex-sc-10py2gf-0 */
+.fDIfyV{position:-webkit-sticky;position:sticky;top:2em;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:left;-webkit-justify-content:left;-ms-flex-pack:left;justify-content:left;width:320px;padding:1.5em;background:none;border-radius:4px;} @media screen and (max-width:950px){.fDIfyV{position:relative;margin:2em 0;width:100%;}} @media screen and (max-width:500px){.fDIfyV{padding:1.3em 1em;}}
+/* sc-component-id: TableOfContents__TableWrapper-sc-10py2gf-1 */
+.fHkPwv{display:block;width:100%;max-height:calc(100vh - 150px);word-break:break-word;color:black;overflow:auto;border-left:1.5px solid rgb(233,236,239);}
+/* sc-component-id: TableOfContents__TableHeader-sc-10py2gf-2 */
+.kqnMjP{display:block;text-align:left;font-size:17px;color:var(--bioColor);padding-left:15px;margin-bottom:15px;}
+/* sc-component-id: TableOfContents__TableContents-sc-10py2gf-3 */
+.XIZEq{margin:0 10px;font-size:14px;overflow:hidden;-webkit-transition:all 0.125s ease-in 0s;transition:all 0.125s ease-in 0s;} .XIZEq a{display:block;color:rgb(134,142,150);} .XIZEq a:hover{color:var(--tableOfContentsFocusColor);} .XIZEq ul{list-style:none;margin-left:10px;margin-bottom:0px;line-height:1.5rem;} .XIZEq ul > li a[href='']{color:var(--tableOfContentsFocusColor);-webkit-transform:scale(1.05);-ms-transform:scale(1.05);transform:scale(1.05);}
+/* sc-component-id: post__Content-sc-rer3gn-0 */
+.boOHpQ{position:relative;background:#fff;overflow:hidden;font-size:16px;} .boOHpQ:before,.boOHpQ:after{content:'';position:absolute;width:0;height:0;z-index:5;-webkit-transition:all 0.2s ease-out 0s;transition:all 0.2s ease-out 0s;} .boOHpQ:before{top:0;left:0;border-top:20px solid var(--bg);border-right:20px solid transparent;} .boOHpQ:after{bottom:0;right:0;border-bottom:20px solid var(--bg);border-left:20px solid transparent;} @media screen and (max-width:500px){.boOHpQ{margin:0 -20px;}.boOHpQ:before,.boOHpQ:after{content:none;}}
+/* sc-component-id: post__HeroImage-sc-rer3gn-1 */
+.gYZPam{position:relative;background:#313746;text-align:center;background-image:url("/static/pattern-00b88abde489053a0ab3b3e799db37b9.svg");background-repeat:repeat;background-size:400px;min-height:230px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;} .gYZPam .emoji{width:110px;height:110px;} @media screen and (max-width:500px){.gYZPam{min-height:190px;}}
+/* sc-component-id: post__ContentMain-sc-rer3gn-2 */
+.dYhQMO{padding:1.8em 2.5em;} @media screen and (max-width:500px){.dYhQMO{padding:30px 20px;}}
+/* sc-component-id: post__PostTitle-sc-rer3gn-3 */
+.dQJMGd{margin:0.1em 0 0.3em;font-size:1.8em;font-weight:700;line-height:1.5;} @media screen and (max-width:500px){.dQJMGd{font-size:25px;}}
+/* sc-component-id: post__PostDate-sc-rer3gn-4 */
+.knVwJm{display:block;color:#969fa7;font-size:0.9em;-webkit-letter-spacing:0.05em;-moz-letter-spacing:0.05em;-ms-letter-spacing:0.05em;letter-spacing:0.05em;}
+/* sc-component-id: post__PostContent-sc-rer3gn-5 */
+.ctKYlG{margin:1.5em 0 1em;line-height:1.9;} .ctKYlG .gatsby-highlight{margin:1.5em 0;} @media screen and (max-width:500px){.ctKYlG .gatsby-highlight{margin:1.5em -20px;}} .ctKYlG code[class*='language-'],.ctKYlG pre[class*='language-']{-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;font-family:Menlo,Monaco,'Courier New',monospace;color:#ccc;text-shadow:none;word-break:break-all;} .ctKYlG pre[class*='language-'],.ctKYlG:not(pre) > code[class*='language-']{background:#313746;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,0.5);} @media screen and (max-width:500px){.ctKYlG pre[class*='language-'],.ctKYlG:not(pre) > code[class*='language-']{border-radius:0;}} .ctKYlG pre[class*='language-']{padding:1.2em 1.2em;-webkit-overflow-scrolling:touch;position:relative;font-size:14.5px;line-height:1.7;overflow:auto;} .ctKYlG .gatsby-highlight pre[class*='language-'].line-numbers{padding-left:3.4em;} .ctKYlG pre[class*='language-'].line-numbers span.line-numbers-rows{padding:1.2em 0 1.2em 0.7em;background-color:hsla(0,0%,78.4%,0.15);border:none;} .ctKYlG .token.comment,.ctKYlG .token.block-comment,.ctKYlG .token.prolog,.ctKYlG .token.doctype,.ctKYlG .token.cdata{color:#999;} .ctKYlG .token.punctuation{color:#ccc;} .ctKYlG .token.tag,.ctKYlG .token.attr-name,.ctKYlG .token.namespace,.ctKYlG .token.deleted{color:#e2777a;} .ctKYlG .token.function-name{color:#6196cc;} .ctKYlG .token.boolean,.ctKYlG .token.number,.ctKYlG .token.function{color:#f08d49;} .ctKYlG .token.property,.ctKYlG .token.class-name,.ctKYlG .token.constant,.ctKYlG .token.symbol{color:#f8c555;} .ctKYlG .token.selector,.ctKYlG .token.important,.ctKYlG .token.atrule,.ctKYlG .token.keyword,.ctKYlG .token.builtin{color:#cc99cd;} .ctKYlG .token.string,.ctKYlG .token.char,.ctKYlG .token.attr-value,.ctKYlG .token.regex,.ctKYlG .token.variable{color:#7ec699;} .ctKYlG .token.operator,.ctKYlG .token.entity,.ctKYlG .token.url{color:#67cdcc;} .ctKYlG .token.important,.ctKYlG .token.bold{font-weight:bold;} .ctKYlG .token.italic{font-style:italic;} .ctKYlG .token.entity{cursor:help;} .ctKYlG .token.inserted{color:green;} .ctKYlG .gatsby-code-title{position:relative;margin:1.5em 0 -24px auto;background:#616161;color:#fff;font-size:12px;height:24px;padding:0 8px;line-height:24px;font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-weight:500;border-radius:0 5px;display:table;z-index:2;} @media screen and (max-width:500px){.ctKYlG .gatsby-code-title{border-radius:0 0 0 5px;margin-right:-20px;}} .ctKYlG .gatsby-code-title + .gatsby-highlight{margin-top:0;} .ctKYlG p > code,.ctKYlG li > code{color:#ff3860 !important;background:#f9f1f3;padding:0.15em 0.4em;margin:0.2em;border-radius:4px;font-size:0.85em;word-break:break-all;white-space:pre-line;} .ctKYlG strong > code{font-family:inherit !important;} .ctKYlG a:hover{-webkit-text-decoration:underline;text-decoration:underline;} .ctKYlG p{margin:0.5em 0;} .ctKYlG h1,.ctKYlG h2,.ctKYlG h3,.ctKYlG h4,.ctKYlG h5,.ctKYlG h6{margin:40px 0 10px;font-weight:700;line-height:1.5;} .ctKYlG h1{margin:45px 0 12px;padding:5px 0 5px 17px;font-size:1.55em;} .ctKYlG h1:before{position:absolute;top:0;left:0;content:"";display:inline-block;width:5px;height:100%;border-radius:5px;background:linear-gradient(0deg,#ffa649 0%,#ffa649 50%,#f7645b 50%,#f7645b 100%);} .ctKYlG h2{position:relative;margin:45px 0 12px;padding:5px 0 5px 17px;font-size:1.40em;} .ctKYlG h2:before{position:absolute;top:0;left:0;content:"";display:inline-block;width:5px;height:100%;border-radius:5px;background:linear-gradient(0deg,#ffa649 0%,#ffa649 50%,#f7645b 50%,#f7645b 100%);} .ctKYlG h3{margin:40px 0 12px;font-size:1.40em;} .ctKYlG h4{position:relative;padding-left:18px;font-size:1.2em;} .ctKYlG h4:before{position:absolute;top:.2em;left:0;content:"";display:inline-block;width:14px;height:19px;background-image:url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIyLjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IuODrOOCpOODpOODvF8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiCgkgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzAgNDUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMwIDQ1OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Y3NjQ1Qzt9Cgkuc3Qxe2ZpbGw6I0ZGQTc0ODt9Cjwvc3R5bGU+Cjx0aXRsZT5pY29uPC90aXRsZT4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTI4LjEsMzAuMWMwLDcuNS02LjEsMTMuNi0xMy42LDEzLjZTMC45LDM3LjcsMC45LDMwLjFTNywxNi41LDE0LjUsMTYuNVMyOC4xLDIyLjYsMjguMSwzMC4xeiIvPgo8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMjguMSwxNS42YzAsNy41LTYuMSwxMy42LTEzLjYsMTMuNlMwLjksMjMuMSwwLjksMTUuNlM3LDIsMTQuNSwyUzI4LjEsOC4xLDI4LjEsMTUuNnoiLz4KPC9zdmc+Cg==");background-size:contain;background-repeat:no-repeat;} .ctKYlG ul,.ctKYlG ol{margin:1em 0;} .ctKYlG ul p,.ctKYlG ol p{margin:0;} .ctKYlG ul{padding-left:1.2em;} .ctKYlG ul li{margin:.4em 0;list-style:disc;} .ctKYlG ul ul,.ctKYlG ul ol{margin:0;} .ctKYlG ol{counter-reset:number;} .ctKYlG ol > li{list-style:none;list-style-position:inside;position:relative;padding:0 0 0 30px;margin:0.5em 0;} .ctKYlG ol > li:before{display:inline-block;position:absolute;left:0;top:0;width:20px;height:20px;margin:.4em 0;border-radius:25%;background:#5c9ee7;color:#fff;font-weight:700;font-size:14px;text-align:center;line-height:20px;content:counter(number);counter-increment:number;} .ctKYlG ol ul{margin:0;} .ctKYlG strong{font-weight:550;font-size:1.1em;} .ctKYlG em{font-style:italic;} .ctKYlG del{-webkit-text-decoration:line-through;text-decoration:line-through;} .ctKYlG hr{display:block;margin:2em 0;border:none;border-top:dotted 3px #e1eaf3;} .ctKYlG table{display:block;margin:1em 0;border-spacing:2px;border-collapse:separate;overflow:auto;-webkit-overflow-scrolling:touch;width:auto;font-size:.9em;line-height:1.4;} .ctKYlG table th{background-color:#313746;color:#FFF;padding:10px 12px;text-align:center;font-weight:700;} .ctKYlG table th[align="center"]{text-align:center;} .ctKYlG table th[align="right"]{text-align:right;} .ctKYlG table td{background-color:#f1f4f7;color:#313746;padding:10px 12px;} .ctKYlG table td code[class*='language-']{color:#313746;} .ctKYlG table thead tr th:first-child{border-radius:5px 0 0 0;} .ctKYlG table thead tr th:last-child{border-radius:0 5px 0 0;} .ctKYlG table tbody tr:last-child td:first-child{border-radius:0 0 0 5px;} .ctKYlG table tbody tr:last-child td:last-child{border-radius:0 0 5px 0;} .ctKYlG blockquote{margin:1em 0;padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5;} .ctKYlG .gatsby-resp-image-wrapper{margin:2em 0;box-shadow:1px 1px 20px lightgrey;border-radius:4px;overflow:hidden;} .ctKYlG .anchor-header{margin:2px 0 0 0;} .ctKYlG .custom-block{margin:1em 0;background:#f1f4f7;} .ctKYlG .custom-block-heading{font-weight:700;} .ctKYlG .custom-block-heading .emoji{width:1.2em !important;height:1.2em !important;vertical-align:-0.2em !important;} .ctKYlG .custom-block-body{font-size:0.92em;} .ctKYlG .custom-block-body > *:first-child{margin-top:0;} .ctKYlG .custom-block-body > *:last-child{margin-bottom:0;} .ctKYlG .custom-block-body h5{font-size:1.05em;margin:20px 0 5px;} .ctKYlG > *:first-child{margin-top:0;} .ctKYlG .custom-block.simple{padding:1em 1.2em;border-radius:5px;} .ctKYlG .custom-block.simple .custom-block-heading{font-size:1.1em;} .ctKYlG .custom-block.info,.ctKYlG .custom-block.alert,.ctKYlG .custom-block.notice{padding:0.7em 1em;border-left:solid 4px #20a8ea;border-radius:1px 3px 3px 1px;} .ctKYlG .custom-block.alert{border-left-color:#f7615f;background:#ffeff0;} .ctKYlG .custom-block.alert .custom-block-heading{color:#f7615f;} .ctKYlG .custom-block.notice{border-left-color:#ffa22b;background:#fff4df;} .ctKYlG .custom-block.notice .custom-block-heading{color:#ffa22b;} .ctKYlG .custom-block.image-small,.ctKYlG .custom-block.image-medium{background:#c0e2fb;padding:1.5em;text-align:center;border-radius:5px;} .ctKYlG .custom-block.image-small .gatsby-resp-image-wrapper,.ctKYlG .custom-block.image-medium .gatsby-resp-image-wrapper{margin:0;border:none;box-shadow:0 5px 15px rgba(0,0,0,0.15);} .ctKYlG .custom-block.image-small .gatsby-resp-image-wrapper{max-width:350px !important;border:none;} .ctKYlG .custom-block.image-medium .gatsby-resp-image-wrapper{max-width:450px !important;border:none;}</style><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link as="script" rel="preload" href="/webpack-runtime-07b7d84af1cf9993340d.js"/><link as="script" rel="preload" href="/framework-999a01e9e4c894cffffe.js"/><link as="script" rel="preload" href="/styles-e383b929d2d4095ae339.js"/><link as="script" rel="preload" href="/app-0dbf9fa9f0620e9dd3df.js"/><link as="script" rel="preload" href="/de71a805-d9a74fce0a097621e412.js"/><link as="script" rel="preload" href="/53b27b57f60ee3e1ca57a66cde9add975dffb161-c74f54ae49cc6ab741d1.js"/><link as="script" rel="preload" href="/component---src-templates-post-tsx-f983782df893669fd506.js"/><link as="fetch" rel="preload" href="/page-data/category/blog/aws-eb-deploy/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/196006245.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/1984257895.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/2528810007.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><script>
+void function() {
+  window.__onThemeChange = function() {}
+
+  var preferredTheme
+  try {
+    preferredTheme = localStorage.getItem('theme')
+  } catch (err) { }
+
+  function setTheme(newTheme) {
+    if (preferredTheme && document.body.classList.contains(preferredTheme)) {
+      document.body.classList.replace(preferredTheme, newTheme)
+    } else {
+      document.body.classList.add(newTheme)
+    }
+
+    window.__theme = newTheme
+    preferredTheme = newTheme
+    window.__onThemeChange(newTheme)
+  }
+
+  window.__setPreferredTheme = function(newTheme) {
+    setTheme(newTheme)
+    try {
+      localStorage.setItem('theme', newTheme)
+    } catch (err) {}
+  }
+
+  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  darkQuery.addListener(function(e) {
+    window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+  })
+
+  setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'))
+}()
+    </script><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="App" style="background-color:var(--bg);color:var(--textNormal);transition:color 0.2s ease-out, background 0.2s ease-out"><header class="Header__HeaderTag-sc-sxwgs1-0 fEdaQt"><div class="ContentWrapper__IndexContent-sc-qgwu46-0 ebovCZ"><div class="Header__HeaderInner-sc-sxwgs1-1 iarFOA"><a class="logo-link" href="/"><img class="logo" src="/static/logo-42e9962f0784e14369fff245074e7612.png" alt="Jay 기술 블로그"/></a><div class="ColorModeToggle__ToggleButton-sc-b3isah-0 evPsmz"><div style="position:relative;display:inline-block;text-align:left;opacity:1;direction:ltr;border-radius:13px;-webkit-transition:opacity 0.25s;-moz-transition:opacity 0.25s;transition:opacity 0.25s;touch-action:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none"><div class="react-switch-bg" style="height:26px;width:54px;margin:0;position:relative;background:#d9dfe2;border-radius:13px;cursor:pointer;-webkit-transition:background 0.25s;-moz-transition:background 0.25s;transition:background 0.25s"><div style="height:26px;width:29px;position:relative;opacity:0;pointer-events:none;-webkit-transition:opacity 0.25s;-moz-transition:opacity 0.25s;transition:opacity 0.25s"><div class="icon-moon checkedIcon"><svg width="24" height="24" fill="#EFDC05"><rect width="24" height="24" fill="none" rx="0" ry="0"></rect><path fill-rule="evenodd" clip-rule="evenodd" d="M14.8102 3.2H13.8202C13.4902 3.2 13.2302 2.93 13.2302 2.6C13.2302 2.27 13.5002 2 13.8302 2H16.2602C16.5002 2 16.7202 2.15 16.8102 2.37C16.9002 2.59 16.8502 2.85 16.6802 3.02L15.2702 4.43H16.2602C16.5902 4.43 16.8602 4.7 16.8602 5.03C16.8602 5.36 16.5902 5.63 16.2602 5.63H13.8202C13.5802 5.63 13.3602 5.48 13.2702 5.26C13.1802 5.04 13.2302 4.78 13.4002 4.61L14.8102 3.2ZM20.1401 11.0101H21.1301C21.4601 11.0101 21.7401 11.2801 21.7401 11.6101C21.7401 11.9401 21.4701 12.2101 21.1401 12.2101H18.7001C18.4601 12.2101 18.2401 12.0601 18.1501 11.8401C18.0601 11.6201 18.1101 11.3601 18.2801 11.1901L19.6901 9.78008H18.7001C18.3701 9.78008 18.1001 9.51008 18.1001 9.18008C18.1001 8.85008 18.3701 8.58008 18.7001 8.58008H21.1301C21.3701 8.58008 21.5901 8.73008 21.6801 8.95008C21.7701 9.17008 21.7201 9.43008 21.5501 9.60008L20.1401 11.0101ZM11.0302 9.8499H12.8502L10.7002 11.9999C10.5302 12.1699 10.4802 12.4299 10.5702 12.6499C10.6602 12.8699 10.8802 13.0199 11.1202 13.0199H14.2902C14.6202 13.0199 14.8902 12.7499 14.8902 12.4199C14.8902 12.0899 14.6202 11.8199 14.2902 11.8199H12.5602L14.7102 9.6699C14.8802 9.4999 14.9302 9.2399 14.8402 9.0199C14.7502 8.7999 14.5302 8.6499 14.2902 8.6499H11.0202C10.6902 8.6499 10.4202 8.9199 10.4202 9.2499C10.4202 9.5799 10.7002 9.8499 11.0302 9.8499ZM14.5501 16.89C15.6601 16.89 16.7201 16.66 17.7101 16.19C17.9401 16.08 18.2101 16.13 18.3801 16.3C18.5601 16.48 18.6101 16.75 18.5001 16.98C17.0901 20.05 13.9901 22.03 10.6001 22.03C5.79013 22.03 1.88013 18.12 1.88013 13.31C1.88013 9.94004 3.87013 6.84004 6.93013 5.40004C7.16013 5.29004 7.43012 5.34004 7.61012 5.52004C7.79012 5.70004 7.84013 5.97004 7.73013 6.20004C7.27013 7.19004 7.03012 8.26004 7.03012 9.38004C7.03012 13.52 10.4001 16.89 14.5501 16.89ZM3.09013 13.31C3.09013 17.46 6.46012 20.83 10.6101 20.83C12.9901 20.83 15.2001 19.7 16.6001 17.85C15.9401 18.01 15.2501 18.09 14.5501 18.09C9.74013 18.09 5.83012 14.18 5.83012 9.38004C5.83012 8.68004 5.91013 7.99004 6.07013 7.32004C4.22013 8.73004 3.09013 10.94 3.09013 13.31Z"></path></svg></div></div><div style="height:26px;width:29px;position:absolute;opacity:1;right:0;top:0;pointer-events:none;-webkit-transition:opacity 0.25s;-moz-transition:opacity 0.25s;transition:opacity 0.25s"><div class="icon-sun uncheckedIcon"><svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.2" baseProfile="tiny" viewBox="0 0 24 24" size="24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 6.934l1-2.934c.072-.213.078-.452 0-.682-.188-.553-.789-.848-1.341-.659-.553.189-.847.788-.659 1.341l1 2.934zM4 11c-.213-.072-.452-.078-.682 0-.553.188-.848.789-.659 1.341.189.553.788.847 1.341.659l2.934-1-2.934-1zM12 17.066l-1 2.934c-.072.213-.078.452 0 .682.188.553.789.848 1.341.659.553-.189.847-.788.659-1.341l-1-2.934zM21.341 11.657c-.188-.553-.788-.848-1.341-.659l-2.934 1 2.934 1c.213.072.452.078.682 0 .552-.188.847-.789.659-1.341zM5.636 7.05l2.781 1.367-1.367-2.781c-.1-.202-.265-.375-.482-.482-.524-.258-1.157-.042-1.415.482-.257.523-.041 1.157.483 1.414zM5.153 17.432c-.257.523-.041 1.156.482 1.414.523.257 1.157.041 1.414-.482l1.367-2.781-2.781 1.367c-.201.099-.374.263-.482.482zM18.363 16.949l-2.781-1.367 1.367 2.781c.1.202.264.375.482.482.523.257 1.156.041 1.414-.482s.042-1.157-.482-1.414zM18.844 6.566c.258-.524.042-1.157-.481-1.415-.523-.257-1.157-.041-1.414.482l-1.369 2.783 2.782-1.368c.202-.1.375-.264.482-.482zM12 7.5c-2.481 0-4.5 2.019-4.5 4.5s2.019 4.5 4.5 4.5 4.5-2.019 4.5-4.5-2.019-4.5-4.5-4.5z"></path></svg></div></div></div><div class="react-switch-handle" style="height:26px;width:26px;background:#ffffff;display:inline-block;cursor:pointer;border-radius:50%;position:absolute;transform:translateX(0px);top:0;outline:0;box-shadow:0px 1px 5px rgba(0, 0, 0, 0.6);border:0;-webkit-transition:background-color 0.25s, transform 0.25s, box-shadow 0.15s;-moz-transition:background-color 0.25s, transform 0.25s, box-shadow 0.15s;transition:background-color 0.25s, transform 0.25s, box-shadow 0.15s"></div><input type="checkbox" role="switch" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px" id="normal-switch"/></div></div></div></div></header><div class="ContentWrapper__IndexContent-sc-qgwu46-0 ebovCZ"><div class="Layout__Content-sc-152i9mm-0 kyfGjL"><main><div class="MainWrapper__IndexWrapper-sc-vkqmvp-0 gEBZRU"><div class="MainWrapper__ContentsWrapper-sc-vkqmvp-1 fKTVbh"><section class="post__Content-sc-rer3gn-0 boOHpQ"><p class="post__HeroImage-sc-rer3gn-1 gYZPam"><img class="emoji" draggable="false" alt="🚀" src="https://twemoji.maxcdn.com/v/12.1.6/svg/1f680.svg"/></p><div class="post__ContentMain-sc-rer3gn-2 dYhQMO"><time class="post__PostDate-sc-rer3gn-4 knVwJm">2020.09.02</time><h1 class="post__PostTitle-sc-rer3gn-3 dQJMGd">[AWS EB] AWS Elastic Beanstalk로 서버 배포 하기</h1><div class="CategoryLabel__Wrapper-sc-134vpma-0 hzEQGR"><a class="category-text" style="background:#ffa22b" href="/category/blog">블로그</a></div><div class="post__PostContent-sc-rer3gn-5 ctKYlG"><h2 id="개요" style="position:relative;"><a href="#%EA%B0%9C%EC%9A%94" aria-label="개요 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>개요</h2>
+<p>저번 포스팅에서는 <a href="https://wwlee94.github.io/category/blog/aws-eb-https/">AWS Elastic Beanstalk에서 HTTPS를 적용하는 방법</a>에 대해서 알아보았는데요.<br>
+AWS EB로 서버를 배포하는 방법도 공유하면 좋을 것 같아서 준비했습니다 😆</p>
+<hr>
+<p>AWS EB로 서버를 배포하는 방법은 2가지가 있습니다.</p>
+<ul>
+<li>첫번째 방법은 직접 <a href="https://aws.amazon.com/ko/elasticbeanstalk/">AWS Elastic Beanstalk Console</a>로 접근해서 <code class="language-text">GUI</code>로 어플리케이션과 환경을 생성해서 배포 파일을 업로드 하는 방법이 있습니다.</li>
+<li>두번째 방법은 <a href="https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/eb-cli3-install-advanced.html">EB CLI</a>를 사용해 터미널 커맨드로 어플리케이션과 환경을 생성한 뒤 배포하는 방법이 있습니다.</li>
+</ul>
+<p>가장 먼저 <code class="language-text">AWS EB</code>에 대해 알아본 뒤에 <code class="language-text">AWS Console</code>을 이용해서 배포하는 방법, <code class="language-text">AWS CLI</code>을 이용한 방법에 대해서 알아보겠습니다.</p>
+<h2 id="aws-elastic-beanstalk-란" style="position:relative;"><a href="#aws-elastic-beanstalk-%EB%9E%80" aria-label="aws elastic beanstalk 란 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>AWS Elastic Beanstalk 란?</h2>
+<p><code class="language-text">AWS Elastic Beanstalk</code>는 AWS에 애플리케이션을 배포하는 가장 빠르면서 간편한 방법이며 AWS 상에 코드을 업로드하기만 하면 용량 프로비저닝, 로드 밸런싱, Auto Scaling, 애플리케이션 상태 모니터링에 대한 정보를 자동으로 처리해주는 서비스입니다.</p>
+<p>해당 애플리케이션 운영에 필요한 AWS 리소스 정보를 통합해서 볼 수 있으며 각 개별 리소스에 자유롭게 접근이 가능합니다.<br>
+.NET, JAVA, Node.js, PHP, Python, Ruby 등 다양한 애플리케이션을 지원합니다.</p>
+<p><code class="language-text">AWS Elastic Beanstalk</code>에 대한 직접적인 추가 비용은 없습니다.<br>
+다만, 애플리케이션을 저장 및 실행하는 데 필요한 AWS 리소스 (AWS EC2, AWS RDS 등등)에 대한 비용에 대해서만 지불하면 됩니다.</p>
+<h2 id="1-aws-console-을-이용해서-배포하기" style="position:relative;"><a href="#1-aws-console-%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%B4%EC%84%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0" aria-label="1 aws console 을 이용해서 배포하기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. AWS Console 을 이용해서 배포하기</h2>
+<p><code class="language-text">AWS Console GUI</code>를 이용해 버튼 몇번으로 손쉽게 세팅할 수 있습니다.</p>
+<p>우선 <a href="https://aws.amazon.com/ko/elasticbeanstalk/">AWS Elastic Beanstalk Console</a> 로 접속합니다.</p>
+<p><code class="language-text">AWS Elastic Beanstalk 시작하기</code> 버튼을 눌러서 들어간 뒤 어플리케이션을 새로 생성합니다.</p>
+<h4 id="1-어플리케이션-생성하기" style="position:relative;"><a href="#1-%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0" aria-label="1 어플리케이션 생성하기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1) 어플리케이션 생성하기</h4>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/7370b0ec010ffc8d739840dad1a7d5d4/be061/aws-console-1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAACgklEQVQ4y5WS7UtTURjA799RH0Ijc7u+zGwWmGJOZqXDl1FhZeBImJ/9L2QfpQZ963OMoASxsGx37y8aUkhfFGJXp9vu+3Z3bjtPz9mcDKyoAz+ew3l5nt957uUGHPy0Z8K1+nju0Yp3dibQ3+8M2O1dAZ7BdzfmLNp4nPON9XpszG02e6CL51euOfpWe3p65znXmPuV98FD8N6fqzM1NQsezzRMTnlh/K4H3O574Bq7AyOucbg17ILBVoZcMHTbDaPjHpiYnIHhUfcGt7b+/vlWOAqxZLaSzHwhm+E4+RiOkkg8RRLpbZJIZUksmSExjJFEBknjXpoIuC9gjEZjJLK5UREEAdY/fHrNHYs/gvDTBBwWQmVVhfzxCWiaBv80pByF7TcWFfdA1sshbn9/P1gul4FSalWrVapiwlJJgnKlApqug6pqUDFNUHDdMIw6pVIJZFkGWZJAVlQqaWVL0QwQD8UQl8vlgoSQekIc1KiYWKkCummBqpcB9wELwclJoV6oUCjA8vIyPFtcBL/fD0tLfvp0/om1tvYOdMMIcaIoBk/lrSohVNXQSjcQHa00KKKNzqzQhlkys1QqDdg7iMXjDBoWBOvg4IAVayREu7OE7BJ7djOq2EvlNDYx0RjPNqGIxVp0dHR03rD1MjNUWpI2kRWlFSrJssXO5PP5Rg9rtVq9h6ZZpRIekP8fixU/ZIbFYvHFqSFBamhZI9ZfIOepkirBD8r6G+K2wpGX3/a+w+7XPcju7OIPnoZ4MvNbYiymMpBIZ8+RyuzAZyH6luvscd4cGBz1t3f2LVxos/suXuZ9F9v/hN13qaPX19Ht9F3pun7G1W7ngs1xw9/W6Rj5BZMZJsgvjbLWAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 1"
+        title="첫번째 방법 - 1"
+        src="/static/7370b0ec010ffc8d739840dad1a7d5d4/1d69c/aws-console-1.png"
+        srcset="/static/7370b0ec010ffc8d739840dad1a7d5d4/4dcb9/aws-console-1.png 188w,
+/static/7370b0ec010ffc8d739840dad1a7d5d4/5ff7e/aws-console-1.png 375w,
+/static/7370b0ec010ffc8d739840dad1a7d5d4/1d69c/aws-console-1.png 750w,
+/static/7370b0ec010ffc8d739840dad1a7d5d4/78797/aws-console-1.png 1125w,
+/static/7370b0ec010ffc8d739840dad1a7d5d4/aa440/aws-console-1.png 1500w,
+/static/7370b0ec010ffc8d739840dad1a7d5d4/be061/aws-console-1.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>어플리케이션 이름과 설명을 작성한 뒤 <code class="language-text">생성</code> 버튼을 눌러 이동합니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/020a341cf89e9f33a12b24eec9b1f8e1/be061/aws-console-2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAACe0lEQVQ4y4WSz08TURDH9+9QD4KplG6phQqa8COkLSVYKlVR68EDe+JvIT0SbOLNs+nFmBAxQSiUFtoGQzRoYjhIW5pQutsfu+7b3TfObAsoQnzJJ/N+zHxn5r0nDHnF6MPp4GLseWxhOhyO+3yDcZfLHRcJsa89R0trl0tE+yfueG+vK+4W3QsD3v5Fj+fOSyEQDL2ZfRaDx09fwKPZGESjTyASiUJkZhYmpyIQCj2A4MQUBNCOjAVheCzwF6PjE+DH83B4Bsb8kx+E98srS2upNGxtF7Tt/Gf2cX2LrabSbG0zw7a28yyDpLM5lka7kdm5QHt/M5vTcA7LK6tvhXK5nLAsC3AYCD8sleHnYRFOajWgfdM00f6LYRjAGEN0rjPdMEwDFEVOCgcHB4mWqgLn3NB1nR8fV6Fer9tCuO4EnUNCRKPZhJosg6wovCYrhoIxWFxSKBaLCXIkQRz8uFrFTApommYHUpVncA6nQ8VzEqk3GhytQQmOKpWkUCqVEh0fA4V5s9UCqphRJaZ5VpHdIkKVmyhOPlcK8nZmW5CcVHSmAPUSqHJV1eyW/1shtVyryfggSL1pi1LFJKJpv2yhli2KCVtXCNId0v2cPgo56DrjeF8c98/BNbbLUZza4S0dk8syl5U6Qo/SgPLRUVI4qVZfdSpkiIVfwNbCGItfoL2H71P5YRnlbxZ6WvhtKIbRHcsyfpu11Obrr/vfYe/LPhR29/CD55Hc5WSRnQJk1j9BNoXkdyGbK9js4Hx9I/1OcHoG7w8N++e7nf1z17pc0o1b4hW4pevdonTztkfq8Y1KjoERySH6JIf7rtTTNzjX67033+X0jv8GXqw2vd4YmtoAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 2"
+        title="첫번째 방법 - 2"
+        src="/static/020a341cf89e9f33a12b24eec9b1f8e1/1d69c/aws-console-2.png"
+        srcset="/static/020a341cf89e9f33a12b24eec9b1f8e1/4dcb9/aws-console-2.png 188w,
+/static/020a341cf89e9f33a12b24eec9b1f8e1/5ff7e/aws-console-2.png 375w,
+/static/020a341cf89e9f33a12b24eec9b1f8e1/1d69c/aws-console-2.png 750w,
+/static/020a341cf89e9f33a12b24eec9b1f8e1/78797/aws-console-2.png 1125w,
+/static/020a341cf89e9f33a12b24eec9b1f8e1/aa440/aws-console-2.png 1500w,
+/static/020a341cf89e9f33a12b24eec9b1f8e1/be061/aws-console-2.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>이제 어플리케이션이 생성되었습니다 !</p>
+<blockquote>
+<p>참 간단 하쥬 ..?</p>
+</blockquote>
+<h4 id="2-환경-생성하기" style="position:relative;"><a href="#2-%ED%99%98%EA%B2%BD-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0" aria-label="2 환경 생성하기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2) 환경 생성하기</h4>
+<p>이제 어플리케이션을 생성했으니 <code class="language-text">새로운 환경</code>을 생성할 차례입니다.</p>
+<p><code class="language-text">새 환경 생성</code> 버튼을 눌러 이동합니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/6a68a485e023b32f37cf9315d9cac80d/be061/aws-console-3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAAChUlEQVQ4y5WSW08TQRTH93PIgwEjwu4Wilg0QYHQQsFyMfUCPvhAn/gspI8Em/jms+mLMSGSmGAppWy3NqKGeEMkvWl3u9vt3ma6e5zZgjEpmjib356ZOXP+58yFGfFzd+YjwfXlpaW1hfm5+PBwIM6yvjjH8nGO40mf2vaY530eno/lPNvfz8Z5jl+76h9aHxgYfMQEQ9NP7z5Yhuj9hxC9twyLi1GIRBZgbiEK4dl5mJ6+DcGpWQiFIzARnIHxyTDcHA/B6FjQ49bEFARDMyRmEcYmwy+ZF5tbG9upXcjs582sWEDbGQGlsyJKC2/QbjaHskIepffoXA6liC+V2ffsjtcXyBoR7YjvzJRQgM2tV8+YcrmUcFsYSKM/V6orUJNlkOQ6yPU6aM0muORzHAdcl+KeWocup/Ou/TmLUfkTqE0jyRwffUnoqgwtx8G2bbu1Wg1qkkQEZZCJqKqqYJgmWJblQfvmKYZh0LHbPHqLteJXKFV/Jplvx98Thml5FSKE3GZTByIMGLeIRYAwJoEmqA0NfkgK1BXV81sEOk+LsBzAFnagUiknmZOTkwTNdiao67pXhU6z/wEVrCkNcgT6WWVtDMMlYLq+UqkkmVKJnCE5lzNBhWxRbTQ6aGgU7TwfjcHUV61W24LQbtgmgu1grQPVE9PO89EYTC+vQgWLxWKifYMutizbrasqzfi/YJqsTLcsS9Lj0woRwSFVOgj/A9SJjWxydxgURUky26n0kw+HH+Hg/SHkCwfkgedgb188lwy1ggjZXL4DQSzA653d50zfQODGyOjkak/f0MqFbjbWdYmLdfX8DTZ2sXcw1usLxC7z135zxRdY6fdfX+3u80/8AsIrMwRdOIsYAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 3"
+        title="첫번째 방법 - 3"
+        src="/static/6a68a485e023b32f37cf9315d9cac80d/1d69c/aws-console-3.png"
+        srcset="/static/6a68a485e023b32f37cf9315d9cac80d/4dcb9/aws-console-3.png 188w,
+/static/6a68a485e023b32f37cf9315d9cac80d/5ff7e/aws-console-3.png 375w,
+/static/6a68a485e023b32f37cf9315d9cac80d/1d69c/aws-console-3.png 750w,
+/static/6a68a485e023b32f37cf9315d9cac80d/78797/aws-console-3.png 1125w,
+/static/6a68a485e023b32f37cf9315d9cac80d/aa440/aws-console-3.png 1500w,
+/static/6a68a485e023b32f37cf9315d9cac80d/be061/aws-console-3.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>저는 간단한 Java 어플리케이션을 테스트 배포할 예정이므로 <code class="language-text">웹 서버 환경</code>을 선택했습니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/f41dc9897adaf3f7ec418d5b0abcb425/be061/aws-console-4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAACf0lEQVQ4y5WTS08TURTH53PIwoARYWYKRSkaCaRpedpKFYlx44Ku+CykS6JN2Lk23RgTIguClD6nFUI0xIWITTudFmhvZ6bt3OnM8dyhmvAy8Sa/nHtmbv7nf+6DG3MLzxaCU2tLiy9Wg4FA5MGoJ8LzrojAixFBEHHOosuZi6LLQeCFLmJkcJCPiIK4et89sjY0NPya80/NvFt6+QqeL50TCi1CMBiC4MIizM4/hemZJ+CfmgM/Rq9vDia9M/B4wgfjk36HCe80+KbnIRAIwaRv9hP3cWPzzfZOApKZfCuT26db8TTdSUk0Ie3TZCZHs7k9mpa+OCQyeSRHk9k83cU18VTWyXfTUiuekmBjc+s9J8ulaKfTARwmYp+cngFD03XQNA2azSa0Wy1ot9tgGAZQxDDaYHZMoJQihm1Qw2Q5IfUYd3T0M0oaKqCoiQtsWalCsSSDolRAqVShrChQrZ7g4gY0Ggz1PKoq1OoE6oTYGE2C32RZjnHHx8fRFjpgDnHYtYYG1ZrKEnSFjqgJlmXD5dEymCPChG0UM1XsBovHuEKhgIJtR5A5JKoGTLSJRVi7OkNvOjkrrGMRvfIL1PIPIJrO3F4ULJVKUdt2HJgGCmILwOyz6IDzizm2qhSAVArQQEFynWC3C0eQdPfnZvC/1vwjBuRyy8ViMWpZFqBLE/fMruEm1/8fkx2sXC7HuLPT07ddhxSx0KVFzX9Ar4LXhrJDrNfx2mzv7K5/O/wOB18PIb93gBdcglQmdy1JFrM5SEv5K+ADgM/xxAduYMjzaGzct9I3MLJ8q5cP99wRwj19N8GHb/cPh/tdnvBdcfQv91ye5UH3w5XeAbf3NzwcMlGcGBiWAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 4"
+        title="첫번째 방법 - 4"
+        src="/static/f41dc9897adaf3f7ec418d5b0abcb425/1d69c/aws-console-4.png"
+        srcset="/static/f41dc9897adaf3f7ec418d5b0abcb425/4dcb9/aws-console-4.png 188w,
+/static/f41dc9897adaf3f7ec418d5b0abcb425/5ff7e/aws-console-4.png 375w,
+/static/f41dc9897adaf3f7ec418d5b0abcb425/1d69c/aws-console-4.png 750w,
+/static/f41dc9897adaf3f7ec418d5b0abcb425/78797/aws-console-4.png 1125w,
+/static/f41dc9897adaf3f7ec418d5b0abcb425/aa440/aws-console-4.png 1500w,
+/static/f41dc9897adaf3f7ec418d5b0abcb425/be061/aws-console-4.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>환경 설정 화면으로 넘어 왔습니다.</p>
+<p>환경 이름과 도메인을 작성한 뒤, 도메인은 <code class="language-text">가용성 확인</code> 버튼을 눌러 도메인 체크를 해주세요.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/d1c6fbde29c5bba7a7e0d892804adc29/84a78/aws-console-5.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 59.04255319148937%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAABYlAAAWJQFJUiTwAAABRUlEQVQoz4VS7ZKDIAz0/d/x+s9eRwUEFEXEXDbVO22ZXmZ2Ako2X1vV9Z2+bjcKIdA0zzRN047zeZJ/8z8AR9W0LdX3b7LWktaGOqVJG0N9b0nxXeHO3jlPy7IUEWMUj6QVArtOCUFKiX8k8XJ+8eu6XpBzphXYzyCtTN9T/XhIVcM4foQfBvK7n7mqVwNxBaKm7eRB4g8fkf6qRzBs2zYBDG8qzAaEqAA/UHoJR9BhZ6ILodJaBo8ZYkuvpFt+BiKh4m40j6jjGGy+WGGYA7VKkWFCbCnuW4uR/RIpLBPN6XkPu3zgsagiofFaKoOOQHTW1cjJmqDIxYFKVmwZW/be08ikIA7c2shAFUhA/BZtlyTzVmFCyxzYs6gB5xxZno/lWVnrJInMdMu/gQeOLb/JBnJZL/LIF5nITEuAzE4ywntw/QDRFqpR+cNScgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 5"
+        title="첫번째 방법 - 5"
+        src="/static/d1c6fbde29c5bba7a7e0d892804adc29/1d69c/aws-console-5.png"
+        srcset="/static/d1c6fbde29c5bba7a7e0d892804adc29/4dcb9/aws-console-5.png 188w,
+/static/d1c6fbde29c5bba7a7e0d892804adc29/5ff7e/aws-console-5.png 375w,
+/static/d1c6fbde29c5bba7a7e0d892804adc29/1d69c/aws-console-5.png 750w,
+/static/d1c6fbde29c5bba7a7e0d892804adc29/78797/aws-console-5.png 1125w,
+/static/d1c6fbde29c5bba7a7e0d892804adc29/aa440/aws-console-5.png 1500w,
+/static/d1c6fbde29c5bba7a7e0d892804adc29/84a78/aws-console-5.png 1832w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>플랫폼은 Java 어플리케이션과 원하는 JDK 버전을 선택합니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/91406069d505f43961b8b4bf48e77dbc/84a78/aws-console-6.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 44.680851063829785%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABIUlEQVQoz3WS2ZKCMBBF+f/fm5qneVEURkGyoGQPdzotWGIxqTrVoZNcequOxxpt2yKlBOcc/Cfev3ALvKezDeQzxqC6KY1OjXg4DxtJNGW2JiT4EDdiIQSmfMcYOYiVnDP7K+FnfNc9vn4OOPQjztLiVxt0jwBtPdrLBcemQU00tL90Ha59j/s04XNFCqRSxuOqJ1xHi5NyqInBREiXMPkIPY5QRLFS69feUpplzfPMPAUjpTwITMYuhxl0jEw25Sf5neXxmuY/ggMaakop7Fqjz/psIGG+R3d2BaVULCiVgpASgxBsyyOOclcw8uNdwf52Q306Q4inWOlU3kv3zVeiWwU3TaEfVqW41jrc7w+MhOXZC6+Z22WZuyLMLBEX/x8DQ72QFAgeKwAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 6"
+        title="첫번째 방법 - 6"
+        src="/static/91406069d505f43961b8b4bf48e77dbc/1d69c/aws-console-6.png"
+        srcset="/static/91406069d505f43961b8b4bf48e77dbc/4dcb9/aws-console-6.png 188w,
+/static/91406069d505f43961b8b4bf48e77dbc/5ff7e/aws-console-6.png 375w,
+/static/91406069d505f43961b8b4bf48e77dbc/1d69c/aws-console-6.png 750w,
+/static/91406069d505f43961b8b4bf48e77dbc/78797/aws-console-6.png 1125w,
+/static/91406069d505f43961b8b4bf48e77dbc/aa440/aws-console-6.png 1500w,
+/static/91406069d505f43961b8b4bf48e77dbc/84a78/aws-console-6.png 1832w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<hr>
+<p><strong>[선택] 추가 옵션 구성</strong></p>
+<p>현재 화면은 AWS EB에서 제공하는 다양한 설정을 할 수 있는 화면입니다.</p>
+<p>서버를 <code class="language-text">단일 인스턴스</code>로도 생성할 수 있고 <code class="language-text">사용자 지정</code> 옵션을 선택해 <code class="language-text">AWS ALB</code>의 로드밸런싱을 설정할 수도 있습니다.</p>
+<p>그외에 환경 변수 설정, 인스턴스 설정, 용량 설정, AWS RDS 설정 등등 다양한 설정이 가능합니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/bd8d651e2f3dddb500719951736f249c/be061/aws-console-7.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAAClElEQVQ4y42Rz08TQRTH99/wVwQk/OhuS1FKSAgEKbRCK1UgxosHeuJvIT0SbeLNs+nFGFGMBpsCbV1aCijxgoTstrLdQivQ7nR2nm+mlSDh4CSfvJk3b77zfTNSv1t+NBUcW5ydnlkIBgKRvj5PxOFwRmRZQZw4b0QZo6I4BbJDFmuOo1uOKLKycNfdu+hy9TyTvGO+V7NPnsLj2Qah0AwEgyEITk2Df+Ih+HyT4B2fgDF/AEa8D2D4vg8Gh7wwOOwVcWhkHEZxfzIQguFR/wfp7dLy85X4KqylN6opNUvevf8o+PQlQRLrabKeUkVMJL+S+FpasJpUz8FzZC2lVhNJFZaWP7+W8nk9SikFHHWEFU0TyuUyWLUaEGKBZTXg8zohQCkv+2ew5lk4Pj6OSXt7P6Plym8spHWLEGaYR8BFK5hjjF2JbdsXwRTjZ0HT9Zi0v78frVarwiEOVq5UoFg04ezsjF9ySQDnl8WZGPws5AuFmHRwcICCNSFI0CF3V8V2eZs1jP8Bq9WsOjdV4IK6rkf5TX8dGujOMIrYcgVOTk4wSa9q82KOMdvmZhoOuWDzcYWgWSrhp1SAFzQ+g8Dp6SnOCS8QWCLXeJI6paJfXisENU2LNm8SLf86PGSGYWAR5bYZpTbT9DzTNJ2hcDNHxVrPFxgKiTfkF+v8U0qm+aLpkCA2foYA38bmaw4awMjO1xzbpjaKCJpn4eioFJNW4omX33Z/wNbOLmxktyCtZkHN5iCZ3hBRkMmJvZSagUxuGzKb25DFmNv+LvY2t3ZEHrXeSF0uz0D/4Oh8W1fv3PVWR/hGmxy+eUcO3+5wYVTE/FpLt+BWuxJu6ewJd7o84Xb5nqDD6eHruW73wHxrl3vkD6eIOgm3uyavAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 7"
+        title="첫번째 방법 - 7"
+        src="/static/bd8d651e2f3dddb500719951736f249c/1d69c/aws-console-7.png"
+        srcset="/static/bd8d651e2f3dddb500719951736f249c/4dcb9/aws-console-7.png 188w,
+/static/bd8d651e2f3dddb500719951736f249c/5ff7e/aws-console-7.png 375w,
+/static/bd8d651e2f3dddb500719951736f249c/1d69c/aws-console-7.png 750w,
+/static/bd8d651e2f3dddb500719951736f249c/78797/aws-console-7.png 1125w,
+/static/bd8d651e2f3dddb500719951736f249c/aa440/aws-console-7.png 1500w,
+/static/bd8d651e2f3dddb500719951736f249c/be061/aws-console-7.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<hr>
+<p>바로 배포 결과를 볼 수 있도록 우선 <code class="language-text">샘플 애플리케이션</code>을 선택한 뒤 <code class="language-text">환경 생성</code> 버튼을 눌러주세요.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/abc14fd2e0e4d62c2b55fc1bf7fdda2c/c95f0/aws-console-8.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 39.8936170212766%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA80lEQVQoz5WSbXKDIBCGOXGP0mv0DD1Br9CfSexEgxZF+RKFt7tEM+mfjmXmYZld5t0PELJtcTqfUdcNBq3hvYdzDo7tUbb71loI2SlcLhWa5lYCOScsy/Jv1nVFmGeI78mjJrHrtYYxtjiPrpwz8mZ5sbCIcYaeJkwkZh2VTVX6EEowpfQnD9FnQd70OKJTPYmawlgSGBiaCVN8G3ucE/8WzCQYIeYYIWWLYdA0Q1+q8/7OfdAOMS6HRrCmDOG2Nnfc0/nhI+FAiXZKQrL763pnEEYFpxUEt3sE/lIMn2/UkeoHVFWFL6nQfX6gf3tB//6KHwrdbNXJmB5mAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 8"
+        title="첫번째 방법 - 8"
+        src="/static/abc14fd2e0e4d62c2b55fc1bf7fdda2c/1d69c/aws-console-8.png"
+        srcset="/static/abc14fd2e0e4d62c2b55fc1bf7fdda2c/4dcb9/aws-console-8.png 188w,
+/static/abc14fd2e0e4d62c2b55fc1bf7fdda2c/5ff7e/aws-console-8.png 375w,
+/static/abc14fd2e0e4d62c2b55fc1bf7fdda2c/1d69c/aws-console-8.png 750w,
+/static/abc14fd2e0e4d62c2b55fc1bf7fdda2c/78797/aws-console-8.png 1125w,
+/static/abc14fd2e0e4d62c2b55fc1bf7fdda2c/aa440/aws-console-8.png 1500w,
+/static/abc14fd2e0e4d62c2b55fc1bf7fdda2c/c95f0/aws-console-8.png 1842w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<h4 id="3-샘플-어플리케이션-배포-확인하기" style="position:relative;"><a href="#3-%EC%83%98%ED%94%8C-%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B0%B0%ED%8F%AC-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0" aria-label="3 샘플 어플리케이션 배포 확인하기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3) 샘플 어플리케이션 배포 확인하기</h4>
+<p>조금만 기다리면 샘플 어플리케이션이 배포가 완료되고 <code class="language-text">초록색 체크</code> 표시가 활성화 됩니다 !</p>
+<p><code class="language-text">빨간색 박스</code> 부분을 클릭해서 이동합니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/1df984036cfc0015cf9a9343f0f99100/be061/aws-console-9.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAACuklEQVQ4y31SW08TQRTe36E+KN7ojYsImhiVUKBguQXUwIMP9InfQvpItIlvPpu+GBMiiYbQlrq9ACEqMQZoC72sru223e7u7M4cz4wtEB88yZfvnG/OnvlmZqWhPs/cdNC/trS4uDo7MxMeGBgMu92+sMftDXs8Xsw5+0Tu9frCvgvwou5yuZG9q3f6+td6enpfSP7R8TcLzxdh/tkSzD9dgtm5BZiamoWpmQUITE7D+PgT8I9OwGggCMP+CXg8EjjDw+ExAf/YJASDc/BoJPBBer++8XJzKwHbctaQM3vk41aSxBIySXxOk0QyReRUlmzLGbKNHEctlkyTeBuxczZiyRSsb3x6K5VKxYjjOIBhI1jl5BQKxwWw6i0waxoQowX/C0odZmNQSkHTalHp6Og4ojWauEBt0zSZZZpg2w78ON0Dw9TBwZw3G4YJ5YqCazZwA4wxqNcbcHh4xLgZy7LgtFiMSif544jZqGEDtQkhzMGPeXwrxMGyz93ZOKQhNmZnWgU3SKUzYiBfL5VKUSmfy0VMPBbuKAYahiFcMJzrOFTkvJm7oihy7tQt7NXqDXFkixAolctRKZfPR0y0y3chts1+qapwYlom4BUAPwrnDowLeRsM++16o4GOK1GpUChEWi3jzKHeagGyAHeg639rq61xZw53jWj3MQS/fyhzh/xRLIuIgcjcIUPrTFV/M92oM0X5KVBRFKE1dZ3pCDw2w+Ed5magyB9FUZRX/MUwCP8LsJlWq1XabDbx+m2qaRpVVVWAa+iE4gB8+A4or/m3UK1Vo9LmVvz114PvsP/lALK7+/iDZyCZugCshSY4jVoW5MwuyOmdc2R2IJXdhc1Y4p3U3TN4f+jByEqXq3/50jV36Mp1T+hy1z9AraNfvd0buuUbDN303kUMhG4gsF529d5b6eruG/4DAYw2VhOdKvYAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 9"
+        title="첫번째 방법 - 9"
+        src="/static/1df984036cfc0015cf9a9343f0f99100/1d69c/aws-console-9.png"
+        srcset="/static/1df984036cfc0015cf9a9343f0f99100/4dcb9/aws-console-9.png 188w,
+/static/1df984036cfc0015cf9a9343f0f99100/5ff7e/aws-console-9.png 375w,
+/static/1df984036cfc0015cf9a9343f0f99100/1d69c/aws-console-9.png 750w,
+/static/1df984036cfc0015cf9a9343f0f99100/78797/aws-console-9.png 1125w,
+/static/1df984036cfc0015cf9a9343f0f99100/aa440/aws-console-9.png 1500w,
+/static/1df984036cfc0015cf9a9343f0f99100/be061/aws-console-9.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>그럼 다음고 같이 샘플 어플리케이션이 성공적으로 배포된 것을 확인할 수 있습니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/be6e5eb426ba5f0ba4aade748899728a/be061/aws-console-10.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAACsElEQVQ4y22Sy08TURSH+1eoEAGt5WXiViuRxETZiFFEqBZoCRUIBAooAUwAK5RSWgcDUsAIJQY3LgwbTUzYuVETEy2xLyhCC4JFoK3YB84w9+ed0thSWXw5555JvnvOuSPKEacXnc4VmzIl2cYTGWIm/0I+U3DpMiM9K2VSU48zR4+kMCnHUhnJyTQm61Q6kyU+SKY4jcmRZBjP5EpMudlihai1rXX6YZ8W3T29UbR6PXQDhmjs6OzCvbZ2NLe240aZGldKGlBY2oirsjiFpQ24Lm+GvKoD1+TqWdHS1tZYCEAYiFBYmrPBWBTOLGWTB6uZ/s7eHXOz9cPLrFLvYisNi3EGXBHlgAu3H3x6JXKurz/1EwIKRyE+nsC3f8Y2zQP0stUgh86pb2gxLaBheB4qgx0VfTaUa60UG6GRq+izQ9b5fiYuBOF8ezxxev2wuH9izrOJz0sbmHN7YfFsQ/N8GWoqq2WcqHkk4EC10YE7BgepMTo4lcG5L5ynQqELP8AFeI74dkPYigQpNIZ2EAj7sLLtR+8LN9RD82h6soC6wXmKE/WPoxcQKuaqjU7c6vqQIBRGBoiQ/4oh5L8pKyEeU29X8XLWA/MbD2pphwqdHZV6O5Q6Ox3ZFh85URigO4zt8x879NtaiEP7s8XoiMKowv4SIAqdjVPoHP8LhUcJxDqL1aLC9fAemkYWINNYoxKhuwQIrcWFya+cDB2drIU50mJyEXmPlSj7o4JkOEEeFS54veOxnbEUPhn6T/I/dgnfMrrIy3vtvLLfwdNukmGV/cKjfJwRfXW7JzYiEXgPIxzB5p9dLPuDaByyQtb9GeW9FpT1fDkEC0ruv3stYkwmqclsrhuZnKyiqJIZnTKrBscnVAUVetW5Iq0q72afKq9Ye4DzxdoqWq+TFmku/gWzMvDctGcbVwAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 10"
+        title="첫번째 방법 - 10"
+        src="/static/be6e5eb426ba5f0ba4aade748899728a/1d69c/aws-console-10.png"
+        srcset="/static/be6e5eb426ba5f0ba4aade748899728a/4dcb9/aws-console-10.png 188w,
+/static/be6e5eb426ba5f0ba4aade748899728a/5ff7e/aws-console-10.png 375w,
+/static/be6e5eb426ba5f0ba4aade748899728a/1d69c/aws-console-10.png 750w,
+/static/be6e5eb426ba5f0ba4aade748899728a/78797/aws-console-10.png 1125w,
+/static/be6e5eb426ba5f0ba4aade748899728a/aa440/aws-console-10.png 1500w,
+/static/be6e5eb426ba5f0ba4aade748899728a/be061/aws-console-10.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<h4 id="4-서버-코드-배포하기" style="position:relative;"><a href="#4-%EC%84%9C%EB%B2%84-%EC%BD%94%EB%93%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0" aria-label="4 서버 코드 배포하기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4) 서버 코드 배포하기</h4>
+<p>이후 새로운 버전으로 배포하길 원한다면 <code class="language-text">업로드 및 배포</code> 버튼을 클릭합니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/f01a726f8dbe4ab3bd9a6f582d0cc2cf/be061/aws-console-11.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAACxklEQVQ4y11SW08TQRTe36E+KN7ojYsImhiVUKBggRJQAw8+0Cd+C+mj0Sa++Wz6YkyIJBpCaUtvoEQlxnBptZeVWtrd7e7O7MzxzFAu4SRfvnO+OXP2m5lVBno805NB/8v5ubml0NRUpK+vP+J2+yIetzfi8XgxF+yTudfri/jOwYu6y+VG9i7d6el92dXV/ULxD4++nX0+BzPP5mHm6TyEQjMwMRGCialZCIxPwujoE/APj8FwIAiD/jF4PBQ4xcPBEQn/yDgEg9PwaCjwUfmwvPJqdS0ByXTeTOe+kE/xFIkn0ySRzpLERpaks5skmc6RZCZP1jdyJJ7KkvU24mdsxlMZWF75/E4pl0tRx3EAgyJ45bAORfUILJRMyoFQudYODheDMYdTDMYYNBpHMWVvbz/a0HRcYNSyLG7bNlCHwa/SVzBtExzMRbPZbEClWASqa+AQIkc3mxrs7u6JlIp9f0qlmPK7sB+1tCPgnFFCCG+7hR/FONjUaNtwgBo6aJoGzGwBOFTK1aoKmWxODqS4r1wux5TCwUHUwibOuRxomiauUuAMpDuRi2YHHYhhTqt1XCNa2NtoavLINrouVyox5aBQiFrYLL5CKOWHtRo60cGyLcArAHEUwVabTetYPweO/bSJ7qvVakwpFovRVss8dWigA2QJ4cAwjmsxWLBw5gjXiHYfR4j7h4pwKB7FtokciCwccrTOa7V/3DCbXFX/SlRVVWq6YXADgccW933CwgyUxKOoqvoah4kjE3H92Mzq9TrTdZ1xoKzRaLBarSYhNHTCcAA+/AmYqMVeqB/VY8rq2vqb7zs/YfvbDuS3tvEHz0Eqcw5YS01yFrU8pHNbgD/8GXKbkMlvwWo88V7p7Oq/P/BgaLHD1btw6Zo7fOW6J3y54wJQO9Gv3u4O3/L1h2967yL6wjcQWC+4uu8tdnT2DP4HKkY2SZByo+QAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 11"
+        title="첫번째 방법 - 11"
+        src="/static/f01a726f8dbe4ab3bd9a6f582d0cc2cf/1d69c/aws-console-11.png"
+        srcset="/static/f01a726f8dbe4ab3bd9a6f582d0cc2cf/4dcb9/aws-console-11.png 188w,
+/static/f01a726f8dbe4ab3bd9a6f582d0cc2cf/5ff7e/aws-console-11.png 375w,
+/static/f01a726f8dbe4ab3bd9a6f582d0cc2cf/1d69c/aws-console-11.png 750w,
+/static/f01a726f8dbe4ab3bd9a6f582d0cc2cf/78797/aws-console-11.png 1125w,
+/static/f01a726f8dbe4ab3bd9a6f582d0cc2cf/aa440/aws-console-11.png 1500w,
+/static/f01a726f8dbe4ab3bd9a6f582d0cc2cf/be061/aws-console-11.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>원하는 배포 파일을 선택해 첨부한 뒤 <code class="language-text">배포</code> 버튼을 누르면 동일한 환경에 새로운 레이블로 배포가 진행됩니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/3cdd7c2f19e2afa33a77d8d75ad21c7b/1cfc2/aws-console-12.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 80.31914893617021%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB+0lEQVQ4y41TSZLbMAzUY/OGPCjXVG75xZxyS2zLi3ZalMayVkqkOwCsGS9RJkFVC3YR1QQaTU8dj9hsfOz2e6zWa7Rti3EcYYz5b3B93TQCryxLhGGIJEkQBAH6rsM0TVK0hOke0zVbqu/7Xprx3OWC+3AEe7mCzxjWUXbz7/lsosKRPgxD4JrJWnj8iV4N1qrGLtVYhQrbRAtWqsVP1WGrB6zzHr+yGv58FuQVyt7d0FmaYIJniVB3Dul5hDo1iPKTICkq7IteyILXAfvSYKdbOqvkPC1rVMMFlZkxcLdC6BBGMYIwQpRkyFT+PpKbR7XOzSPf5LALI3NznqPiJElpw74gU0fgUda7uDzhMYSQb0/TTDo8BCHlkP6nsvWN7+OwPyBIQhRtcaWkxSzhgVAphTiOUVWV+Koj6zAa8hXnuqlhrLn1+eSMB0K2QlGU1F2AmLpSNHJB3mSBr5Zh/ZxYQgxPuO90kZBNySTHXEPrQrr822hM/jEhFZxOZAVaTEJaxnEqjj+faxn37QW0bSeZX9GSljcN6cNv2Pe39AQjeYYR2YhzrrVIkGWZZF4WX/IHobPkMSuXCSGLX9eN5HHW6KN4Xsq7bQhC+BxuXsQS3rpinRuSwXQNhh/fMbx8hdHBVcMlPf4VPE2UHtG85mi/fUb95RP63Qt+A3Y92MPkY/JlAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 12"
+        title="첫번째 방법 - 12"
+        src="/static/3cdd7c2f19e2afa33a77d8d75ad21c7b/1d69c/aws-console-12.png"
+        srcset="/static/3cdd7c2f19e2afa33a77d8d75ad21c7b/4dcb9/aws-console-12.png 188w,
+/static/3cdd7c2f19e2afa33a77d8d75ad21c7b/5ff7e/aws-console-12.png 375w,
+/static/3cdd7c2f19e2afa33a77d8d75ad21c7b/1d69c/aws-console-12.png 750w,
+/static/3cdd7c2f19e2afa33a77d8d75ad21c7b/1cfc2/aws-console-12.png 900w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>좌측 사이드바의 <code class="language-text">애플리케이션 버전</code>을 클릭해 들어가 보면 배포 되었던 여러 버전을 확인 할 수 있고 이전 버전으로도 언제든지 되돌아 갈 수 있습니다!</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/97266a8fdd71c3f70985419c34e2879d/be061/aws-console-13.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAACSUlEQVQ4y5VSS28SURSe32EXpjVWmAelVqpJI8GOpa2gJWDVNnFRVv0tzSybSuLOtWFjTHzG4EAHGMCaRtO4UGnCowvKDM/hDjPHe6eAKGj0JF/Ouefc8813zxxq3skE/D5+d/PBxs7dUFCYm3MJNM0JDM0KDMPh+MwzDCtwLCewbK9GM5a322mBZdidy87ZXYdj5iHF3/Q+Cd27D8H1DQitb8JaIAR+/xr47wRhZfU2eJd9wC+tAu+9BR5+Bdw3vLDg5ge47lmy6j5fANyLy6+o5y9e78XEfZDSuXY6+xG9FSUUS6SQmP6AxGQWJaQ0SiRlJMk57DMojpFIZZAoyRZIHJfkdjwpw8s3755SpVIp0jUMwKZjmIpaA7VWh59mwjgzjC50u11ACJk6NgNzqKoSpb5/+xppqRUwu7quaR1T0zRQFAXq9Tq5DG1yVlWo4lyj2bRytUYL1Gbbik+rVRPfIb1QKBajVD6fj2jtFlGid/DX+s1VRcVKaxYGOVXtnWuDGOdJj17DAsonJ5jw+DhCnmiapk7kk0ukSNAn7J/7ud9i0qPXG40zwmKxGDF6M+wMEY4jHq4NxaOEvTn/QvivGCEsFAqWQvJk8lPwbMhM/hc6GVupXI5Sp5XKo55CRLYBqzSQ/hegUXRQB+HNIdsRpWJi4vHnoy9w+OkIcgeHeMEzkExnx0IiXs5CKpMbgZw9gPfx/WeUzeG6Nr+wuD1lm906N0mHJy4w4YmpP4EOn5+eCU9zrvBF9soAlzjXlt15dXvS5vT8AOkyMw8cnys4AAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="첫번째 방법 - 13"
+        title="첫번째 방법 - 13"
+        src="/static/97266a8fdd71c3f70985419c34e2879d/1d69c/aws-console-13.png"
+        srcset="/static/97266a8fdd71c3f70985419c34e2879d/4dcb9/aws-console-13.png 188w,
+/static/97266a8fdd71c3f70985419c34e2879d/5ff7e/aws-console-13.png 375w,
+/static/97266a8fdd71c3f70985419c34e2879d/1d69c/aws-console-13.png 750w,
+/static/97266a8fdd71c3f70985419c34e2879d/78797/aws-console-13.png 1125w,
+/static/97266a8fdd71c3f70985419c34e2879d/aa440/aws-console-13.png 1500w,
+/static/97266a8fdd71c3f70985419c34e2879d/be061/aws-console-13.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<h2 id="2-eb-cli를-이용해서-배포하기" style="position:relative;"><a href="#2-eb-cli%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4%EC%84%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0" aria-label="2 eb cli를 이용해서 배포하기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. EB CLI를 이용해서 배포하기</h2>
+<p>모든 <code class="language-text">AWS CLI</code> 기능들을 이용하기 위해서는 기본적으로 <code class="language-text">IAM</code>에서 생성한 권한을 가지고 있어야합니다.</p>
+<p><code class="language-text">IAM</code>에서 사용자를 생성하면 <code class="language-text">aws-access-key</code> 와 <code class="language-text">aws-secret-key</code>를 발급해줍니다.</p>
+<p>위의 Secret 정보를 저장해두거나 <code class="language-text">.csv</code> 파일로 저장해서 필요할 때 확인 할 수 있습니다.</p>
+<p>이번 <code class="language-text">EB CLI</code> 방법은 <code class="language-text">IAM</code>에서 발급받은 <code class="language-text">aws-access-key</code> 와 <code class="language-text">aws-secret-key</code>를 가지고 있음을 전제로합니다.</p>
+<h4 id="1-eb-cli-설치하기" style="position:relative;"><a href="#1-eb-cli-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0" aria-label="1 eb cli 설치하기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1) EB CLI 설치하기</h4>
+<p><code class="language-text">EB CLI</code>를 로컬 환경에서 설치하려면 <a href="https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/eb-cli3-install-advanced.html">EB CLI 프로그램 설치</a>가 필요합니다.</p>
+<p>설치할때는 <code class="language-text">pip</code>를 이용하는게 정신건강에 이롭습니다..</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/f383ab483bef3df853adc26b432fcd3e/d2782/aws-eb-cli-1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 71.27659574468085%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABYlAAAWJQFJUiTwAAACxElEQVQ4y5WSS1PTYBSGIw60Te/pBZSFYwGhF5qkTdI2aXohLRWrIwLi6AYy46gLNm5cuHHhH/FXaBeOsnDhH1GWjkuGNMf3+1JgbWfeec932jx9z/kiyGkldPjIPnB2xy+7o33XHu2624+fuQ8Pj93x0yN3vPfC7Q9H7uD+2B3ujN3BaMcdjh64dqfntizbNdv2cbvTe73lDJ137z8IQkxavlPqNv6sPDmiu3snVNh7Q4WDE9p4/pbWobX9V1QyDaq2ba6y1aHlhkm5mkFZVSdJ0SmLOq9qP4hIEOK3sgWpVv0t6SpJmnKx2JC9jKZAciBd9rJQ3pC9HBy/QV31cgbrKzir5/mmSonNyndBEG4KkcXlgqR3znKmQ+lGfwr5cc32RdWC2n60ZvkR1ZydLT9WZ72gz86oPbHWpoWSdgrgHAem9e5ZqulQXO9NU40tYoprPUoafUrofYrWuxSDwgoelC0KwUOKxesF2fQW2LmsXwMTdfuMPZwy+tMAEsDiWhfeo7Dapvlqi0Icdi3A0Dc99gfhihEAxSWMbPR4QkCmaXiq0edApjTSMo/WOxxwCQvPUkIeT4qRRZ4wf7uQATBnbfOEUsuhrDngoHRzi3LWkGJIylJHVJtDmEeQmikMIJvgauQwgCnskIGkpjPNtAY8UQZQtkt2ZnCWSKx1+N5YHcB4SgDt65Hns0t8h1IAmiKJDxDU91kNGG695+M7H2P7APhIxX1W85Hni9qpdJVQ6/wKbrZ7AffwsIfaA5DXzJHIYzeKi/FYKu4QLuucp64Y3y5HXsHIf9MsId+bQ5evDhe7LHgMOwypwWsT5rts89sP3KaFsv5zjo+clBaTReWTVKl/jW8oX5JFdZIqqZNEUZlE16uB36tOYuvyRFzb5D0RZ9Zjjt7n0GrlVFwtf+QJ8bkBRaAklJj5/4o9F5rbqAn/ACEvWIXnK+kCAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="두번째 방법 - 1"
+        title="두번째 방법 - 1"
+        src="/static/f383ab483bef3df853adc26b432fcd3e/1d69c/aws-eb-cli-1.png"
+        srcset="/static/f383ab483bef3df853adc26b432fcd3e/4dcb9/aws-eb-cli-1.png 188w,
+/static/f383ab483bef3df853adc26b432fcd3e/5ff7e/aws-eb-cli-1.png 375w,
+/static/f383ab483bef3df853adc26b432fcd3e/1d69c/aws-eb-cli-1.png 750w,
+/static/f383ab483bef3df853adc26b432fcd3e/78797/aws-eb-cli-1.png 1125w,
+/static/f383ab483bef3df853adc26b432fcd3e/aa440/aws-eb-cli-1.png 1500w,
+/static/f383ab483bef3df853adc26b432fcd3e/d2782/aws-eb-cli-1.png 1864w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<h4 id="2-어플리케이션-생성하기" style="position:relative;"><a href="#2-%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0" aria-label="2 어플리케이션 생성하기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2) 어플리케이션 생성하기</h4>
+<p><code class="language-text">eb init</code> 커맨드를 입력해 EB 초기화를 진행합니다.</p>
+<p>여기서 초기화는 AWS EB에 <code class="language-text">새로운 어플리케이션</code>을 생성하는 것과 동일한 작업입니다.</p>
+<p><strong>[권한] ‘aws-access-key’ 와 ‘aws-secret-key’를 입력합니다.</strong></p>
+<p>저는 이미 입력이 되어있기 때문에 권한을 물어보지 않습니다만 처음 실행하면 다음과 같이 <code class="language-text">IAM</code>에서 발급받은 키를 물어봅니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/353bb1a0da41af052ade45df5759addc/4b39a/aws-eb-cli-2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.829787234042556%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAABr0lEQVQ4y9WSzU7bUBCFb1xaWspfoKJKkyYNCU5C4tj3+v7EcRIbUEqp+hB9gr4BReguKrFCYct7It0YT8fBQlRVF2TXxadzRjNzNIsh01ieTuLR1TCcXEbTz/qHCPV3R+i6inRTjHXVU9oeRPpATRa+LUe6hTxoqG2c76jR5eFgfNUSwzHh3LvlgQJHBaCOjuAbV/DV88EWATSYhBr6j1TAJyagRjmUqYT3VEGFKSihz+oy+oyNDv1Fmq57XWccSq5/V3WZ2aPc1LgwNcZNlQlzwKUpe9zgjNn3pdnpC7Pe46bY52bT4Wa755uNLrtb7zKwGr1zsiejWSU+gw+T06QSfUlLoynsygjeBSdQlDGsuQGs9gfwBvUtDeG1F8JLZwCv3CGsIqTDU9LyE9L2odBwLsiK7c1eHApAkpWuTDNPWgyygYX+Bf2zbvtpoe0nSHbhBSk0nVneTJD0MSyn8A//hBTJL1wE9md5I8mb8Ez+48B53lyGeR74Mwu8eXIhLMnDhU18G0y9Jja+gk3nyD2SPpP7fBes/e45sbZ26tbW7jFqhBovx2L32NosVn4DEw5ErH2iIewAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="두번째 방법 - 2"
+        title="두번째 방법 - 2"
+        src="/static/353bb1a0da41af052ade45df5759addc/1d69c/aws-eb-cli-2.png"
+        srcset="/static/353bb1a0da41af052ade45df5759addc/4dcb9/aws-eb-cli-2.png 188w,
+/static/353bb1a0da41af052ade45df5759addc/5ff7e/aws-eb-cli-2.png 375w,
+/static/353bb1a0da41af052ade45df5759addc/1d69c/aws-eb-cli-2.png 750w,
+/static/353bb1a0da41af052ade45df5759addc/78797/aws-eb-cli-2.png 1125w,
+/static/353bb1a0da41af052ade45df5759addc/aa440/aws-eb-cli-2.png 1500w,
+/static/353bb1a0da41af052ade45df5759addc/4b39a/aws-eb-cli-2.png 3104w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>키를 입력하면 다음과 같이 <code class="language-text">AWS Console</code>로 진행할 때와 동일한 설정들을 세팅합니다.</p>
+<p>각자의 환경에 맞추어 설정을 진행합니다.</p>
+<p>설정 화면에서도 볼 수 있듯이 새로운 어플리케이션 뿐 아니라 기존 어플리케이션과 연동해서 동기화 할 수도 있습니다 !</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/b163f45c0cbc0975dd51f34c45653d0a/d2782/aws-eb-cli-3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 71.27659574468085%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABYlAAAWJQFJUiTwAAACbUlEQVQ4y5WSSW/TUBCAX5qmDXHiJG3TpmmbBpcuWerEuxNvWRoWqVVVhBAHJGqpEn+BAxIH/gi/AnJAUAkO/BHwEXGs6niY56SUJRFg6dOMn/2+N+Mx4TP1+YeH5gPnrnOmGx1XN0doSMvquIbluO1e3zWdrqsbtts0bVyz3ZY5ynHt1HLaT7sH/d6z5y8IWcgVNmsm//Vmk4eCUIeizP9gXeJhVaxDqalCUZOhIEtQVKUwFmQZSroY5guCBkt15eMHAEJIdplLifKX5XuPIHd8drl+8sTPH5/6hRPXx3uf6T/243XRn+MVP1qT/FmERlKVw3x2X7ogVQUiO/z7W4RESWwxzyUF00saR8Da94cp6yRgjOMgph0G8eZRMCvfDkhFRbSAlNVJ+PgMyI5wrhAyQxIraxzTaHlpxYZ4XR+ysgWsZIYkRQNiNRVIWQFSmQoKVaxQOG9QIZNfR6HhsWoHEqI1ZCQHMloXUkobSBVP3lPGQvU6/kz5WihQYaqwgS0bXlbvQUp2hihFYQfSeAAVxwUTojV9smySMJFf41jJ8hZbfcgZ/VB4JaNxxbwDMb7578K5pTyXlm2PClilPUzKDtBqs+O2KRHa+rS2fxfO51bxtzE9upEKscIA82BB7wWMaI8mXFbGkx7nv/JnhSj8TIWMZF/GG6aPMh9z/Pda9GU/3DSdi5Gw8a4xrnALW/6WwTbphBnacvMAh2GNphy2pk3+flfge5Fd4ZNKhTPJ9EqmIrxiy423ie39N4md/UGMqwzmtqqDaGlvECnu/o3Xkc2985mN7ZdZKsQrgtxA0gg7jv8L3TdPSlXyHSzCSwVAGWncAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="두번째 방법 - 3"
+        title="두번째 방법 - 3"
+        src="/static/b163f45c0cbc0975dd51f34c45653d0a/1d69c/aws-eb-cli-3.png"
+        srcset="/static/b163f45c0cbc0975dd51f34c45653d0a/4dcb9/aws-eb-cli-3.png 188w,
+/static/b163f45c0cbc0975dd51f34c45653d0a/5ff7e/aws-eb-cli-3.png 375w,
+/static/b163f45c0cbc0975dd51f34c45653d0a/1d69c/aws-eb-cli-3.png 750w,
+/static/b163f45c0cbc0975dd51f34c45653d0a/78797/aws-eb-cli-3.png 1125w,
+/static/b163f45c0cbc0975dd51f34c45653d0a/aa440/aws-eb-cli-3.png 1500w,
+/static/b163f45c0cbc0975dd51f34c45653d0a/d2782/aws-eb-cli-3.png 1864w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/c3ed4f7427612d68337febc2e9303be9/d2782/aws-eb-cli-4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 78.19148936170212%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAACCUlEQVQ4y52S227aQBCG14ZgCAeTUCB2oCkhVDXYgGPW+IQ5iqi9SJq0al6ij9OH6EUi9X16W9XqddUgQZztrAlSQklDYunT7I53f/2zMwjndPbzWef1+YlbP+73lOOBq5wMugGno57yfthTPh6NlE9vx8Ga5pah+fN3Y/nD0YhD6Uxpt2a1vxdN41pUrT+Flj3Z1awA8dCcCKoxKWBn8lLvBOsgdwfYX0G8KmJnKlTrBgplcgcxtfMroQ9ITHMJq5iEkU2CZIOgN/gOraU9/vf/zt4IRXNiOaU5P7P2mKT1/jXXtG9CshHAVPUb9Dg+haliwoqlIYq82ClvNiwvrnVJTHV8cEvC4JKttQkcJEjCcxZrGu+B56ISFXw1RFxWKPNax+Oh5Ljm+incI5SNukUYEF2wWmyF4AY4jDctjzqjDjcPaeyQqOqQSMMCbBA31xcMZ/LlhGoHJXMN2w8FzbhtgISfXnJ4O1/mW66XhDIh6T/oZF2HizfcMoYE3N0XfFDkkTfkNddL6X1aqr+yzP8KLwnSsdnCXS/dHpBo0/Ej9XkjWLn9PIe3Jf+AkaFdnTI1fQYzOINDMzi0LtNAUKAOs0KFb3V/J2EOGegwBdG5eyJ0Vllxf4xCST6XqMhfEhXlG1eSLqL70iVbrFwyhYN1uaAR7nxlt/M1BB8DRIAEEH8m9C4HsH8BDrp3WNUaYs4AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="두번째 방법 - 4"
+        title="두번째 방법 - 4"
+        src="/static/c3ed4f7427612d68337febc2e9303be9/1d69c/aws-eb-cli-4.png"
+        srcset="/static/c3ed4f7427612d68337febc2e9303be9/4dcb9/aws-eb-cli-4.png 188w,
+/static/c3ed4f7427612d68337febc2e9303be9/5ff7e/aws-eb-cli-4.png 375w,
+/static/c3ed4f7427612d68337febc2e9303be9/1d69c/aws-eb-cli-4.png 750w,
+/static/c3ed4f7427612d68337febc2e9303be9/78797/aws-eb-cli-4.png 1125w,
+/static/c3ed4f7427612d68337febc2e9303be9/aa440/aws-eb-cli-4.png 1500w,
+/static/c3ed4f7427612d68337febc2e9303be9/d2782/aws-eb-cli-4.png 1864w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<h4 id="3-환경-생성하기" style="position:relative;"><a href="#3-%ED%99%98%EA%B2%BD-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0" aria-label="3 환경 생성하기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3) 환경 생성하기</h4>
+<p><code class="language-text">eb create</code> 커맨드를 입력해 새로운 환경을 생성합니다.</p>
+<p><code class="language-text">AWS ALB</code>의 로드밸런싱은 종류가 3가지가 있는데 <a href="https://jins-dev.tistory.com/entry/AWS-%EC%9D%98-%EB%A1%9C%EB%93%9C%EB%B0%B8%EB%9F%B0%EC%84%9CLoad-Balancer-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0-ELB-ALB">해당 사이트</a>를 참고 바랍니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/3b57934ae6d876bd58610d333cb01a9a/d2782/aws-eb-cli-5.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 78.19148936170212%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAACbUlEQVQ4y52S7W7SYBTHS4GW8TLG23iZKIxhGKVAoS2FlgIDwYnocIl6BSbGxCzxVrwIP8zE+/GrkfjZOBJYOZ6nhaHLNokkv5zzPLT/nnP+hxLCVfrNqP7w9KlaHHeP+BePOibjHqHNn3Tb/MvjPv96ODBzcncdcv/qSb9wOuixVDCc2Su31K/ppnoZLdV+xQVlGkPiQn2aqNSn5Hy/pk9TSsvMzbs/wPMFxoukpM3i+aJCOSOxA5/Y+uGTj8BZ1oDmG2AvNoDK14DKSUvEJdId4P+xBz2KDcczAVH/7pPawJYalzRXW9gLysLGyQsqLyHyvzAItrwEdCLdpZzhWMZf1Sd+uQMoZti4mvW1Q/xqXrbiKr8RyRI9JIIpFAxFM+5SY+ISNEAMF7bNlFQwhe8UumKxrhAFGazQJ2gTn9QBO6+Q8tdim7FAsEIRbHEUdAR3MzuiPkFjwFVWDTdW6izWgUFIxHmCgyfnBlZu4SxasNgJnheYG+R5x96+VSGZoUdsA1PGloUmtq7DVkUH1swRHAOpmkAv4yonJmJu0Jy8NCWSyPixwtDoLQTGH4zAyRkEnp/B9ug9+J9hHL4DV7VpVmyu0q0t4wxJyywKBuX2JKQ9hpB2bET0IezUByiCMy01gSoQg5ZzXbl+gyl/uewV1Im70gScn+ETdfBgvlVGoby0XqFb1+fa2pAZesrqN69pijbDAc/RjLmDV+b40KbMrlrGxc5uV/WfwUbfNIDiFGtWBG5zTJMS+33K7vXverOFj55s4QuTyp0z6dxnW/LA4t5GnJNIJ7Of6GCUo/BnQxjEi3j+E/Iui9C/Ac0Pe/UCj46FAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="두번째 방법 - 5"
+        title="두번째 방법 - 5"
+        src="/static/3b57934ae6d876bd58610d333cb01a9a/1d69c/aws-eb-cli-5.png"
+        srcset="/static/3b57934ae6d876bd58610d333cb01a9a/4dcb9/aws-eb-cli-5.png 188w,
+/static/3b57934ae6d876bd58610d333cb01a9a/5ff7e/aws-eb-cli-5.png 375w,
+/static/3b57934ae6d876bd58610d333cb01a9a/1d69c/aws-eb-cli-5.png 750w,
+/static/3b57934ae6d876bd58610d333cb01a9a/78797/aws-eb-cli-5.png 1125w,
+/static/3b57934ae6d876bd58610d333cb01a9a/aa440/aws-eb-cli-5.png 1500w,
+/static/3b57934ae6d876bd58610d333cb01a9a/d2782/aws-eb-cli-5.png 1864w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>로드밸런싱 타입을 선택하면 다음과 같이 샘플 어플리케이션이 배포가 됩니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/06d9765e611a4b5eec8aa7f0e4e27c86/d2782/aws-eb-cli-6.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 78.19148936170212%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAAC/klEQVQ4y51S23LSUBQN4RIIlDtUrNhSqG2BUO65cAkJUFtrtY4P/oFf5Ef4UGb8H18dGZ8dZaY0Oa59Am2fzcyavc/OOWuvdc4WOrme+Plaf3VzqTcuhgPlYmRwXD7B1WSkvLVMZW6oypU5VN5ZY+XaGinvbVP5MJsoN9OJ8unNef3j65kkpDKlvZY5+H5kju9LqvnnUDdXJe0RB+p4VZ2cr2rWxaoysFb7/dHqRXewKgJ7HWNVaOt/CcXe8K5QbWhCILtbiXXMX0ltzuKqzVI6xSnijOcJbcp2+haLtMdM7posjBg4G7Bgc8hERWfCSY8Jp8BJlwnP9meCICfK8fbwZ9YAgWrfpzXbTaqWm+xbbrQzdgOK5mKzKxx3gK6XP8Vpz9mAiYWDqSDEUuVoc7DMGHOWVG1nBypAzNJQFkMuNaGmYbDQmcH8isYjIdjQWahB0XCxdnj+ogzCZLYsnxnLBNnVbCcKS1DGIq0RP+Sva5wo2PBIKAZgVayp3r+65op1zQnUVRbYOwRhNAmFxjIFRYm+5YCU4gOgmjcgElK2JeP35sGzjTv0keVAZrec7pnLpGfTkdsjrkjCxRNBDGRUozUpDOMxSJmv2mciVIHc9dVUR6z1mf95ySNMbQizxtxJbRTt9CZse5+0jm6II4TWkDeja0HNRRNHRk16WYHlRLac7k+WaYxJRp85IOVkW7u0pmvwMN2sp/zRKM8N5q4EwhDUS0UQBqEwr085ISmkjfENYRhdKW4VUp1eniKB1KMpVxjBNISI0J/Ol3OajbF5VEjK6ABZTG0acICc1vSfbNNIIbqwDsKNZTGVg0L7h0c4vQPpGqrWUMoBRWu5NVqDfA2VD8AjrcPNAa9D4Z0Ey3xsxHT+KKPZv2M9i8kdk0VgLYjOEi6cEKZ5pBeHgnD7MSdIBPz3ckxBsXIuiLF4Pn6sfJErtW/RSu02Uq4uggfHC6l0wmP0qL6gmgxQxJ5F+PD0IaJ2i7ML4GswV6gJ+HxACIgB0f8EnZUA8R98c4mcvl538wAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="두번째 방법 - 6"
+        title="두번째 방법 - 6"
+        src="/static/06d9765e611a4b5eec8aa7f0e4e27c86/1d69c/aws-eb-cli-6.png"
+        srcset="/static/06d9765e611a4b5eec8aa7f0e4e27c86/4dcb9/aws-eb-cli-6.png 188w,
+/static/06d9765e611a4b5eec8aa7f0e4e27c86/5ff7e/aws-eb-cli-6.png 375w,
+/static/06d9765e611a4b5eec8aa7f0e4e27c86/1d69c/aws-eb-cli-6.png 750w,
+/static/06d9765e611a4b5eec8aa7f0e4e27c86/78797/aws-eb-cli-6.png 1125w,
+/static/06d9765e611a4b5eec8aa7f0e4e27c86/aa440/aws-eb-cli-6.png 1500w,
+/static/06d9765e611a4b5eec8aa7f0e4e27c86/d2782/aws-eb-cli-6.png 1864w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p><code class="language-text">AWS Console</code>을 들어가서 확인해보면 배포가 진행 중임을 확인할 수 있습니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 750px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/0fe4c81eec56f7d779578b85c206db8c/be061/aws-eb-cli-7.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 63.297872340425535%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAAC2UlEQVQ4y4XSzUvbYBwH8IB/QT142A59b22SvrraQtdO+6az6matY5cJFibtWT3MwxS8ieBFtsLwsvPoZWzIBNHp1Na21lareFEr4knsy2rSRPPbk8QNRGSBD8/z5OX7fBOCtZqIl73d3rlQsH+6OxCYaWmxzuA4OUPwCFKcE3phTZL6u9B5nQ7n75u2mMxzBoPxDebx+j+HXr2GvpDoRW8fBAI9EOjpA39nALzeTnB7/OD2PYdn7X5wtnnB1eYTOFweeIq0ezqgq6sXXO6OH9i3hcUPK6vrsJHMUMn0DrOcyDLrqR0msb3LJJHt/AGTzhWYdH6fSWYLyN4dqdw+j9rM5GBhcekLdn5+Hru+vgZ0sAi3nC7A96VVWNvahq1cARLZXdhE0AbCXLQnXLvFbWTy7OHxKVSr1Th2dHQcK5UrwHEcWy6XuVB/P9hsdnC6XGCxtABJkoATBBD8iKORIAF9N1AolCCTy0GlUnGSxkb27fAwXF1Rcax4ehr7XasJDSvVKhcMBlGgDVwo0Gw2g8loRCGEAMdxIBC1SgVyuQzkMhkolUpOIpGwwyiQpuk4dnJyEqMoWgysVLiBgQFwOp3g9/vB4XCAzW4Hk8kEarUaNBqNMP6da7Va1FbHNTU1sdFoVAwsFouxy8uS8Mp8oM/nE5rxYRaLBYyoocFgEOj1eiFMqVDwzYS5VCrlGhoa2MHBQajX63Hs7OwsxjCM0LBWu+JmZ2fh/cQETE1NweTkJEwg4+Pj8O7W6NgYjIyMiEZH+TUXiUbY+fl5QIXEQNROaEjX6xyF1BnmHvqWsGZZESOODMvyzwL6Y+LYxcXFRxAPvuYN+g43dP0/6LsommLQRlAqleLYyuqvT4WDQ8jvHUAmm0c/eApJP2hzKw2JVOaeZDoLP9fWv2LNBqu91eGOKJrNQ4/kePixkgg/VjwED0s1xrBGbw2rySf/aPXWIZ3JFpE3m9r+AP/FkED8fI75AAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="두번째 방법 - 7"
+        title="두번째 방법 - 7"
+        src="/static/0fe4c81eec56f7d779578b85c206db8c/1d69c/aws-eb-cli-7.png"
+        srcset="/static/0fe4c81eec56f7d779578b85c206db8c/4dcb9/aws-eb-cli-7.png 188w,
+/static/0fe4c81eec56f7d779578b85c206db8c/5ff7e/aws-eb-cli-7.png 375w,
+/static/0fe4c81eec56f7d779578b85c206db8c/1d69c/aws-eb-cli-7.png 750w,
+/static/0fe4c81eec56f7d779578b85c206db8c/78797/aws-eb-cli-7.png 1125w,
+/static/0fe4c81eec56f7d779578b85c206db8c/aa440/aws-eb-cli-7.png 1500w,
+/static/0fe4c81eec56f7d779578b85c206db8c/be061/aws-eb-cli-7.png 3584w"
+        sizes="(max-width: 750px) 100vw, 750px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<h4 id="4-서버-코드-배포하기-1" style="position:relative;"><a href="#4-%EC%84%9C%EB%B2%84-%EC%BD%94%EB%93%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-1" aria-label="4 서버 코드 배포하기 1 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4) 서버 코드 배포하기</h4>
+<p>서버 코드를 배포하려면 <code class="language-text">./elasticbeanstalk/config.yml</code> 파일에 있는 파일을 수정해야합니다.</p>
+<p><code class="language-text">config.yml</code>파일에 배포할 파일의 경로를 작성해 준 뒤 <code class="language-text">eb deploy</code> 커맨드를 입력하면 배포 끝입니다 !</p>
+<div class="gatsby-code-title">config.yml</div>
+<div class="gatsby-highlight" data-language="yml"><pre style="counter-reset: linenumber NaN" class="language-yml line-numbers"><code class="language-yml"><span class="token key atrule">branch-defaults</span><span class="token punctuation">:</span>
+  <span class="token key atrule">default</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> aws<span class="token punctuation">-</span>eb<span class="token punctuation">-</span>deploy<span class="token punctuation">-</span>dev
+    <span class="token key atrule">group_suffix</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+<span class="token key atrule">global</span><span class="token punctuation">:</span>
+  <span class="token key atrule">application_name</span><span class="token punctuation">:</span> aws<span class="token punctuation">-</span>eb<span class="token punctuation">-</span>deploy
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+  <span class="token key atrule">default_ec2_keyname</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+  <span class="token key atrule">default_platform</span><span class="token punctuation">:</span> Java 8
+  <span class="token key atrule">default_region</span><span class="token punctuation">:</span> ap<span class="token punctuation">-</span>northeast<span class="token punctuation">-</span><span class="token number">2</span>
+  <span class="token key atrule">include_git_submodules</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">instance_profile</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+  <span class="token key atrule">platform_name</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+  <span class="token key atrule">platform_version</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+  <span class="token key atrule">profile</span><span class="token punctuation">:</span> eb<span class="token punctuation">-</span>cli
+  <span class="token key atrule">repository</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+  <span class="token key atrule">sc</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+  <span class="token key atrule">workspace_type</span><span class="token punctuation">:</span> Application
+<span class="token comment"># *업로드할 파일 경로 설정 가능*</span>
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">artifact</span><span class="token punctuation">:</span> build/libs/rubycon<span class="token punctuation">-</span>team2<span class="token punctuation">-</span>0.0.1<span class="token punctuation">-</span>SNAPSHOT.jar</code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
+<h2 id="마무리" style="position:relative;"><a href="#%EB%A7%88%EB%AC%B4%EB%A6%AC" aria-label="마무리 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>마무리</h2>
+<p>‘AWS EB’로 서버를 배포하는 방법은 전혀 어렵지 않습니다.</p>
+<p>‘AWS EB’를 이용해서 서버를 손쉽게 배포해보세요!</p></div></div><aside><div class="RelatedPosts__Wrapper-sc-15t1gj5-0 fiFeft"><div class="RelatedPosts__PostCardWrapper-sc-15t1gj5-1 iRbQrG"><a class="post-card-link" href="/category/blog/graphql-introduce/"><p class="RelatedPosts__PostCardEmoji-sc-15t1gj5-2 ifmpQu"><img class="emoji" draggable="false" alt="📘" src="https://twemoji.maxcdn.com/v/12.1.6/svg/1f4d8.svg"/></p><div class="RelatedPosts__PostCardContent-sc-15t1gj5-3 ggusaO"><h5>[GraphQL] GraphQL에 대해서</h5><time>2020.11.25</time></div></a></div><div class="RelatedPosts__PostCardWrapper-sc-15t1gj5-1 iRbQrG"><a class="post-card-link" href="/category/blog/spring/redis/spring-data-redis-version-issue/"><p class="RelatedPosts__PostCardEmoji-sc-15t1gj5-2 ifmpQu"><img class="emoji" draggable="false" alt="❓" src="https://twemoji.maxcdn.com/v/12.1.6/svg/2753.svg"/></p><div class="RelatedPosts__PostCardContent-sc-15t1gj5-3 ggusaO"><h5>[Spring] Spring Boot 2.3.2.RELEASE 버전 Redis 이슈</h5><time>2020.11.20</time></div></a></div><div class="RelatedPosts__PostCardWrapper-sc-15t1gj5-1 iRbQrG"><a class="post-card-link" href="/category/blog/spring-transactional-precautions/"><p class="RelatedPosts__PostCardEmoji-sc-15t1gj5-2 ifmpQu"><img class="emoji" draggable="false" alt="🚧" src="https://twemoji.maxcdn.com/v/12.1.6/svg/1f6a7.svg"/></p><div class="RelatedPosts__PostCardContent-sc-15t1gj5-3 ggusaO"><h5>[Spring] @Transactional 사용 시 주의점과 JPQL 주의점</h5><time>2020.11.14</time></div></a></div><div class="RelatedPosts__PostCardWrapper-sc-15t1gj5-1 iRbQrG"><a class="post-card-link" href="/category/blog/spring-jpa-one-to-many-save-issue/"><p class="RelatedPosts__PostCardEmoji-sc-15t1gj5-2 ifmpQu"><img class="emoji" draggable="false" alt="💭" src="https://twemoji.maxcdn.com/v/12.1.6/svg/1f4ad.svg"/></p><div class="RelatedPosts__PostCardContent-sc-15t1gj5-3 ggusaO"><h5>[Spring JPA] 1:N 관계 엔티티 save시 update 쿼리가 추가로 발생하는 이슈</h5><time>2020.09.25</time></div></a></div></div><div></div></aside></section></div><div class="TableOfContents__TableIndex-sc-10py2gf-0 fDIfyV"><div class="TableOfContents__TableWrapper-sc-10py2gf-1 fHkPwv table-of-contents"><h1 class="TableOfContents__TableHeader-sc-10py2gf-2 kqnMjP">🔖 Catalog</h1><div class="TableOfContents__TableContents-sc-10py2gf-3 XIZEq"><ul>
+<li><a href="/category/blog/aws-eb-deploy/#%EA%B0%9C%EC%9A%94">개요</a></li>
+<li><a href="/category/blog/aws-eb-deploy/#aws-elastic-beanstalk-%EB%9E%80">AWS Elastic Beanstalk 란?</a></li>
+<li>
+<p><a href="/category/blog/aws-eb-deploy/#1-aws-console-%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%B4%EC%84%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">1. AWS Console 을 이용해서 배포하기</a></p>
+<ul>
+<li>
+<ul>
+<li><a href="/category/blog/aws-eb-deploy/#1-%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0">1) 어플리케이션 생성하기</a></li>
+<li><a href="/category/blog/aws-eb-deploy/#2-%ED%99%98%EA%B2%BD-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0">2) 환경 생성하기</a></li>
+<li><a href="/category/blog/aws-eb-deploy/#3-%EC%83%98%ED%94%8C-%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B0%B0%ED%8F%AC-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0">3) 샘플 어플리케이션 배포 확인하기</a></li>
+<li><a href="/category/blog/aws-eb-deploy/#4-%EC%84%9C%EB%B2%84-%EC%BD%94%EB%93%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">4) 서버 코드 배포하기</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="/category/blog/aws-eb-deploy/#2-eb-cli%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4%EC%84%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">2. EB CLI를 이용해서 배포하기</a></p>
+<ul>
+<li>
+<ul>
+<li><a href="/category/blog/aws-eb-deploy/#1-eb-cli-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0">1) EB CLI 설치하기</a></li>
+<li><a href="/category/blog/aws-eb-deploy/#2-%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0">2) 어플리케이션 생성하기</a></li>
+<li><a href="/category/blog/aws-eb-deploy/#3-%ED%99%98%EA%B2%BD-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0">3) 환경 생성하기</a></li>
+<li><a href="/category/blog/aws-eb-deploy/#4-%EC%84%9C%EB%B2%84-%EC%BD%94%EB%93%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-1">4) 서버 코드 배포하기</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/category/blog/aws-eb-deploy/#%EB%A7%88%EB%AC%B4%EB%A6%AC">마무리</a></li>
+</ul></div></div></div></div></main></div></div><footer class="Footer__FooterContent-sc-5p0nzy-0 fTcnoY"><div class="ContentWrapper__IndexContent-sc-qgwu46-0 ebovCZ"><div class="Footer__FooterInner-sc-5p0nzy-1 heGWde"><div>© <!-- -->2022<!-- -->, Blausee. All rights reserved.</div></div></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'none', 'auto', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/category/blog/aws-eb-deploy/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-6ed0469530c21b23fd71.js"],"app":["/app-0dbf9fa9f0620e9dd3df.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-2296adb1de2fc003fbd5.js"],"component---src-pages-404-tsx":["/component---src-pages-404-tsx-50bdfd543664202d8b16.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-7396849cd1398b08eae4.js"],"component---src-templates-categories-tsx":["/component---src-templates-categories-tsx-655be2bbb60a827e3b84.js"],"component---src-templates-post-tsx":["/component---src-templates-post-tsx-f983782df893669fd506.js"]};/*]]>*/</script><script src="/polyfill-6ed0469530c21b23fd71.js" nomodule=""></script><script src="/component---src-templates-post-tsx-f983782df893669fd506.js" async=""></script><script src="/53b27b57f60ee3e1ca57a66cde9add975dffb161-c74f54ae49cc6ab741d1.js" async=""></script><script src="/de71a805-d9a74fce0a097621e412.js" async=""></script><script src="/app-0dbf9fa9f0620e9dd3df.js" async=""></script><script src="/styles-e383b929d2d4095ae339.js" async=""></script><script src="/framework-999a01e9e4c894cffffe.js" async=""></script><script src="/webpack-runtime-07b7d84af1cf9993340d.js" async=""></script></body></html>
