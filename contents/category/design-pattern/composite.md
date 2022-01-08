@@ -2,6 +2,7 @@
 title: "[다자인패턴] 컴포지트 패턴"
 date: '2021-11-11'
 category: 'design-pattern'
+description: ''
 emoji: '🌲'
 ---
 

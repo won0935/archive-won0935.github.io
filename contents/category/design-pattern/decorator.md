@@ -2,6 +2,7 @@
 title: "[다자인패턴] 데코레이터 패턴"
 date: '2021-11-13'
 category: 'design-pattern'
+description: ''
 emoji: '🎁'
 ---
 

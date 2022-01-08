@@ -2,6 +2,7 @@
 title: "[다자인패턴] 커맨드 패턴"
 date: '2021-11-07'
 category: 'design-pattern'
+description: ''
 emoji: '⛳️'
 ---
 

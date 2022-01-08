@@ -2,6 +2,7 @@
 title: "[다자인패턴] 어댑터 & 파사드 패턴"
 date: '2021-11-23'
 category: 'design-pattern'
+description: ''
 emoji: '🧤'
 ---
 

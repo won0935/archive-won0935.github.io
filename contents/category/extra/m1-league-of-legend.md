@@ -2,6 +2,7 @@
 title: "[LOL] m1 맥에서 144hz 롤하기"
 date: '2021-10-30'
 category: 'extra'
+description: ''
 emoji: '🎮'
 ---
 
