@@ -66,7 +66,7 @@ query {
 
 ---
 
-## 1️⃣ ReceiverProject 만들기
+## 1️⃣ [ReceiverProject](https://github.com/won0935/GraphQLTestReceiver) 만들기
 
 요청을 받아 DB CRUD 하는 서비스를 만든다.
 
@@ -117,7 +117,7 @@ public class LoanController {
 
 ---
 
-## 2️⃣ SenderProject 만들기
+## 2️⃣ [SenderProject](https://github.com/won0935/GraphQLTestSender) 만들기
 
 이번에는 `GraphQL(spqr)`로 요청을 받아 ReceiverProject로 보내는 서비스를 만든다.
 
@@ -223,7 +223,7 @@ http://localhost:8080/gui
 
 ---
 
-## 결론
+## 🎬 결론
 
 - `graphQL` 로 클라이언트에서 요청을 받고, 다른 서비스로 `REST`하게 전송할 때 별다른 문제점은 찾지 못했다.
 - 페이징, 파일 전송 등은 연구 필요

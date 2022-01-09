@@ -182,7 +182,7 @@ void function() {
 <li>다른 서비스(msa)에 <code class="language-text">graphQL</code>로 받은 요청을 보낼 수 있는지</li>
 </ol>
 <hr>
-<h2 id="1️-receiverproject-만들기" style="position:relative;"><a href="#1%EF%B8%8F-receiverproject-%EB%A7%8C%EB%93%A4%EA%B8%B0" aria-label="1️ receiverproject 만들기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1️⃣ ReceiverProject 만들기</h2>
+<h2 id="1️-receiverproject-만들기" style="position:relative;"><a href="#1%EF%B8%8F-receiverproject-%EB%A7%8C%EB%93%A4%EA%B8%B0" aria-label="1️ receiverproject 만들기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1️⃣ <a href="https://github.com/won0935/GraphQLTestReceiver">ReceiverProject</a> 만들기</h2>
 <p>요청을 받아 DB CRUD 하는 서비스를 만든다.</p>
 <h3 id="1-db-스키마-설계" style="position:relative;"><a href="#1-db-%EC%8A%A4%ED%82%A4%EB%A7%88-%EC%84%A4%EA%B3%84" aria-label="1 db 스키마 설계 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. DB 스키마 설계</h3>
 <p>테이블 구조는 아래와 같다.</p>
@@ -224,7 +224,7 @@ void function() {
 
 <span class="token punctuation">}</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
 <hr>
-<h2 id="2️-senderproject-만들기" style="position:relative;"><a href="#2%EF%B8%8F-senderproject-%EB%A7%8C%EB%93%A4%EA%B8%B0" aria-label="2️ senderproject 만들기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2️⃣ SenderProject 만들기</h2>
+<h2 id="2️-senderproject-만들기" style="position:relative;"><a href="#2%EF%B8%8F-senderproject-%EB%A7%8C%EB%93%A4%EA%B8%B0" aria-label="2️ senderproject 만들기 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2️⃣ <a href="https://github.com/won0935/GraphQLTestSender">SenderProject</a> 만들기</h2>
 <p>이번에는 <code class="language-text">GraphQL(spqr)</code>로 요청을 받아 ReceiverProject로 보내는 서비스를 만든다.</p>
 <ul>
 <li>
@@ -318,7 +318,7 @@ void function() {
 로 접속하면 해당 화면을 볼 수 있다.</p>
 <p><img src="https://user-images.githubusercontent.com/55419159/148673364-6e083cc1-c385-4b4f-a970-761919e0054f.png" alt="image"></p>
 <hr>
-<h2 id="결론" style="position:relative;"><a href="#%EA%B2%B0%EB%A1%A0" aria-label="결론 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>결론</h2>
+<h2 id="-결론" style="position:relative;"><a href="#-%EA%B2%B0%EB%A1%A0" aria-label=" 결론 permalink" class="anchor-header before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>🎬 결론</h2>
 <ul>
 <li><code class="language-text">graphQL</code> 로 클라이언트에서 요청을 받고, 다른 서비스로 <code class="language-text">REST</code>하게 전송할 때 별다른 문제점은 찾지 못했다.</li>
 <li>페이징, 파일 전송 등은 연구 필요</li>
@@ -346,7 +346,7 @@ void function() {
 <li><a href="/category/spring/graphql-exaple/#3-%EC%8B%A4%ED%96%89">3. 실행</a></li>
 </ul>
 </li>
-<li><a href="/category/spring/graphql-exaple/#%EA%B2%B0%EB%A1%A0">결론</a></li>
+<li><a href="/category/spring/graphql-exaple/#-%EA%B2%B0%EB%A1%A0">🎬 결론</a></li>
 </ul></div></div></div></div></main></div></div><footer class="Footer__FooterContent-sc-5p0nzy-0 fTcnoY"><div class="ContentWrapper__IndexContent-sc-qgwu46-0 ebovCZ"><div class="Footer__FooterInner-sc-5p0nzy-1 heGWde"><div>© <!-- -->2022<!-- -->, Jay. All rights reserved.</div></div></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
   
   
