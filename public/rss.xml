@@ -1,5 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Your Site's RSS Feed]]></title><description><![CDATA[📚'기억보다 기록을' 목표로 
-    공부한 내용을 정리하는 블로그 ✔︎]]></description><link>https://won0935.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 25 Jan 2022 06:32:54 GMT</lastBuildDate><item><title><![CDATA[[모니터링] 폐쇠망에서 Jenkins 업그레이드 & 플러그인 설치하기]]></title><description><![CDATA[폐쇠망에서는 어떤 프로그램이던 의존성을 가져오기가 쉽지 않다. 현재 내가 구축 중인 Grafana(모니터링 시스템) 연동으로 인해 Jenkins…]]></description><link>https://won0935.github.io/category/monitoring/jenkins-plugins/</link><guid isPermaLink="false">https://won0935.github.io/category/monitoring/jenkins-plugins/</guid><pubDate>Tue, 25 Jan 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;폐쇠망에서는 어떤 프로그램이던 의존성을 가져오기가 쉽지 않다.&lt;/p&gt;
+    공부한 내용을 정리하는 블로그 ✔︎]]></description><link>https://won0935.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 29 Jan 2022 06:02:09 GMT</lastBuildDate><item><title><![CDATA[[모니터링] Oauth 2.0 & OpenID Connect 알아보기]]></title><description><![CDATA[회사에서 의 OpenId를 이용해 로그인 및 권한관리를 구현하려고 한다. 따라서 각 기술에 대해 공부해보았다. OAuth는 무엇인가? 은 위임 권한부여를 위한 표준 프로토콜이다.  OAuth…]]></description><link>https://won0935.github.io/category/monitoring/oauth2-openid/</link><guid isPermaLink="false">https://won0935.github.io/category/monitoring/oauth2-openid/</guid><pubDate>Sat, 29 Jan 2022 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;회사에서 &lt;code class=&quot;language-text&quot;&gt;KeyCloak&lt;/code&gt;의 OpenId를 이용해 로그인 및 권한관리를 구현하려고 한다.&lt;/p&gt;
+&lt;p&gt;따라서 각 기술에 대해 공부해보았다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;oauth는-무엇인가&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#oauth%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80&quot; aria-label=&quot;oauth는 무엇인가 permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;OAuth는 무엇인가?&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;OAuth(Open Authorization)&lt;/code&gt;은 &lt;strong&gt;위임 권한부여&lt;/strong&gt;를 위한 표준 프로토콜이다. &lt;/p&gt;
+&lt;p&gt;OAuth는 어플리케이션이 사용자의 &lt;strong&gt;패스워드 없이 사용자의 데이터에 접근 가능하도록&lt;/strong&gt; 허가해준다.&lt;/p&gt;
+&lt;h2 id=&quot;oauth-20-용어-정리&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#oauth-20-%EC%9A%A9%EC%96%B4-%EC%A0%95%EB%A6%AC&quot; aria-label=&quot;oauth 20 용어 정리 permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;OAuth 2.0 용어 정리&lt;/h2&gt;
+&lt;p&gt;다음 용어들을 알아야 OAuth 2.0을 이해할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;리소스 소유자(Resource Owner)&lt;/strong&gt;: 클라이언트 어플리케이션이 접근하길 원하는 데이터를 가지고 있는 사용자이다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;클라이언트(Client)&lt;/strong&gt;: 사용자의 데이터에 접근하고 싶어하는 어플리케이션이다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;권한부여 서버(Authorization Server)&lt;/strong&gt;: 사용자로부터 권한을 부여받음으로써 클라이언트가 사용자의 데이터에 접근할 권한을 부여해주는 권한부여 서버이다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;리소스 서버(Resource Server)&lt;/strong&gt;: 클라이언트가 접근하길 원하는 데이터를 갖고 있는 시스템이다. 때때로 권한부여 서버와 리소스 서버가 같은 경우가 있다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;액세스 토큰(Access Token)&lt;/strong&gt;: 리소스 서버에서 사용자에 의해 부여된 데이터에 접근하기 위해서 클라이언트가 사용할 수 있는 유일한 키가 바로 이 엑세스 토큰이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;아래 그림은 OAuth 2.0의 추상적인 흐름이다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/55419159/151648368-a910b40e-14a0-402d-b2e7-311fa499f57f.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;권한 키/인가는 타입 코드 또는 토큰이 될 수 있다.
+다른 권한 부여들에 대해서는 일단 나중에 배워보고, 먼저 권한 부여 플로우를 자세히 알아보자.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;사용자가 권한 부여 플로우를 시작한다. 주로 &lt;code class=&quot;language-text&quot;&gt;구글로 로그인하기&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;페이스북으로 로그인하기&lt;/code&gt;와 같은 버튼을 눌러서 시작한다.&lt;/li&gt;
+&lt;li&gt;클라이언트는 유저를 권한 부여 서버로 리다이렉트 시킨다. 리다이렉트가 되는 동안 클라이언트는 클라이언트 ID 그리고 리다이렉트 URI와 같은 정보를 전달한다.&lt;/li&gt;
+&lt;li&gt;권한 부여 서버가 사용자 인증을 처리하고 동의를 구하는 화면을 표출한 뒤에 유저로부터 클라이언트에게 허가가 떨어진다. 만일 사용자가 &lt;code class=&quot;language-text&quot;&gt;구글로 로그인하기&lt;/code&gt; 버튼을 눌렀다면,
+사용자는 반드시 구글에게 로그인 자격을 제공해야 한다.
+이를테면 &lt;code class=&quot;language-text&quot;&gt;account.google.com&lt;/code&gt;과 같은 사이트에서 로그인하는 것을 말한다. (클라이언트는 제공하지 않아도 된다.)&lt;/li&gt;
+&lt;li&gt;사용자가 허가를 내줬다면, 권한부여 서버는 권한 부여 키(코드 혹은 토큰)와 함께 사용자를 클라이언트로 돌려보내준다.&lt;/li&gt;
+&lt;li&gt;클라이언트는 리소스 서버에게 권한 부여 키를 이용하여 사용자의 데이터에 대한 응답을 요청한다.&lt;/li&gt;
+&lt;li&gt;리소스 서버는 권한부여 키의 유효성 검사를 한 뛰에 요청된 데이터를 클라이언트에게 보내준다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;위에 설명한 내용이 어떻게 사용자가 서드파티 어플리케이션에게 직접 패스워드를 주지 않으면서 사용자의 데이터에 접근할 수 있게 하는지에 대한 방법이다.
+이 시점에서, 아마 다음과 같은 질문이 있을 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;어떻게 리소스 서버에서 특정한 데이터에만 접근이 가능하도록 제한할까?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;만일 클라이언트가 데이터를 읽기만 바라고 수정하지는 않길 바란다면?&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;이러한 질문들은 OAuth 용어에서 &lt;strong&gt;‘스코프’&lt;/strong&gt;라는 개념을 공부하면 이해 가능하다.&lt;/p&gt;
+&lt;h2 id=&quot;oauth의-스코프&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#oauth%EC%9D%98-%EC%8A%A4%EC%BD%94%ED%94%84&quot; aria-label=&quot;oauth의 스코프 permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;OAuth의 스코프&lt;/h2&gt;
+&lt;p&gt;OAuth 2.0에서 스코프는 어플리케이션이 사용자 데이터에 접근하는 것을 제한하기 위해 사용된다.
+사용자에 의해 특정 스코프로 &lt;strong&gt;제한된 권한 인가권을 발행&lt;/strong&gt;함으로써 데이터 접근을 제한한다.&lt;/p&gt;
+&lt;p&gt;클라이언트가 권한 인가를 위해 권한 부여 서버로 요청을 보낼 때, 클라이언트는 스코프도 함께 보낸다.
+권한 부여 서버는 동의를 구하는 화면을 만들고 사용자로부터 허가를 받기 위해 스코프의 리스트를 사용한다.
+만일 사용자가 동의 화면에서 동의했다면, 그 권한 부여 서버는 유저에 의해 부여된 스코프에 제한된 토큰 또는 권한 부여 코드를 발행한다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;예를들어 만일 클라이언트에게 나의 구글 연락처의 리스트를 볼 수 있게 하기 위해 권한을 부여했다면
+권한 부여 서버로부터 발행되어 클라이언트로 전해진 토큰은 나의 연락처를 삭제하거나 나의 캘린더 이벤트를 볼 수는 없다.
+왜냐하면 오직 구글 연락처를 읽도록 스코프가 설정되어 있기 때문이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;oauth-20을-위한-셋업&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#oauth-20%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%85%8B%EC%97%85&quot; aria-label=&quot;oauth 20을 위한 셋업 permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;OAuth 2.0을 위한 셋업&lt;/h1&gt;
+&lt;p&gt;OAuth 플로우에 대해 배워보기 전에, 몇가지 OAuth 설정에 대해 미리 알아두면 좋다.
+권한 부여를 위한 요청이 초기화되었을 때, 클라이언트가 몇가지 설정 데이터를 권한부여 서버에게 쿼리 파라미터로 보낸다. 기본적인 쿼리 파라미터는 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;response_type&lt;/code&gt; : 우리가 권한부여 서버로부터 받길 원하는 응답의 타입이다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;scope&lt;/code&gt; : 클라이언트가 접근하길 원하는 리스트의 스코프이다. 이 리스트는 동의를 구하는 화면을 만들 때 권한부여 서버에 의해 사용된다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;client_id&lt;/code&gt; : 클라이언트에 OAuth 세팅을 할 때, 권한부여 서버에 의해 제공된다. 이 ID는 권한 부여 서버가 OAuth 플로우를 시행하려는 클라이언트가 누구인지 알아내기 위해 사용된다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;redirect_url&lt;/code&gt; : 권한부여 서버에게 OAuth 플로우가 끝나면 어디로 보내줄지에 대해 알려주는 역할이다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;client_secret&lt;/code&gt; : 권한부여 서버에 의해 제공된다. OAuth 플로우에서 이 파라미터는 필수 옵션은 아니다. 권한부여 코드 플로우에서 이 &lt;code class=&quot;language-text&quot;&gt;client_secret&lt;/code&gt;의 중요성에 대해 알아볼 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;다른-oauth-플로우들-이해하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8B%A4%EB%A5%B8-oauth-%ED%94%8C%EB%A1%9C%EC%9A%B0%EB%93%A4-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0&quot; aria-label=&quot;다른 oauth 플로우들 이해하기 permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;다른 OAuth 플로우들 이해하기&lt;/h1&gt;
+&lt;p&gt;가장 흔하게 쓰이는 두가지 OAuth 2.0 플로우는 2가지가 있다. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;서버를 베이스로한 어플리케이션을 위한 권한부여 코드 플로우&lt;/li&gt;
+&lt;li&gt;순수한 자바스크립트 Single Page Application(SPA)을 위한 암묵적인 플로우&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이 글에서는 서버를 베이스로 한 권한부여 코드 플로우만 설명한다.
+쉬운 설명을 위해 OAuth 플로우를 설명하면서, 구글을 OAuth 서비스 제공자로 가정하면서 설명하겠다.&lt;/p&gt;
+&lt;h2 id=&quot;권한부여-코드-플로우&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B6%8C%ED%95%9C%EB%B6%80%EC%97%AC-%EC%BD%94%EB%93%9C-%ED%94%8C%EB%A1%9C%EC%9A%B0&quot; aria-label=&quot;권한부여 코드 플로우 permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;권한부여 코드 플로우&lt;/h2&gt;
+&lt;p&gt;권한부여 코드 플로우 또는 권한부여 코드 부여는 보안성을 높이기 위해서 이상적인 OAuth 플로우로 여겨진다.
+왜냐하면 OAuth 2.0 매커니즘을 구현하기 위해서 프론트엔드 채널도 이용하고, 백엔드 채널도 이용하기 때문이다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/55419159/151649535-863d10a3-ee1c-49ff-a145-00c830a69e0b.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;잘보면 권한코드를 부여하고 그 권한 코드를 엑세스 토큰으로 변경하는 부분이 추가되었다.&lt;/p&gt;
+&lt;p&gt;클라이언트는 &lt;strong&gt;code&lt;/strong&gt;라고 세팅된 &lt;code class=&quot;language-text&quot;&gt;response_type&lt;/code&gt;과 함께 사용자를 권한부여 서버로 리다이렉팅함으로써 권한 부여 시퀀스를 시작한다.
+이게 의미하는 바는 권한부여 서버에게 권한부여 코드로 응답하라는 것을 말한다. 이 플로우에 대한 URI는 다음과 같이 생겼다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre style=&quot;counter-reset: linenumber NaN&quot; class=&quot;language-text line-numbers&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;https://accounts.google.com/o/oauth2/v2/auth?
+response_type=code&amp;amp;
+client_id=your_client_id&amp;amp;
+scope=profile%20contacts&amp;amp;
+redirect_uri=https%3A//oauth2.example.com/code&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot; style=&quot;white-space: normal; width: auto; left: 0;&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;위 요청에서, 클라이언트는 요청의 &lt;code class=&quot;language-text&quot;&gt;scope&lt;/code&gt; 파라미터에 인자를 보냄으로써, 사용자의 공개 프로필과 연락처에 접근할 수 있는 사용자의 권한을 요구한다.
+이 요청의 결과는 액세스 토큰으로 변환 가능한 권한 부여 코드이다. 권한부여 코드는 다음과 같이 생겼다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre style=&quot;counter-reset: linenumber NaN&quot; class=&quot;language-text line-numbers&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;4/W7q7P51a-iMsCeLvIaQc6bYrgtp9&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot; style=&quot;white-space: normal; width: auto; left: 0;&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;왜-코드를-토큰으로-바꾸는-것일까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%99%9C-%EC%BD%94%EB%93%9C%EB%A5%BC-%ED%86%A0%ED%81%B0%EC%9C%BC%EB%A1%9C-%EB%B0%94%EA%BE%B8%EB%8A%94-%EA%B2%83%EC%9D%BC%EA%B9%8C&quot; aria-label=&quot;왜 코드를 토큰으로 바꾸는 것일까 permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;왜 코드를 토큰으로 바꾸는 것일까?&lt;/h2&gt;
+&lt;p&gt;액세스 토큰은 리소스 서버에 존재하는 데이터에 접근하기 위한 유일한 것이다.
+하지만 어플리케이션 코드는 아니다. 그래서 왜 액세스 토큰이 필요할 때, 클라이언트가 &lt;code class=&quot;language-text&quot;&gt;response_type&lt;/code&gt;을 &lt;strong&gt;code&lt;/strong&gt;로 세팅하는 것일까?&lt;/p&gt;
+&lt;p&gt;이유는 &lt;strong&gt;OAuth 플로우의 보안성을 높게 만들기 위해서&lt;/strong&gt;이다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;문제&lt;/strong&gt;: 액세스 토큰은 다른 사람이 접근하면 안되는 정보의 비밀스러운 부분이다.
+만일 클라이언트가 액세스 토큰을 직접적으로 요청하고 브라우저에 갖고 있게 되면 탈취당할 수 있다.
+왜냐하면 브라우저는 완전히 보안이 되어있진 않으니까. 다른 사람이 페이지 소스 또는 잠재적으로 개발자 도구로 액세스 토큰을 얻어갈 수 있다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;해결방법&lt;/strong&gt;: 브라우저에서 액세스 토큰 노출을 방지하기 위해서, 클라이언트의 프론트엔드 채널은 권한 부여 서버로부터 어플리케이션 코드를 얻는다.
+그리고 어플리케이션 코드를 백엔드 채널로 보낸다. 어플리케이션 코드를 액세스 토큰으로 바꾸기 위해서, client&lt;em&gt;secret이 필요하다.
+client&lt;/em&gt;secret은 클라이언트의 백엔드 채널에 의해서만 알려지게 되며, 프론트엔드 채널은 client_secret에 관여하지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;백엔드 채널은 POST 요청을 권한부여 서버에 어플리케이션 코드와 어플리케이션 코드를 동봉해서 보낸다. 요청은 다음과 같이 보내진다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre style=&quot;counter-reset: linenumber NaN&quot; class=&quot;language-text line-numbers&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;POST /token HTTP/1.1
+Host: oauth2.googleapis.com
+Content-Type: application/x-www-form-urlencoded
+
+code=4/W7q7P51a-iMsCeLvIaQc6bYrgtp9&amp;amp;
+client_id=your_client_id&amp;amp;
+client_secret==your_client_secret_only_known_by_server&amp;amp;
+redirect_url=https%3A//oauth2.example.com/code&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot; style=&quot;white-space: normal; width: auto; left: 0;&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;권한 부여 서버는 &lt;code class=&quot;language-text&quot;&gt;client_secret&lt;/code&gt;과 &lt;code class=&quot;language-text&quot;&gt;application code&lt;/code&gt;의 유효성을 검사하고 액세스 토큰을 보내준다.
+백엔드 채널은 액세스 토큰을 갖고 있고 이 토큰을 리소스 서버에서 정보를 갖고올 때 사용한다.
+이러한 방법으로 브라우저는 액세스 토큰에 접근하지 않는 방식으로 구현할 수 있다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;인증authentication-vs-권한-부여authorization&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9D%B8%EC%A6%9Dauthentication-vs-%EA%B6%8C%ED%95%9C-%EB%B6%80%EC%97%ACauthorization&quot; aria-label=&quot;인증authentication vs 권한 부여authorization permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;인증(Authentication) vs 권한 부여(Authorization)&lt;/h1&gt;
+&lt;p&gt;우리가 알고있듯, OAuth는 위임된 권한부여 문제를 해결해준다.
+하지만 이 방법은 사용자 인증을 위한 표준 방법을 제공해주진 않는다.
+우리는 다음과 같이 말할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;OAuth 2.0&lt;/strong&gt;은 권한 부여를 위한 것이다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OpenID Connect&lt;/strong&gt;는 인증을 위한 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;아마 ‘권한 부여’와 ‘인증’이 헷갈릴 수 있는데, 차이점은 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;인증(Authentication)&lt;/strong&gt;은 내가 소통하는 주체가 어떤 것인지 확신하는 것이다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;권한 부여(Authorization)&lt;/strong&gt;는 소통하는 주체가 리소스에 접근할 수 있는지 아닌지에 대해 확인하는 프로세스이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;authentication(인증)은 &lt;strong&gt;당신이 누구인지&lt;/strong&gt;에 대한 것이고, authorization(권한 부여)은 &lt;strong&gt;당신이 어떤 권한을 가졌는지&lt;/strong&gt;에 대한 것이다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;openid-connect란&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#openid-connect%EB%9E%80&quot; aria-label=&quot;openid connect란 permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;OpenID Connect란&lt;/h1&gt;
+&lt;p&gt;OpenID Connect는 OAuth 2.0 프로토콜의 &lt;strong&gt;최상위 레이어와 동일한 레이어&lt;/strong&gt;다.
+OpenID Connect는 &lt;strong&gt;OAuth 2.0을 확장&lt;/strong&gt;하여 인증 방식을 표준화한다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/55419159/151649045-24d98904-6dce-41fb-8a36-c7dd30db2c11.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;OAuth는 유저 인증을 곧바로 제공하지 않지만 권한 부여를 위한 엑세스 토큰을 제공한다.
+OpenID Connect는 권한부여 서버에 의해 작동하는 인증 시스템을 기반으로 클라이언트가 사용자를 판단할 수 있게 해준다.
+권한부여 서버에 유저 로그인과 동의를 요청할 때, openid라는 스코프를 정의하면 OpenID Connect 사용이 가능하다.
+openid는 OpenID가 필요되는 권한부여 서버에 필수적인 스코프이다.&lt;/p&gt;
+&lt;p&gt;OpenID Connect 인증을 위한 URI 요청은 다음과 같이 만들어진다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre style=&quot;counter-reset: linenumber NaN&quot; class=&quot;language-text line-numbers&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;https://accounts.google.com/o/oauth2/v2/auth?
+response_type=code&amp;amp;
+client_id=your_client_id&amp;amp;
+scope=openid%20contacts&amp;amp;
+redirect_uri=https%3A//oauth2.example.com/code&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot; style=&quot;white-space: normal; width: auto; left: 0;&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 요청의 결과는 액세스 토큰과 ID 토큰으로 바꿀 수 있는 어플리케이션 코드이다.
+OAuth 플로우가 암묵적 플로우면, 서버는 액세스 토큰과 ID 토큰을 바로 줄 것이다.&lt;/p&gt;
+&lt;p&gt;ID 토큰은 JWT 또는 JSON 웹 토큰이다.
+JWT는 header, payload, signature 3가지 부분이 담겨있는 인코드된 토큰이다.
+ID 토큰을 얻은 이후에, 클라이언트는 payload 부분에 인코드된 사용자 정보를 얻을지 결정할 수 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre style=&quot;counter-reset: linenumber NaN&quot; class=&quot;language-json line-numbers&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;&quot;iss&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;https://accounts.google.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;&quot;sub&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;10965150351106250715113082368&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;johndoe@example.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;&quot;iat&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1516239022&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token property&quot;&gt;&quot;exp&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1516242922&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot; style=&quot;white-space: normal; width: auto; left: 0;&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;claims&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#claims&quot; aria-label=&quot;claims permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Claims&lt;/h2&gt;
+&lt;p&gt;ID 토큰이 갖고 있는 payload는 &lt;code class=&quot;language-text&quot;&gt;claims&lt;/code&gt;라 알려진 어떤 필드들을 포함한다. 기본적인 &lt;code class=&quot;language-text&quot;&gt;claims&lt;/code&gt;는 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;iss&lt;/code&gt;: 토큰 발행자&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;sub&lt;/code&gt;: 사용자를 구분하기 위한 유니크한 구분자&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;email&lt;/code&gt;: 사용자의 이메일&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;iat&lt;/code&gt;: 토큰이 발행되는 시간을 Unix time으로 표기한 것&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;exp&lt;/code&gt;: 토큰이 만료되는 시간을 Unix time으로 표기한 것&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;하지만, claims는 이러한 영역에 제한된 것이 아니다.
+권한부여 서버에서 어떻게 &lt;code class=&quot;language-text&quot;&gt;claims&lt;/code&gt;를 인코드할 것인지에 달린 것이다.
+클라이언트는 이러한 정보를 이용하여 사용자를 인증할 수 있다.&lt;/p&gt;
+&lt;p&gt;만일 클라이언트가 더 많은 사용자 정보를 원한다면,
+클라이언트는 표준 OpenID Connect 스코프에 더 많은 것들을 기재하여 권한 부여 서버에게 ID Token의 payload에 필요한 것들을 더 추가하라고 할 수 있다.
+이러한 스코프는 &lt;strong&gt;email&lt;/strong&gt;, &lt;strong&gt;address&lt;/strong&gt;, &lt;strong&gt;phone&lt;/strong&gt;, &lt;strong&gt;profile&lt;/strong&gt; 등이다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[[모니터링] 폐쇠망에서 Jenkins 업그레이드 & 플러그인 설치하기]]></title><description><![CDATA[폐쇠망에서는 어떤 프로그램이던 의존성을 가져오기가 쉽지 않다. 현재 내가 구축 중인 Grafana(모니터링 시스템) 연동으로 인해 Jenkins…]]></description><link>https://won0935.github.io/category/monitoring/jenkins-plugins/</link><guid isPermaLink="false">https://won0935.github.io/category/monitoring/jenkins-plugins/</guid><pubDate>Tue, 25 Jan 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;폐쇠망에서는 어떤 프로그램이던 의존성을 가져오기가 쉽지 않다.&lt;/p&gt;
 &lt;p&gt;현재 내가 구축 중인 Grafana(모니터링 시스템) 연동으로 인해 Jenkins 버전 업그레이드 및 플러그인 설치가 필요했다.&lt;/p&gt;
 &lt;p&gt;폐쇠망 환경에서 고군분투한 경험을 적어본다. &lt;/p&gt;
 &lt;hr&gt;
@@ -71,7 +235,7 @@
 &lt;ol&gt;
 &lt;li&gt;Lombok &lt;code class=&quot;language-text&quot;&gt;@NoArgsConstructor&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;public TestRequest(){}&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[[GraphQL] graphql 라이브러리 spqr 를 이용한 GraphQL 실습해보기]]></title><description><![CDATA[회사에서 백오피스를 구축해야 하는데, 여러면에 있어 를 적용시키면 좋을 것 같아 학습해보았다. 👾 GraphQL 이란 은 페이스북이 2012년에 개발하여 201…]]></description><link>https://won0935.github.io/category/spring/graphql-exaple/</link><guid isPermaLink="false">https://won0935.github.io/category/spring/graphql-exaple/</guid><pubDate>Sun, 09 Jan 2022 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[[GraphQL] graphql 라이브러리 spqr 를 이용한 GraphQL 실습해보기]]></title><description><![CDATA[회사에서 백오피스를 구축해야 하는데, 여러면에 있어 를 적용시키면 좋을 것 같아 학습해보았다. 👾 GraphQL 이란 은 페이스북이 2012년에 개발하여 201…]]></description><link>https://won0935.github.io/category/spring/graphql-example/</link><guid isPermaLink="false">https://won0935.github.io/category/spring/graphql-example/</guid><pubDate>Sun, 09 Jan 2022 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;회사에서 백오피스를 구축해야 하는데, 여러면에 있어 &lt;code class=&quot;language-text&quot;&gt;graphQL&lt;/code&gt;를 적용시키면 좋을 것 같아 학습해보았다.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;-graphql-이란&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#-graphql-%EC%9D%B4%EB%9E%80&quot; aria-label=&quot; graphql 이란 permalink&quot; class=&quot;anchor-header before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;👾 GraphQL 이란&lt;/h2&gt;
