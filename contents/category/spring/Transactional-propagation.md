@@ -103,6 +103,4 @@ public void doSomeThing() {...}
 public void doSomeThing() {...}
 ```
 
-- `non-transactional` 로 실행되며 부모 트랜잭션이 존재하면 `Exception`이 발생한다. 
-- `no-rollback-for` : 롤백하지 않을 익셉션 타입 
-- `rollback-for` : 롤백할 익셉션 타입
+- `non-transactional` 로 실행되며 부모 트랜잭션이 존재하면 `Exception`이 발생한다.
