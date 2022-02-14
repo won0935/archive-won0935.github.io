@@ -86,6 +86,9 @@ public void doSomething(){...}
 - 이 격리 수준에서는 UPDATE 한 데이터에 대해서는 정합성을 보장하지만, INSERT/DELETE 는 보장되지 않는다.
 - 격리 수준 이하에서는 **Phantom Read** 문제가 발생한다.
 
+> Phantom Read 란?
+> 
+> 한 트랜잭션 내에서 같은 쿼리를 두 번 수행 시, 첫 번째 쿼리에서 없던 레코드(유령, Phantom)가 두 번째 쿼리에서 발생하는 현상
 
 ##Isolation.SERIALIZABLE
 
