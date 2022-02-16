@@ -190,7 +190,7 @@ const BlogPostTemplate = ({ ...props }: Props) => {
             </ContentMain>
             <aside>
               <RelatedPosts posts={relatedPosts} />
-              <Utterances repo="wwlee94/wwlee94.github.io" theme="github-light" />
+              <Utterances repo="won0935/won0935.github.io" theme="github-light" />
             </aside>
           </Content>
         }

@@ -26,7 +26,7 @@ class BlogIndex extends React.Component<Props> {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="" />
         <Helmet>
-          <link rel="canonical" href="https://wwlee94.github.io" />
+          <link rel="canonical" href="https://won0935.github.io" />
           <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css" />
         </Helmet>
         <HomeJsonLd />
