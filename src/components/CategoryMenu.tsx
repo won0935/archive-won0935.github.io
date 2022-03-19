@@ -132,6 +132,8 @@ function selectCategoryIcon(name: string) {
       return CategoryIcon.messageIcon;
     case 'monitoringIcon':
       return CategoryIcon.monitoringIcon;
+    case 'kotlinIcon':
+      return CategoryIcon.kotlinIcon;
   }
 }
 

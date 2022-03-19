@@ -73,6 +73,13 @@ module.exports = {
         link: `/category/monitoring`,
       },
       {
+        name: `코틀린`,
+        slug: `kotlin`,
+        color: `#cc6287`,
+        icon: `kotlinIcon`,
+        link: `/category/kotlin`,
+      },
+      {
         name: `기타`,
         slug: `extra`,
         color: `#4597d5`,

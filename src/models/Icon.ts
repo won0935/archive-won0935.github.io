@@ -11,3 +11,4 @@ export { default as designIcon } from '../../static/images/svg/categories/design
 export { default as systemIcon } from '../../static/images/svg/categories/system-icon.svg';
 export { default as messageIcon } from '../../static/images/svg/categories/message-icon.svg';
 export { default as monitoringIcon } from '../../static/images/svg/categories/monitoring-icon.svg';
+export { default as kotlinIcon } from '../../static/images/svg/categories/kotlin-icon.svg';
