@@ -43,7 +43,7 @@ URL : [https://springcamp.ksug.org/2023/](https://springcamp.ksug.org/2023/)
     - UUID + Time sorted
     - 시계열 정렬 가능한 UUID라고 보면 됨, 인덱싱 간편, UUID 적용 시 고려해보길 추천
 
-## 2. 12:55 - 13:25: 글로벌 서비스를 위한 Timezone/DST (김대겸)
+## 2. 글로벌 서비스를 위한 Timezone/DST (김대겸)
 
 ### 요약
 
