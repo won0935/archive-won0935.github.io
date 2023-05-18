@@ -16,13 +16,13 @@ module.exports = {
     },
     // Blue : #2EA2DB
     categories: [
-      // {
-      //   name: `블로그`,
-      //   slug: `blog`,
-      //   color: `#ffa22b`,
-      //   icon: `blogIcon`,
-      //   link: `/category/blog`,
-      // },
+      {
+        name: `웹`,
+        slug: `web`,
+        color: `#ffa22b`,
+        icon: `blogIcon`,
+        link: `/category/blog`,
+      },
       // {
       //   name: `알고리즘`,
       //   slug: `algorithm`,

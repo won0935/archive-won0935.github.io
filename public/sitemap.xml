@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url> <loc>https://won0935.github.io/category/web/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://won0935.github.io/category/spring/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://won0935.github.io/category/kotlin/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://won0935.github.io/category/monitoring/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://won0935.github.io/category/design-pattern/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://won0935.github.io/category/system/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://won0935.github.io/category/extra/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://won0935.github.io/category/web/http-status-codes/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://won0935.github.io/category/spring/spring-camp-2023/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://won0935.github.io/category/spring/pessimistic-optimistic-lock/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://won0935.github.io/category/spring/jdk-dynamic-proxy-vs-cglib/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
