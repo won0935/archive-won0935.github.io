@@ -21,7 +21,7 @@ module.exports = {
         slug: `web`,
         color: `#ffa22b`,
         icon: `blogIcon`,
-        link: `/category/blog`,
+        link: `/category/web`,
       },
       // {
       //   name: `알고리즘`,
